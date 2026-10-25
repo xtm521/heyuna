@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "RewardAllocation": {
+      "additionalProperties": false,
+      "properties": {
+        "recipient": {
+          "pattern": "^0x[0-9a-fA-F]{40}$",
+          "title": "Recipient",
+          "type": "string"
+        },
+        "amount": {
+          "pattern": "^[0-9]+$",
+          "title": "Amount",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "training",
+            "validation"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "receipt_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Receipt Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "recipient",
+        "amount",
+        "category",
+        "receipt_ids"
+      ],
+      "title": "RewardAllocation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "epoch": {
+      "minimum": 0,
+      "title": "Epoch",
+      "type": "integer"
+    },
+    "chain_id": {
+      "const": 11155111,
+      "default": 11155111,
+      "title": "Chain Id",
+      "type": "integer"
+    },
+    "state": {
+      "const": "draft_pending_review",
+      "default": "draft_pending_review",
+      "title": "State",
+      "type": "string"
+    },
+    "budget_wei": {
+      "title": "Budget Wei",
+      "type": "string"
+    },
+    "allocated_wei": {
+      "title": "Allocated Wei",
+      "type": "string"
+    },
+    "allocations": {
+      "items": {
+        "$ref": "#/$defs/RewardAllocation"
+      },
+      "title": "Allocations",
+      "type": "array"
+    },
+    "manifest_hash": {
+      "default": "",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "notice": {
+      "default": "Unsigned draft only. Not an on-chain root, proof, entitlement or payment.",
+      "title": "Notice",
+      "type": "string"
+    }
+  },
+  "required": [
+    "epoch",
+    "budget_wei",
+    "allocated_wei",
+    "allocations"
+  ],
+  "title": "RewardEpoch",
+  "type": "object"
+}

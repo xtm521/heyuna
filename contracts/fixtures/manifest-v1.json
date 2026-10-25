@@ -1,0 +1,50 @@
+{
+  "manifest": {
+    "version": 1,
+    "chain_id": 11155111,
+    "reward_vault": "0x0000000000000000000000000000000000001000",
+    "epoch": "0",
+    "allocations": [
+      {
+        "index": "0",
+        "recipient": "0x0000000000000000000000000000000000001001",
+        "kind": 0,
+        "amount": "100000000000000000000"
+      },
+      {
+        "index": "1",
+        "recipient": "0x0000000000000000000000000000000000001002",
+        "kind": 1,
+        "amount": "10000000000000000000"
+      }
+    ]
+  },
+  "serialized": "{\"version\":1,\"chain_id\":11155111,\"reward_vault\":\"0x0000000000000000000000000000000000001000\",\"epoch\":\"0\",\"allocations\":[{\"index\":\"0\",\"recipient\":\"0x0000000000000000000000000000000000001001\",\"kind\":0,\"amount\":\"100000000000000000000\"},{\"index\":\"1\",\"recipient\":\"0x0000000000000000000000000000000000001002\",\"kind\":1,\"amount\":\"10000000000000000000\"}]}",
+  "manifestHash": "0x7f011258ae09f8448f9057a0266358aa19586881c4eee952e04d0091f647e6f3",
+  "root": "0xc5da0783a1a27a3680fb82543975f2c39d36cc4ddc6f8c14d37874a8a7d4af3b",
+  "trainingAmount": "100000000000000000000",
+  "validationAmount": "10000000000000000000",
+  "claims": [
+    {
+      "index": "0",
+      "recipient": "0x0000000000000000000000000000000000001001",
+      "kind": 0,
+      "amount": "100000000000000000000",
+      "epoch": "0",
+      "proof": [
+        "0xc93b32b64c6c668ac60502470db5976012a5837843f5be3090d283a95dd2466d"
+      ]
+    },
+    {
+      "index": "1",
+      "recipient": "0x0000000000000000000000000000000000001002",
+      "kind": 1,
+      "amount": "10000000000000000000",
+      "epoch": "0",
+      "proof": [
+        "0x30eaefa41dab1650375730c86ec20cd8b529f8e59c01a33f5b62ed0f40b5b938"
+      ]
+    }
+  ],
+  "notice": "INTEROPERABILITY TEST VECTOR ONLY. Addresses are placeholders, not a deployed asset."
+}

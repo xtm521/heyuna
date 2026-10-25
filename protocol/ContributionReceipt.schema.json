@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "ContributionState": {
+      "enum": [
+        "computed",
+        "pending_verification",
+        "verified",
+        "rejected",
+        "pending_settlement",
+        "claimable",
+        "confirmed"
+      ],
+      "title": "ContributionState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "receipt_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Receipt Id",
+      "type": "string"
+    },
+    "task_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "round_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Round Id",
+      "type": "string"
+    },
+    "participant_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Participant Id",
+      "type": "string"
+    },
+    "wallet": {
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "title": "Wallet",
+      "type": "string"
+    },
+    "task_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Task Hash",
+      "type": "string"
+    },
+    "adapter_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Adapter Hash",
+      "type": "string"
+    },
+    "state": {
+      "$ref": "#/$defs/ContributionState"
+    },
+    "work_units": {
+      "minimum": 1,
+      "title": "Work Units",
+      "type": "integer"
+    },
+    "validator_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validator Ids",
+      "type": "array"
+    },
+    "detail": {
+      "default": "Awaiting independent validators; no chain payment has occurred.",
+      "title": "Detail",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "task_id",
+    "round_id",
+    "participant_id",
+    "wallet",
+    "task_hash",
+    "adapter_hash",
+    "state",
+    "work_units"
+  ],
+  "title": "ContributionReceipt",
+  "type": "object"
+}

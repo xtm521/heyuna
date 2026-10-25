@@ -1,0 +1,187 @@
+{
+  "$defs": {
+    "LayerSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^model\\.layers\\.(34|35)\\.self_attn\\.(q_proj|v_proj)$",
+          "title": "Name",
+          "type": "string"
+        },
+        "input_size": {
+          "const": 2560,
+          "default": 2560,
+          "title": "Input Size",
+          "type": "integer"
+        },
+        "output_size": {
+          "enum": [
+            1024,
+            4096
+          ],
+          "title": "Output Size",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "output_size"
+      ],
+      "title": "LayerSpec",
+      "type": "object"
+    },
+    "TrainingConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "template": {
+          "const": "heyuna-ffa-causal-lm-v1",
+          "default": "heyuna-ffa-causal-lm-v1",
+          "title": "Template",
+          "type": "string"
+        },
+        "base_dtype": {
+          "const": "bfloat16",
+          "default": "bfloat16",
+          "title": "Base Dtype",
+          "type": "string"
+        },
+        "rank": {
+          "const": 8,
+          "default": 8,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "scale": {
+          "const": 1.0,
+          "default": 1.0,
+          "title": "Scale",
+          "type": "number"
+        },
+        "steps": {
+          "default": 4,
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Steps",
+          "type": "integer"
+        },
+        "sequence_length": {
+          "default": 128,
+          "maximum": 512,
+          "minimum": 32,
+          "title": "Sequence Length",
+          "type": "integer"
+        },
+        "learning_rate": {
+          "default": 0.0001,
+          "exclusiveMinimum": 0,
+          "maximum": 0.001,
+          "title": "Learning Rate",
+          "type": "number"
+        },
+        "seed": {
+          "default": 42,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "layers": {
+          "items": {
+            "$ref": "#/$defs/LayerSpec"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Layers",
+          "type": "array"
+        }
+      },
+      "title": "TrainingConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "task_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "round_id": {
+      "pattern": "^[a-zA-Z0-9_-]{1,80}$",
+      "title": "Round Id",
+      "type": "string"
+    },
+    "model_id": {
+      "const": "Qwen/Qwen3-4B-Instruct-2507",
+      "default": "Qwen/Qwen3-4B-Instruct-2507",
+      "title": "Model Id",
+      "type": "string"
+    },
+    "model_revision": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Model Revision",
+      "type": "string"
+    },
+    "tokenizer_revision": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Tokenizer Revision",
+      "type": "string"
+    },
+    "data_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Data Hash",
+      "type": "string"
+    },
+    "data_source": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Data Source",
+      "type": "string"
+    },
+    "data_license": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Data License",
+      "type": "string"
+    },
+    "shared_a_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Shared A Hash",
+      "type": "string"
+    },
+    "base_b_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Base B Hash",
+      "type": "string"
+    },
+    "config": {
+      "$ref": "#/$defs/TrainingConfig"
+    },
+    "work_units": {
+      "default": 1,
+      "maximum": 1000,
+      "minimum": 1,
+      "title": "Work Units",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "task_id",
+    "round_id",
+    "model_revision",
+    "tokenizer_revision",
+    "data_hash",
+    "data_source",
+    "data_license",
+    "shared_a_hash",
+    "base_b_hash"
+  ],
+  "title": "TrainingTask",
+  "type": "object"
+}

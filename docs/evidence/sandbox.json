@@ -1,0 +1,9 @@
+{
+  "container": {
+    "uid": 65532,
+    "root_readonly": true,
+    "network_blocked": true
+  },
+  "test_fixture_initial_failure_expected": true,
+  "note": "Actual local Lima VM + Docker; not a sandbox escape audit"
+}

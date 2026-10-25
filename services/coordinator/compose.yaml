@@ -1,0 +1,41 @@
+# Local/staging deployment only. Provide secrets in an untracked 0600 env file.
+services:
+  coordinator:
+    build:
+      context: ../..
+      dockerfile: services/coordinator/Dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      HEYUNA_COORDINATOR_HOSTS: ${HEYUNA_COORDINATOR_HOSTS:-localhost,127.0.0.1}
+      HEYUNA_DATABASE_URL: ${HEYUNA_DATABASE_URL:?Set the PostgreSQL connection URL}
+      HEYUNA_COORDINATOR_IDENTITIES: ${HEYUNA_COORDINATOR_IDENTITIES:?Set independently issued principal credentials}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    cpus: 1.0
+    restart: unless-stopped
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: heyuna
+      POSTGRES_USER: heyuna
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a unique generated database password}
+    volumes:
+      - coordinator-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U heyuna -d heyuna"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    mem_limit: 512m
+    cpus: 1.0
+    restart: unless-stopped
+volumes:
+  coordinator-db:

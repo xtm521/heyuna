@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "chain_id": 11155111,
+  "factory_address": null,
+  "token_address": null,
+  "reward_vault_address": null,
+  "public_fund_address": null,
+  "genesis": null,
+  "decimals": 18,
+  "total_supply": "20000000000000000000000000",
+  "confirmations": 3,
+  "code_hashes": { "factory": null, "token": null, "reward_vault": null, "public_fund": null }
+}

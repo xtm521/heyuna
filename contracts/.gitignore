@@ -1,0 +1,6 @@
+node_modules/
+artifacts/
+deployments/*.local.json
+.env
+.env.*
+!.env.example

@@ -1,0 +1,13 @@
+{
+  "name": "heyuna",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "pnpm --filter @heyuna/desktop dev",
+    "build": "pnpm --filter @heyuna/desktop build",
+    "test:desktop": "pnpm --filter @heyuna/desktop test",
+    "typecheck": "pnpm --filter @heyuna/desktop typecheck",
+    "desktop": "pnpm --filter @heyuna/desktop tauri"
+  }
+}

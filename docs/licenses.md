@@ -1,0 +1,28 @@
+# License and provenance ledger
+
+| Component | Upstream / license | Use and obligation |
+|---|---|---|
+| Heyuna code/docs/design | Apache-2.0 | LICENSE + NOTICE; original layout/text and icon composition |
+| Qwen3-4B-Instruct-2507 | https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507 / Apache-2.0 model card | Separate optional download; retain upstream files and pinned revision |
+| OpenZeppelin Contracts | https://github.com/OpenZeppelin/openzeppelin-contracts / MIT | Dependency, retain license; no claim upstream audited our composition |
+| React, TypeScript, Monaco, Vite, MLX, FastAPI | Respective official distributions / MIT | Installed dependency licenses retained in package distributions |
+| rcgen / Rustls | Official Rust crates / rcgen MIT OR Apache-2.0; Rustls Apache-2.0 OR ISC OR MIT | Per-launch certificate generation and pinned local TLS; no custom cryptographic algorithm |
+| Tauri | https://github.com/tauri-apps/tauri / MIT or Apache-2.0 | Rust wrapper and API dependency |
+| PyTorch | https://github.com/pytorch/pytorch / BSD-style | Optional Windows CUDA runtime; retain bundled license notices |
+| Transformers, safetensors | Hugging Face official projects / Apache-2.0 | Local model loading and safe tensor serialization |
+| CPython | Python Software Foundation license and bundled notices | Embedded runtime; license copied to `sidecar/_internal/licenses/CPython-LICENSE.txt` |
+| PyInstaller 6.22.3 | [Official licensing terms](https://pyinstaller.org/en/stable/license.html) / GPL-2.0-or-later WITH Bootloader-exception; selected runtime hooks Apache-2.0 | Build tool and unmodified embedded bootloader. Its explicit bootloader exception permits combining/distributing that bootloader with other programs; the other dependencies still retain their own license requirements. Full upstream `COPYING.txt`, including the exception, is preserved in the package. Heyuna does not modify PyInstaller. |
+| PyInstaller hooks contrib 2026.9 | Official wheel / upstream hook licenses | Packaging hooks; preserve the wheel's full license text and individual notices |
+| Lucide | https://github.com/lucide-icons/lucide / ISC | Icon components, preserve dependency notice |
+| Demo training data | Original tiny fixture statements in scripts/federation_smoke.py / Apache-2.0 | Only technical smoke evidence; not a representative licensed production corpus |
+| OKX public SDK | https://github.com/okx/js-wallet-sdk / MIT | Reference only, not currently included or linked; no brand/asset license implied |
+
+Public reference evidence: OKX wallet SDK uses TS/JS; https://github.com/okx/wallet-sdk-demo/blob/main/package.json identifies React/TypeScript/Chakra/Emotion in that demo. This does not establish the architecture of OKX's exchange or all mobile apps. Heyuna's Tauri/Rust/React/Monaco stack is its own selection.
+
+Locked dependency manifests are the source for exact versions. Release preparation must export all transitive licenses/SBOM and resolve any incompatibility, not assume this short ledger is exhaustive. A production dataset requires a dataset card with provenance, license, redistribution/training rights, sensitive-data review, hashes and deletion policy before admission.
+
+The frozen desktop runtime preserves original wheel metadata/license directories under `sidecar/_internal/*.dist-info/` and exports collected Python distribution notices to `sidecar/_internal/licenses/python/<distribution>/`. `sidecar/_internal/licenses/python-license-index.json` records versions, declared SPDX expressions where available, and retained text paths. The PyInstaller terms are at `sidecar/_internal/licenses/python/pyinstaller/pyinstaller-6.22.3.dist-info/licenses/COPYING.txt`. Inside a macOS application these paths begin at `Heyuna.app/Contents/Resources/`. The build manifest hashes those files; it does not convert them to Apache-2.0 or establish that every binary dependency obligation is satisfied. Frontend/Rust transitive release notices and distribution review remain release gates.
+
+SentencePiece 0.2.2 and Tokenizers 0.23.3 wheels omit standalone license text. The repository retains the unmodified license files from those exact upstream release tags under `apps/desktop/sidecar/licenses/`; `sources.json` records URLs and SHA-256 hashes. Packaging checks both the installed version and text hash, copies them into the runtime license directory, and fails if a collected Python distribution has no retained license text. This check covers distribution-level notices, not a complete audit of embedded native subcomponents.
+
+The desktop bundle excludes the coordinator, SQLAlchemy and Psycopg database drivers; these stay in the separately installed coordinator environment. Psycopg and psycopg-binary are LGPL-3.0-only and retain their own notices when that server environment is redistributed. No model weights or production dataset are bundled with the desktop application.

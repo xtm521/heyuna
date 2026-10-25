@@ -1,0 +1,6 @@
+# Packaging tools only; install the root platform-specific runtime requirements first.
+pyinstaller==6.22.3
+pyinstaller-hooks-contrib==2026.9
+altgraph==0.17.5
+macholib==1.16.4; sys_platform == 'darwin'
+setuptools==84.2.1
