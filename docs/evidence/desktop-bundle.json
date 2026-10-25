@@ -1,0 +1,87 @@
+{
+  "app": "apps/desktop/src-tauri/target/debug/bundle/macos/Heyuna.app",
+  "profile": "debug",
+  "restored_relative_symlinks": 2,
+  "signature": "local_ad_hoc",
+  "notarized": false,
+  "runtime": {
+    "frozen": true,
+    "platform": "Darwin",
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "backend": "mlx",
+    "tls_contexts_initialized": true,
+    "inference_verified": false,
+    "training_verified": false,
+    "mlx": "0.32.4",
+    "mlx_lm": "0.30.7",
+    "tensor_smoke": 3.0
+  },
+  "api_smoke": {
+    "authenticated_status": 200,
+    "unauthenticated_status": 401,
+    "model_ready": false,
+    "contribution_enabled": false,
+    "transport": "isolated_development_http; production TLS is verified separately below"
+  },
+  "source_sha256": {
+    "backend/heyuna/__init__.py": "2af97966142e9cc0656e7f4ad03f2a4512db920028b93ce9885c3c684d02a4d3",
+    "backend/heyuna/agent.py": "70dd8e539b10d6ba8253388722c1fbca3741a74fc011e327419770a1f25413a9",
+    "backend/heyuna/app.py": "8efcff4d8fded30707509a9b60769637cd60d70a43f7781a5f3d7aa9d1c15676",
+    "backend/heyuna/cli.py": "29b88b611a73279985b3c5ecf8505fd9234c2d1e14f0e0676aa566daa0813ef0",
+    "backend/heyuna/coordinator.py": "49a4fc483611546f368fa91931ee6dab0d46cf0d1799320b470bff78dcac5401",
+    "backend/heyuna/deployment.py": "b682f0cd7ab5dc698397f0b5380bc8203079edc41c91417314633f027858b047",
+    "backend/heyuna/federation.py": "c9ddabee2c98090b64090641b23355f721da8d24770dae2b4fd3a040a02d4324",
+    "backend/heyuna/model.py": "3922afa4e85e34c30ede7ffcde3ecf234d56d391535cf709195b616c66e5294f",
+    "backend/heyuna/network.py": "d604fb6f404c1c0b1053d88818af059a25057ab049256b2c09d4adc61f8f9ad9",
+    "backend/heyuna/projects.py": "4389e92c5cbb3129b6b96d92fa289c52e5087507dea3eb4ff0e616df6fb079be",
+    "backend/heyuna/protocol.py": "8ac52561e394d38761187e07bf37f4a1236abc0b82c48db52aea7e3ab9ffb0a7",
+    "backend/heyuna/sandbox.py": "b6527bd2e297df5a50a89a7aa84499036a11c8b1de0a524d1cc57904c05681eb",
+    "backend/heyuna/training.py": "4e7334649dca4629ab268feb66197c073b88eda39765f81212339daea4a2f288"
+  },
+  "runtime_files_verified": 3244,
+  "service_sha256": "40fd592c069158bd7fc1f6cdf00529ed90a857222116cf7a2c3c88f43a84af24",
+  "verified_at": "2026-10-25T05:21:39.453252+00:00",
+  "artifact_published": false,
+  "native_observation": {
+    "app": "Heyuna.app",
+    "bundle_profile": "debug",
+    "native_workbench_observed": true,
+    "native_wallet_unconfigured_and_disabled_observed": true,
+    "native_local_service_connected_observed": true,
+    "backend_tls_started": true,
+    "tls_certificate_verified": true,
+    "unauthenticated_https_status": 401,
+    "private_directory_mode": "0o700",
+    "private_key_mode": "0o600",
+    "model_downloaded_in_app_state": false,
+    "native_training_proven": false,
+    "native_inference_proven": false,
+    "backend_sources_match": true,
+    "runtime_service_sha256": "40fd592c069158bd7fc1f6cdf00529ed90a857222116cf7a2c3c88f43a84af24",
+    "application_binary_sha256": "6b4ad9bc8b06ccc3bc223f2f2268929beff6f78576177b996fbfb488fc7fea4e"
+  },
+  "production_transport": {
+    "scheme": "https",
+    "identity": "new certificate per application launch",
+    "trust": "only the launch certificate; system roots disabled",
+    "proxy_enabled": false,
+    "redirects_enabled": false,
+    "plaintext_fallback": false,
+    "tests_passed": [
+      "pinned certificate accepted",
+      "wrong certificate rejected before HTTP payload",
+      "port squatter received no plaintext token or project body",
+      "redirect not followed",
+      "Unix 0700 directory and 0600 key verified",
+      "ephemeral identity removed on normal teardown"
+    ]
+  },
+  "remaining_gates": [
+    "Native project picker and VoiceOver interaction",
+    "Native full model inference/training in the bundled application",
+    "Windows CUDA runtime and installer/device checks",
+    "Developer ID signing and notarization",
+    "Independent security audits and public testnet settlement"
+  ]
+}

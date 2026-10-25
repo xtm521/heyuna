@@ -30,7 +30,10 @@ and [PEFT LoRA documentation](https://huggingface.co/docs/peft/main/en/package_r
 
 `NetworkService(state_dir, resource_lock)` mounts `/network/status`, `/network/configure`,
 `/network/contribution`, `/network/run-once`, `/network/receipts`; the root application adds `/api`
-and local bearer authentication. Configuration is stored with mode 0600, never echoed to the UI.
+and local bearer authentication. On POSIX platforms, configuration is stored with mode 0600;
+credentials are never echoed to the UI. Windows `chmod` and `stat` permission bits do not establish
+equivalent access control. Windows credential isolation depends on the directory/file ACLs and still
+requires real-device verification; the current tests do not prove Windows credential privacy.
 Contribution is disabled on every app start. Configure does not authenticate or connect.
 
 Run once authenticates, claims a 15-minute renewable lease, verifies all artifacts, then starts the

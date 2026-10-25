@@ -1,4 +1,5 @@
 import json
+import os
 import threading
 
 import pytest
@@ -36,7 +37,9 @@ def test_node_defaults_off_and_configuration_is_not_connection(tmp_path):
     assert snapshot['network']['configured'] is True
     assert snapshot['network']['connected'] is False
     assert 'device_token' not in str(snapshot)
-    assert service.directory.joinpath('connection.json').stat().st_mode & 0o777 == 0o600
+    # POSIX permission bits do not establish Windows file ACL privacy.
+    if os.name == 'posix':
+        assert service.directory.joinpath('connection.json').stat().st_mode & 0o777 == 0o600
     service.contribution(ContributionSwitch(enabled=True))
     assert NetworkService(tmp_path, threading.Lock()).enabled is False
 
