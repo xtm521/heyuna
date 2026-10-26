@@ -40,3 +40,19 @@ The desktop bundle excludes the coordinator, SQLAlchemy and Psycopg database dri
 | Node/OpenSSL offline crypto | Node24.19.0 / Node license; OpenSSL3.5.7 / Apache-2.0 | Runtime experiment only; not a bundled chain algorithm migration |
 
 Exact transitive versions remain in chain/go.mod, chain/go.sum, JS lockfiles, uv.lock and Cargo.lock. Release SBOM must cover each. Go source provenance is recorded in chain/upstream/SOURCE.md; a short ledger is not an exhaustive license compatibility audit. Dependency licenses do not grant permission to use third-party brands or interface assets.
+
+## Native Apple wallet additions
+
+The independent SwiftUI wallet has its own pinned graph in `apps/apple-wallet/Package.resolved`. Its detailed [dependency ledger](../apps/apple-wallet/DEPENDENCIES.md) records direct revisions, source submodules, original notice hashes, observed compilation scope, and remaining release gates. The bundled [ThirdPartyNotices.txt](../apps/apple-wallet/Config/ThirdPartyNotices.txt) preserves the original direct-dependency legal texts and applicable known embedded-source attributions; it must be present in both final application archives and accessible on their separate legal page.
+
+| Component | Pinned provenance / license | Obligation and scope |
+|---|---|---|
+| BigInt | 5.4.1 / MIT | Preserve original copyright and permission text |
+| CryptoSwift | 1.10.0 / upstream custom permission notice | Preserve the full original text and its required product-documentation acknowledgment; do not label it MIT |
+| secp256k1.swift | 0.10.0 / MIT | Includes the separately licensed Bitcoin Core secp256k1 C source and SwiftCrypto source portions below |
+| Bitcoin Core secp256k1 C | submodule 01b819a8c7d485fdd3f024d77273f5769d75b2d3 / MIT | Preserve COPYING and applicable source/header copyrights; the unused zkp target is not treated as an application dependency |
+| SwiftCrypto source portions | submodule 92a04c10fc5ce0504f8396aac7392126033e547c / Apache-2.0 | Preserve complete Apache terms, relevant NOTICE attribution and original source copyrights; this is not a claim that all upstream test/tool components are linked |
+| Vendored Web3Core | web3swift 3.3.2, b9c771bf3b94983d2f9b22096b4a267a72c16006 / Apache-2.0 | Preserve upstream source headers and LICENSE.md; one HTTPURLResponse compatibility patch is documented in Vendor/Web3Core/UPSTREAM.md |
+| BDK Swift and FFI | 3.1.1 / top-level MIT OR Apache-2.0 | Preserve both supplied license texts. Its prebuilt static Rust library requires additional target-specific transitive Rust/C license and SBOM verification before store distribution |
+
+The fixed official bdk-ffi v3.1.1 Cargo.lock and its `--locked` XCFramework packaging script have been inspected. A lockfile includes non-runtime and cross-target packages and is not proof of the exact contents of a released static binary. Complete BDK embedded-component notices, target-specific SBOM and binary/source provenance remain explicit release gates; the direct notices bundle does not claim all transitive license obligations are closed. A pinned or recent dependency is also not an independent audit of this wallet composition. These legal attributions do not reintroduce third-party product branding into wallet navigation or marketing.

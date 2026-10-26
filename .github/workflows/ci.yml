@@ -82,10 +82,30 @@ jobs:
       - run: cargo +1.99.1 test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml --lib
       - run: cargo +1.99.1 build --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
 
+  apple-wallet:
+    name: Apple wallet
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Toolchain
+        run: xcodebuild -version && swift --version
+      - name: Reviewed vendor integrity
+        run: python3 apps/apple-wallet/script/verify_vendor.py
+      - name: Pinned wallet and state tests
+        run: swift test --package-path apps/apple-wallet --disable-automatic-resolution
+      - name: Reproducible Xcode project
+        run: |
+          python3 apps/apple-wallet/script/generate_project.py
+          git diff --exit-code -- apps/apple-wallet/HeyunaWallet.xcodeproj
+      - name: Native Mac build
+        run: xcodebuild -project apps/apple-wallet/HeyunaWallet.xcodeproj -scheme HeyunaWallet -destination 'generic/platform=macOS' -derivedDataPath .state/wallet-mac CODE_SIGNING_ALLOWED=NO build
+      - name: Native iOS simulator build
+        run: xcodebuild -project apps/apple-wallet/HeyunaWallet.xcodeproj -scheme HeyunaWallet -destination 'generic/platform=iOS Simulator' -derivedDataPath .state/wallet-ios CODE_SIGNING_ALLOWED=NO build
+
   source-provenance:
     name: Source provenance
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [backend, frontend-contracts, native, secrets]
+    needs: [backend, frontend-contracts, native, secrets, apple-wallet]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -102,6 +122,8 @@ jobs:
           cp apps/desktop/src-tauri/Cargo.lock release/Cargo.lock
           cp chain/go.mod release/chain-go.mod
           cp chain/go.sum release/chain-go.sum
+          cp apps/apple-wallet/Package.resolved release/apple-wallet-Package.resolved
+          cp apps/apple-wallet/Config/ThirdPartyNotices.txt release/apple-wallet-ThirdPartyNotices.txt
           python3 scripts/release_inventory.py release
       - uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2
         with:

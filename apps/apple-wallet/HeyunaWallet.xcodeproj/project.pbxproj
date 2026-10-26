@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+	};
+	"objectVersion" = 60;
+	"objects" = {
+		"408BA58203C05DA2D64D605C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/HeyunaWalletApp.swift";
+			"sourceTree" = "<group>";
+		};
+		"053A392D8F4AE8C2C2F0B795" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "408BA58203C05DA2D64D605C";
+		};
+		"B94359FE1326C7FB96D44202" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/ReceiveQRCode.swift";
+			"sourceTree" = "<group>";
+		};
+		"44B199DCB1599B40B18A63E8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "B94359FE1326C7FB96D44202";
+		};
+		"53751294FF9C9DE0B46B251C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/ReceiveView.swift";
+			"sourceTree" = "<group>";
+		};
+		"C29CDB1F582B8197C174D38B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "53751294FF9C9DE0B46B251C";
+		};
+		"C4F6B312EA0D0BB5C27DDC27" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/TransferComposerView.swift";
+			"sourceTree" = "<group>";
+		};
+		"33E3B045B55B0AD031CD71B5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C4F6B312EA0D0BB5C27DDC27";
+		};
+		"E315ACA40B13E505913EAB79" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletActivityView.swift";
+			"sourceTree" = "<group>";
+		};
+		"A6537A1F66F667BF6C72EEBF" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E315ACA40B13E505913EAB79";
+		};
+		"C71EF25DF76B20B32CFE6053" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletHomeView.swift";
+			"sourceTree" = "<group>";
+		};
+		"D1EDEF64B816758894A0E6D7" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C71EF25DF76B20B32CFE6053";
+		};
+		"84D48D2226FEA3EC07A1AB9D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletLicensesView.swift";
+			"sourceTree" = "<group>";
+		};
+		"43C395A983EA103BF280CA9B" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "84D48D2226FEA3EC07A1AB9D";
+		};
+		"C75243FB0AEF2A6A118D2788" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletRootView.swift";
+			"sourceTree" = "<group>";
+		};
+		"C6EDE96F13EDB60037709197" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C75243FB0AEF2A6A118D2788";
+		};
+		"C183F037E5048C779BCA7A83" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletSettingsView.swift";
+			"sourceTree" = "<group>";
+		};
+		"370AE30D96EB5F371544804D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "C183F037E5048C779BCA7A83";
+		};
+		"8F183BE95153DE09C4C20B71" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletSetupView.swift";
+			"sourceTree" = "<group>";
+		};
+		"A43BF09C310B05A0A68FF546" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8F183BE95153DE09C4C20B71";
+		};
+		"F0080A21CA1EB8D6EDCCC758" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/Views/WalletTheme.swift";
+			"sourceTree" = "<group>";
+		};
+		"39F13063E837B570CB4FA96C" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F0080A21CA1EB8D6EDCCC758";
+		};
+		"D8AEC9064764916BEE251442" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "App/WalletStore.swift";
+			"sourceTree" = "<group>";
+		};
+		"F0CAAAED6D9F343C2E684042" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D8AEC9064764916BEE251442";
+		};
+		"6D2E5714560CB3D4DD7C46F0" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "Config/PrivacyInfo.xcprivacy";
+			"sourceTree" = "<group>";
+		};
+		"D7B7E0F455CEE7538F364E55" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6D2E5714560CB3D4DD7C46F0";
+		};
+		"D81BCC6DA8871FE35F2371BF" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "folder.assetcatalog";
+			"path" = "Config/Assets.xcassets";
+			"sourceTree" = "<group>";
+		};
+		"6CF89BC42979CA051EFA7083" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "D81BCC6DA8871FE35F2371BF";
+		};
+		"3A4C4DFF66ED1FFBAD10DC3D" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.xml";
+			"path" = "Config/ThirdPartyNotices.txt";
+			"sourceTree" = "<group>";
+		};
+		"12EE9AF60010B7BCE86A5892" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "3A4C4DFF66ED1FFBAD10DC3D";
+		};
+		"A8792157CB4F27FB949C035F" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"includeInIndex" = 0;
+			"path" = "HeyunaWallet.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"0A3E27B8CA818264D75C8D81" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"A8792157CB4F27FB949C035F",
+				"93E46A602338E07A8524AEF6",
+			);
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		"19F479106CE8C3BA8C106518" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"408BA58203C05DA2D64D605C",
+				"B94359FE1326C7FB96D44202",
+				"53751294FF9C9DE0B46B251C",
+				"C4F6B312EA0D0BB5C27DDC27",
+				"E315ACA40B13E505913EAB79",
+				"C71EF25DF76B20B32CFE6053",
+				"84D48D2226FEA3EC07A1AB9D",
+				"C75243FB0AEF2A6A118D2788",
+				"C183F037E5048C779BCA7A83",
+				"8F183BE95153DE09C4C20B71",
+				"F0080A21CA1EB8D6EDCCC758",
+				"D8AEC9064764916BEE251442",
+				"6D2E5714560CB3D4DD7C46F0",
+				"D81BCC6DA8871FE35F2371BF",
+				"3A4C4DFF66ED1FFBAD10DC3D",
+				"0A3E27B8CA818264D75C8D81",
+				"09C237CC57C9FB3DB9E30078",
+			);
+			"sourceTree" = "<group>";
+		};
+		"BC4A71180870F7945155FBB0" = {
+			"isa" = "XCLocalSwiftPackageReference";
+			"relativePath" = ".";
+		};
+		"ED3DC570B697046E1D6DC405" = {
+			"isa" = "XCSwiftPackageProductDependency";
+			"package" = "BC4A71180870F7945155FBB0";
+			"productName" = "WalletKit";
+		};
+		"66EF54F873BEB2441B2858AA" = {
+			"isa" = "PBXBuildFile";
+			"productRef" = "ED3DC570B697046E1D6DC405";
+		};
+		"E2AA269EB967A8853A258BFA" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"66EF54F873BEB2441B2858AA",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"878A52FC5FF6A57D50B7B870" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"053A392D8F4AE8C2C2F0B795",
+				"44B199DCB1599B40B18A63E8",
+				"C29CDB1F582B8197C174D38B",
+				"33E3B045B55B0AD031CD71B5",
+				"A6537A1F66F667BF6C72EEBF",
+				"D1EDEF64B816758894A0E6D7",
+				"43C395A983EA103BF280CA9B",
+				"C6EDE96F13EDB60037709197",
+				"370AE30D96EB5F371544804D",
+				"A43BF09C310B05A0A68FF546",
+				"39F13063E837B570CB4FA96C",
+				"F0CAAAED6D9F343C2E684042",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"41D311A605520FC7B8B9A980" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"D7B7E0F455CEE7538F364E55",
+				"6CF89BC42979CA051EFA7083",
+				"12EE9AF60010B7BCE86A5892",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"B8EB4DC6EE71CC2FBFD201B8" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.heyuna.wallet";
+				"PRODUCT_NAME" = "HeyunaWallet";
+				"INFOPLIST_FILE" = "Config/Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"SWIFT_VERSION" = "5.0";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator macosx";
+				"SDKROOT" = "auto";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"MACOSX_DEPLOYMENT_TARGET" = "15.5";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"ENABLE_DEBUG_DYLIB" = "NO";
+				"ENABLE_HARDENED_RUNTIME" = "YES";
+				"ENABLE_APP_SANDBOX" = "YES";
+				"ENABLE_OUTGOING_NETWORK_CONNECTIONS" = "YES";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Config/macOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Config/iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "Config/iOS.entitlements";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks @executable_path/Frameworks";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"MARKETING_VERSION" = "0.1.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ONLY_ACTIVE_ARCH" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "$(inherited) DEBUG";
+			};
+		};
+		"2EF9ECCD715FED9D8FF379BE" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.heyuna.wallet";
+				"PRODUCT_NAME" = "HeyunaWallet";
+				"INFOPLIST_FILE" = "Config/Info.plist";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"SWIFT_VERSION" = "5.0";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator macosx";
+				"SDKROOT" = "auto";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"MACOSX_DEPLOYMENT_TARGET" = "15.5";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"SUPPORTS_MACCATALYST" = "NO";
+				"ENABLE_DEBUG_DYLIB" = "NO";
+				"ENABLE_HARDENED_RUNTIME" = "YES";
+				"ENABLE_APP_SANDBOX" = "YES";
+				"ENABLE_OUTGOING_NETWORK_CONNECTIONS" = "YES";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = "Config/macOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphoneos*]" = "Config/iOS.entitlements";
+				"CODE_SIGN_ENTITLEMENTS[sdk=iphonesimulator*]" = "Config/iOS.entitlements";
+				"SWIFT_EMIT_LOC_STRINGS" = "YES";
+				"ENABLE_USER_SCRIPT_SANDBOXING" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = "$(inherited) @executable_path/../Frameworks @executable_path/Frameworks";
+				"ASSETCATALOG_COMPILER_APPICON_NAME" = "AppIcon";
+				"MARKETING_VERSION" = "0.1.0";
+				"CURRENT_PROJECT_VERSION" = "1";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+				"ONLY_ACTIVE_ARCH" = "NO";
+			};
+		};
+		"82A58AF6F77EDCFC78A65DA6" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"B8EB4DC6EE71CC2FBFD201B8",
+				"2EF9ECCD715FED9D8FF379BE",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"34A04005BCAF206EEC990BD9" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "82A58AF6F77EDCFC78A65DA6";
+			"buildPhases" = (
+				"878A52FC5FF6A57D50B7B870",
+				"E2AA269EB967A8853A258BFA",
+				"41D311A605520FC7B8B9A980",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+			);
+			"name" = "HeyunaWallet";
+			"packageProductDependencies" = (
+				"ED3DC570B697046E1D6DC405",
+			);
+			"productName" = "HeyunaWallet";
+			"productReference" = "A8792157CB4F27FB949C035F";
+			"productType" = "com.apple.product-type.application";
+		};
+		"09C237CC57C9FB3DB9E30078" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "UITests/WalletAppUITests.swift";
+			"sourceTree" = "<group>";
+		};
+		"93E46A602338E07A8524AEF6" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "WalletAppUITests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"0F57E1CFBF4D1BEC221AC955" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.heyuna.wallet.uitests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_VERSION" = "5.0";
+				"SDKROOT" = "auto";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator macosx";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"MACOSX_DEPLOYMENT_TARGET" = "15.5";
+				"TEST_TARGET_NAME" = "HeyunaWallet";
+				"CODE_SIGN_STYLE" = "Automatic";
+			};
+		};
+		"77D373C0B0BEB111717BC6CE" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.heyuna.wallet.uitests";
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"SWIFT_VERSION" = "5.0";
+				"SDKROOT" = "auto";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator macosx";
+				"TARGETED_DEVICE_FAMILY" = "1,2";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"MACOSX_DEPLOYMENT_TARGET" = "15.5";
+				"TEST_TARGET_NAME" = "HeyunaWallet";
+				"CODE_SIGN_STYLE" = "Automatic";
+			};
+		};
+		"512FEAD05B4138AAAA4858C1" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"0F57E1CFBF4D1BEC221AC955",
+				"77D373C0B0BEB111717BC6CE",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"C8888B1FC4BF7E3AFDD3B5AC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "09C237CC57C9FB3DB9E30078";
+		};
+		"760DD443C1DF2461277A1FDF" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"C8888B1FC4BF7E3AFDD3B5AC",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"5571A8135AC78D6956901922" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"2232AAA02F27CED7D4DA528D" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "34A04005BCAF206EEC990BD9";
+		};
+		"4EA0BBFB4641B4E941FBF077" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "512FEAD05B4138AAAA4858C1";
+			"buildPhases" = (
+				"760DD443C1DF2461277A1FDF",
+				"5571A8135AC78D6956901922",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"2232AAA02F27CED7D4DA528D",
+			);
+			"name" = "WalletAppUITests";
+			"productName" = "WalletAppUITests";
+			"productReference" = "93E46A602338E07A8524AEF6";
+			"productType" = "com.apple.product-type.bundle.ui-testing";
+		};
+		"5DF0EAF287A59303D4EFEAF3" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SWIFT_STRICT_CONCURRENCY" = "complete";
+				"ENABLE_STRICT_OBJC_MSGSEND" = "YES";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"CLANG_CXX_LANGUAGE_STANDARD" = "gnu++20";
+				"SWIFT_TREAT_WARNINGS_AS_ERRORS" = "NO";
+			};
+		};
+		"C62D9534737287C44FD6EF43" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"CLANG_ENABLE_MODULES" = "YES";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SWIFT_STRICT_CONCURRENCY" = "complete";
+				"ENABLE_STRICT_OBJC_MSGSEND" = "YES";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"CLANG_CXX_LANGUAGE_STANDARD" = "gnu++20";
+				"SWIFT_TREAT_WARNINGS_AS_ERRORS" = "NO";
+			};
+		};
+		"7ED5184A5487DF185E3420D0" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"5DF0EAF287A59303D4EFEAF3",
+				"C62D9534737287C44FD6EF43",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"244210E48437B6556980A702" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastUpgradeCheck" = "2700";
+				"TargetAttributes" = {
+					"4EA0BBFB4641B4E941FBF077" = {
+						"TestTargetID" = "34A04005BCAF206EEC990BD9";
+					};
+				};
+			};
+			"buildConfigurationList" = "7ED5184A5487DF185E3420D0";
+			"compatibilityVersion" = "Xcode 15.0";
+			"developmentRegion" = "zh-Hans";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = (
+				"zh-Hans",
+				"en",
+				"Base",
+			);
+			"mainGroup" = "19F479106CE8C3BA8C106518";
+			"packageReferences" = (
+				"BC4A71180870F7945155FBB0",
+			);
+			"productRefGroup" = "0A3E27B8CA818264D75C8D81";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = (
+				"34A04005BCAF206EEC990BD9",
+				"4EA0BBFB4641B4E941FBF077",
+			);
+		};
+	};
+	"rootObject" = "244210E48437B6556980A702";
+}
