@@ -1,0 +1,320 @@
+{
+  "upstream": "https://github.com/web3swift-team/web3swift",
+  "version": "3.3.2",
+  "revision": "b9c771bf3b94983d2f9b22096b4a267a72c16006",
+  "modification": "One explicit HTTPURLResponse compatibility guard; cryptographic paths unchanged. See Web3Core/UPSTREAM.md.",
+  "files": [
+    {
+      "path": "Contract/ContractProtocol.swift",
+      "sha256": "2b07dda4339c9cdc26f1c31cac6f6bdd93c9d3a1b57f021c3499ff0cd8ab7863"
+    },
+    {
+      "path": "Contract/EthereumContract.swift",
+      "sha256": "cfa61edf93546a1a0c8e73ba99fcd9e8680b42e2b0f436a86f71d897e80a17f6"
+    },
+    {
+      "path": "EthereumABI/ABI.swift",
+      "sha256": "4c22f47f464bfb65582b83daac2963d5fd5c3aaf97508284c2be8ec6886a2b46"
+    },
+    {
+      "path": "EthereumABI/ABIDecoding.swift",
+      "sha256": "9ea84a22c877a48764c1b27aa36d2f3c4558e64326d2a9f8edc5b652815cb910"
+    },
+    {
+      "path": "EthereumABI/ABIElements.swift",
+      "sha256": "879a0e1f9ca5b6e75832c9032d095be1df0f15aeeb080b2d8e7ff77af594b90f"
+    },
+    {
+      "path": "EthereumABI/ABIEncoding.swift",
+      "sha256": "8c37f54c89cba4fc771be7535d1d8b5379c23f0342820d638455545f714735d2"
+    },
+    {
+      "path": "EthereumABI/ABIError.swift",
+      "sha256": "6ab02f18955e388cee796a2c9cbdbe32cad51b293f5ed8457686ab53d2e0bbb1"
+    },
+    {
+      "path": "EthereumABI/ABIParameterTypes.swift",
+      "sha256": "053736c1c5efbab3a406218895e041c6718ab76c57bd32a0de6358ee0310c29d"
+    },
+    {
+      "path": "EthereumABI/ABIParsing.swift",
+      "sha256": "2ccac5af09312613566ee4266df2f43284fc2c707cffd1e34eee77b93d61f615"
+    },
+    {
+      "path": "EthereumABI/ABITypeParser.swift",
+      "sha256": "8f34a68c87f03d3834ee3c3ce05d58b3a6eabcec506177f0545f0fa672978974"
+    },
+    {
+      "path": "EthereumABI/Sequence+ABIExtension.swift",
+      "sha256": "dd856de27f1bc17d4ad8328d6f3caa6d3d448354c5824e09675a4d18591cf8ba"
+    },
+    {
+      "path": "EthereumAddress/EthereumAddress.swift",
+      "sha256": "32b394b71ca638a0910af9ca5450784006fa1e9495d480da30b91b9550359607"
+    },
+    {
+      "path": "EthereumNetwork/Request/APIRequest+ComputedProperties.swift",
+      "sha256": "34bab263ff6350e1c7cf1001e43bc0934ab81d0e2c953df343d1f0285b324780"
+    },
+    {
+      "path": "EthereumNetwork/Request/APIRequest+Methods.swift",
+      "sha256": "038550f2a66cdca5948104178cbb9ebafef899a18a5cd35dae3b629b4d893bfe"
+    },
+    {
+      "path": "EthereumNetwork/Request/APIRequest+UtilityTypes.swift",
+      "sha256": "789be747438a76b16b5a144a14eaad2c0184f595e6cb1f1bc5dfb733fdd067ed"
+    },
+    {
+      "path": "EthereumNetwork/Request/APIRequest.swift",
+      "sha256": "4fec46fe9ed7f5eef3f6c2a294670859f68c7aa91ad1335734c4ecf8d039de2a"
+    },
+    {
+      "path": "EthereumNetwork/RequestParameter/APIRequestParameterType.swift",
+      "sha256": "40e89b6cdaf770c1a98195b5f85b301e54d417be0a8f9fec78a71390053dda38"
+    },
+    {
+      "path": "EthereumNetwork/RequestParameter/RequestParameter+Encodable.swift",
+      "sha256": "9c2540cba6fd407d90ca3a6190d208ad585ffcc862cfe232dc418bff9e7e68ba"
+    },
+    {
+      "path": "EthereumNetwork/RequestParameter/RequestParameter+RawRepresentable.swift",
+      "sha256": "b28dc4e7eaa412b43f4da8fceaa829fdeba22604b074990e7768ddefec9b381b"
+    },
+    {
+      "path": "EthereumNetwork/RequestParameter/RequestParameter.swift",
+      "sha256": "4c6b59fd2f717e8fc3f936c10e20d5d764df4ce4927911912fa8e41eb4e8b397"
+    },
+    {
+      "path": "EthereumNetwork/Utility/Async+BackwardCapability.swift",
+      "sha256": "6f102fbb1a1aca2211d74ed83d945cead889ed93918ddc45a9a486b265999f96"
+    },
+    {
+      "path": "EthereumNetwork/Utility/HexDecodable+Extensions.swift",
+      "sha256": "d0e29168ecf59d6b6a74bd2fffdef8cf54eaa9685965a1618a9f361069433136"
+    },
+    {
+      "path": "EthereumNetwork/Utility/HexDecodableProtocols.swift",
+      "sha256": "d5ad40ed7f4926d41abab5946121e9663a84cf682ed729bcfc5f235024fa32f7"
+    },
+    {
+      "path": "EthereumNetwork/Utility/IntegerInitableWithRadix.swift",
+      "sha256": "fd29279e4b464bfad700fdeb340f8ce03464d67e3d48eaaf7935071177d72264"
+    },
+    {
+      "path": "KeystoreManager/AbstractKeystore.swift",
+      "sha256": "90dfd25bb9ab7c01186792cd04197ebb4937a622ebed21fdf7e02df775c8f9bf"
+    },
+    {
+      "path": "KeystoreManager/BIP32HDNode.swift",
+      "sha256": "4603ec5a1d64e04109d3126f64e391232d0a5cb575f763d4f4d4c99aa0092559"
+    },
+    {
+      "path": "KeystoreManager/BIP32Keystore.swift",
+      "sha256": "90e5b8ee238bb48d0bd112afb387b7e7d4b2e5effe22bee116aa1a4a76e22298"
+    },
+    {
+      "path": "KeystoreManager/BIP39+WordLists.swift",
+      "sha256": "78cb30831831fc705b13d295bbe786e736a44d0c361b274a8a458ebf61f0346e"
+    },
+    {
+      "path": "KeystoreManager/BIP39.swift",
+      "sha256": "da349841e4741134c6653b10bfcb58a8278607c2e041b99bbf599bbfdbcf304a"
+    },
+    {
+      "path": "KeystoreManager/BIP44.swift",
+      "sha256": "daedacd53db3e1d6525f60a5587566798877d413da5c79868366db0b7c33a1ca"
+    },
+    {
+      "path": "KeystoreManager/EthereumKeystoreV3.swift",
+      "sha256": "b56ad9d71371ac77bc745bc697da83d8b78473cb98bb7588e8ceb31a83255ddc"
+    },
+    {
+      "path": "KeystoreManager/EtherscanTransactionChecker.swift",
+      "sha256": "12b377c2c4bf1db68a0329fe1a73c75ba2c07b932c7f24f1782b709f7a9730b1"
+    },
+    {
+      "path": "KeystoreManager/IBAN.swift",
+      "sha256": "329f8d77073491f579c6f389d4e4a4fb2f268f9496ec135b43b1288db529dae4"
+    },
+    {
+      "path": "KeystoreManager/KeystoreManager.swift",
+      "sha256": "1b61566956dc9f3bfa003bb0c2661e142c74ec0646f35e3bc2b414543314e740"
+    },
+    {
+      "path": "KeystoreManager/KeystoreParams.swift",
+      "sha256": "aba7e6b26744e4cd8499381985ceae8a667c3dcf7c3e98b13c1be9fcb048d480"
+    },
+    {
+      "path": "KeystoreManager/PathAddressStorage.swift",
+      "sha256": "f21aecba5d61c64ca7e1b2606e9dd9d171ae45bdd602412d4f63d0ad40de0675"
+    },
+    {
+      "path": "KeystoreManager/PlainKeystore.swift",
+      "sha256": "d0b2423925c53a663c811442a844da66376c3b426d36a8ff970b16637c9cc1f8"
+    },
+    {
+      "path": "LICENSE.md",
+      "sha256": "bf5f5fbe8b645db0087ac12918884ce89bd22a4c5fafbfd7635828e5947eff2a"
+    },
+    {
+      "path": "Oracle/GasOracle.swift",
+      "sha256": "b96d8f7a9e86b7299e9485913cba370652a9b4b5fc0de753def82c8cdc3282d4"
+    },
+    {
+      "path": "RLP/RLP.swift",
+      "sha256": "24edf04b29440f864bd5862aa942905b4589b11346971f2a12de13e5806d434a"
+    },
+    {
+      "path": "Structure/Base58.swift",
+      "sha256": "4fce7bdac44154d120f3d0ede4100b73981cbd126d162208201be729eab9dc42"
+    },
+    {
+      "path": "Structure/Block/Block.swift",
+      "sha256": "9ee99a72d0db19c2704839c1b83baa519670d5715112c2ced4da17973496d24e"
+    },
+    {
+      "path": "Structure/Block/BlockNumber.swift",
+      "sha256": "333a04b538c0c83643659e88bfcc2fbc1441988088cb05262394e2381b464407"
+    },
+    {
+      "path": "Structure/Event+Protocol.swift",
+      "sha256": "d2b3ac6a4064e41f6b1c0d0e2dc2bdd217a7f5f7437f477cebe79382520b3001"
+    },
+    {
+      "path": "Structure/EventLog/EventLog.swift",
+      "sha256": "68eab8e9364971646955395cc2e1788d11b320e86946b94793707a987fbee477"
+    },
+    {
+      "path": "Structure/SECP256k1.swift",
+      "sha256": "cb8a5d97130a8441dd2239c7368e6bef31b1bc82d1c0fa8dc5a6cc115c908dc8"
+    },
+    {
+      "path": "Structure/Transaction/TransactionDetails.swift",
+      "sha256": "b89944a07ecc44009d24ce941185ed51a34cfbbd359efa6d58ae27a254881f1a"
+    },
+    {
+      "path": "Structure/Transaction/TransactionInBlock.swift",
+      "sha256": "01aeded0f449b5fa2a649771ba2a19c3ae77c8d87d6d2ffdeef6efe231a75109"
+    },
+    {
+      "path": "Structure/Transaction/TransactionReceipt.swift",
+      "sha256": "ae82a6aa3bb0f4b301a892c9f2c9571f310fe548c88152702a699e60132eff60"
+    },
+    {
+      "path": "Structure/TxPool/TxPoolContent.swift",
+      "sha256": "9c33d6e13e7bcdebc3c93d3aecc7209d841cb9b5098be41854a7f9fd386389cb"
+    },
+    {
+      "path": "Structure/TxPool/TxPoolStatus.swift",
+      "sha256": "a64fda1be4d160b7a5919e7a602be2afb7e25f5c324ff832585fe12385cac8ca"
+    },
+    {
+      "path": "Structure/Web3ProviderProtocol.swift",
+      "sha256": "982ae0b58fa6e66c769ed1d71e159a7dbf2bffba623727f7c25ec2df0f82d7d6"
+    },
+    {
+      "path": "Transaction/CodableTransaction.swift",
+      "sha256": "969f3443785d551a350366e415a03430a60cab094bac1b89602fc59d5d9fd2e6"
+    },
+    {
+      "path": "Transaction/Envelope/AbstractEnvelope.swift",
+      "sha256": "e32c7163c04be0eacaffb7bd94ca91fc64b621ec076c3a5620a8fda1ef32605d"
+    },
+    {
+      "path": "Transaction/Envelope/EIP1559Envelope.swift",
+      "sha256": "b4f7259fc4b10ddc3879d045e66bdeecc0af1ae5a60b44365fe019c54fee9953"
+    },
+    {
+      "path": "Transaction/Envelope/EIP2718Envelope.swift",
+      "sha256": "99c9afc79cd835d1b5add896e7cce16f3fec4f0e40cc7c3029e3de27c434b7f0"
+    },
+    {
+      "path": "Transaction/Envelope/EIP2930Envelope.swift",
+      "sha256": "fd2130632ace24e15f52743a71b65064480fc83111c7f8524086dcca9e68c14b"
+    },
+    {
+      "path": "Transaction/Envelope/EnvelopeFactory.swift",
+      "sha256": "c80d2c83f9fbd072c8be2976c77718ec260c5dcb23737e31a16eadcc83dddf06"
+    },
+    {
+      "path": "Transaction/Envelope/LegacyEnvelope.swift",
+      "sha256": "7f66f9b76db96afe56f416ad2cd76c0e82df18515767199c5af30f144ff4bcb8"
+    },
+    {
+      "path": "Transaction/Envelope/Protocols/EIP2930Compatible.swift",
+      "sha256": "57d647ee497fbb6613c0b582652c7e5fa0a9b120f185fe256da92442e46ad7c8"
+    },
+    {
+      "path": "Transaction/EthereumBloomFilter.swift",
+      "sha256": "450239ae435506b3522c253a896ae1e87f1357a7dbd8ea94d3f197574218519a"
+    },
+    {
+      "path": "Transaction/EventfilterParameters.swift",
+      "sha256": "77fd8a3edfe3391b9e59664472230ed2b133abdbdb504b3dd34a78392a4d3210"
+    },
+    {
+      "path": "Transaction/Policies.swift",
+      "sha256": "8920ab1aed8a400995b498c831a55f7665861e81707946735bfbcd99d4875064"
+    },
+    {
+      "path": "Transaction/TransactionMetadata.swift",
+      "sha256": "a1dd9d7fbb05a2fbd5a420677ecc15d09380f15ac774fcede72706399fd082d8"
+    },
+    {
+      "path": "UPSTREAM.md",
+      "sha256": "33c7db22f900df8ef4f2b2fdbd571792d3a9d0edaa4cd764e2ace2ac27a7d421"
+    },
+    {
+      "path": "Utility/Array+Extension.swift",
+      "sha256": "3a0fc6faa1789e532c3c77d5ecd2fa6da2b2d23507c4fac4f2fa58ac70f4cc1f"
+    },
+    {
+      "path": "Utility/BigUInt+Extension.swift",
+      "sha256": "fb835b125e2ba85fba60f8e2393b00efc48b745994f44518ff5918e8576a2674"
+    },
+    {
+      "path": "Utility/CryptoExtension.swift",
+      "sha256": "a4bde3c62049139e74ca915f6b0ab8869d52ea57284f81493fcbe380e13c0135"
+    },
+    {
+      "path": "Utility/Data+Extension.swift",
+      "sha256": "9b74479a7007b3b1039328ca4ce2108a0a85c8b3672764df4493609d71b4ff94"
+    },
+    {
+      "path": "Utility/Decodable+Extensions.swift",
+      "sha256": "0b22cefb34ba44119067a99f08fb3ca7dbe55fb581c5c02cc1ce9e3e8673858c"
+    },
+    {
+      "path": "Utility/Dictionary+Extension.swift",
+      "sha256": "10d6e9149bc475453a02360951d6fbe22c87010547b3411477c30094e2e6436f"
+    },
+    {
+      "path": "Utility/Encodable+Extensions.swift",
+      "sha256": "2323608a2a4a9a1895ac8763ac7091d73b3e574e479a3a3820fdca4c3f4cd2d3"
+    },
+    {
+      "path": "Utility/NSRegularExpression+Extension.swift",
+      "sha256": "c1ca31e9c92601e43bc2c8b660dbbd20f805841014824e40fb34772567a04768"
+    },
+    {
+      "path": "Utility/NativeTypesEncoding+Extension.swift",
+      "sha256": "d50712d492381403b3de5812e8fe371999717219c95a0cdb0866af49939e2240"
+    },
+    {
+      "path": "Utility/RIPEMD160+StackOveflow.swift",
+      "sha256": "73dda02b83c9383d95fa7307386e08761f86617d5f2ed7ceaf58fc2093a296b7"
+    },
+    {
+      "path": "Utility/String+Extension.swift",
+      "sha256": "ebc150b47080c0e8fa87bb51496dd40724dd5daeae5642102db249ee1b2aeb98"
+    },
+    {
+      "path": "Utility/Utilities.swift",
+      "sha256": "515623cb6893410a1da750547a57540f74d813ff46d0a24cc740b25e4e57f94e"
+    },
+    {
+      "path": "Web3Error/Web3Error.swift",
+      "sha256": "7b0eff5d06eea13dd05968e15637ac7228cac71a176fb03b0dc59f936f991d27"
+    }
+  ]
+}

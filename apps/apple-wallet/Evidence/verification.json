@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "status": "development-preview-not-published",
+  "platforms": {
+    "iOS": {
+      "minimum": "17.0",
+      "deviceArchive": "unsigned Release archive succeeded; no device install or upload",
+      "simulator": {
+        "model": "iPhone 17",
+        "os": "27.0",
+        "uiTests": 1,
+        "failed": 0,
+        "scenario": "offline welcome; secure import input; invalid mnemonic rejected; return to empty wallet"
+      }
+    },
+    "macOS": {
+      "minimum": "15.5",
+      "architecture": "arm64 development build; earlier universal unsigned build also passed",
+      "signature": "Apple Development; verified locally, not notarized or App Store distribution",
+      "effectiveEntitlements": {
+        "sandbox": true,
+        "networkClient": true,
+        "getTaskAllow": true
+      },
+      "uiScenarios": [
+        "welcome empty/offline",
+        "secure invalid mnemonic rejection",
+        "invalid HTTP node rejection",
+        "native settings observed"
+      ]
+    }
+  },
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "host": "macOS 27.0.1"
+  },
+  "unitAndStateTests": {
+    "passed": 29,
+    "failed": 0,
+    "http": "in-memory URLProtocol fixtures; no real network broadcast",
+    "coverage": [
+      "BIP39/BIP84 published vectors",
+      "EIP1559 signature recovery and fields",
+      "BTC synthetic UTXO -> preview -> public revalidation -> offline PSBT signature -> hash-checked simulated broadcast",
+      "same raw transaction recovery",
+      "wrong network and genesis rejection",
+      "amount precision and bounds",
+      "UTXO and raw transaction mismatches",
+      "streamed response size and scan bounds",
+      "cancellation before broadcast",
+      "missing Keychain record recovery via mocked vault",
+      "in-flight backup dismissal via mocked vault"
+    ]
+  },
+  "resourcesVerifiedInBothProducts": [
+    "PrivacyInfo.xcprivacy",
+    "ThirdPartyNotices.txt"
+  ],
+  "independentAgentReview": "Four concrete issues fixed and regression tested; no remaining reproducible P1/P2 found in final source review. This is not an external security audit.",
+  "notVerified": [
+    "physical iPhone Keychain, passcode, Face ID and recovery",
+    "Mac authenticated Keychain add/read/delete with final app identity",
+    "real Signet/Sepolia funding, broadcast and confirmations",
+    "full Rust/C binary dependency SBOM and license closure",
+    "organization membership eligibility",
+    "release distribution signing/provisioning",
+    "privacy/export/regions",
+    "upload, TestFlight, review, public availability"
+  ],
+  "artifact": {
+    "path": ".state/artifacts/HeyunaWallet-macos-development-0.1.0.zip",
+    "sha256": "e07e1b6f42e72eed4248fef459b9df9f85b0ba571ed1c58c6f11d5f88914628d",
+    "purpose": "local development preview; do not store real assets"
+  },
+  "screenshots": {
+    "ios-welcome.png": "602cee496cbd395b4e2e569ffef36a28aac2cd79e47828d8069743ead669dacc",
+    "macos-invalid-node.png": "5d163f5773eda92ccf27a88fb101aa1b60946e3d55eb834fe084f7cefa00c81a",
+    "macos-welcome.png": "1b59c92a6d52ab34adaf681115ef09d9b6787f221a924a567988a01e4805a780"
+  },
+  "implementationFileSHA256": [
+    {
+      "path": "Sources/WalletKit/BitcoinEngine.swift",
+      "sha256": "79050d0952bbe7b28e62eb668cd70bcca8cedf82b136f849aa96198f5d2be251"
+    },
+    {
+      "path": "Sources/WalletKit/EVMEngine.swift",
+      "sha256": "76a6b42ef78bd61aaccb408ffa227b1054987a0c951416c210f24664a6d6a1d5"
+    },
+    {
+      "path": "Sources/WalletKit/JSONRPC.swift",
+      "sha256": "dec7646e85fefd3f6d817a318baacff9e3bad99a46a5d347f5d281c498148ca1"
+    },
+    {
+      "path": "Sources/WalletKit/Models.swift",
+      "sha256": "c4664a83c878964ccd04ed5e5d815c3a8e8d4fe8fc9eea6254f9c17ebc25df89"
+    },
+    {
+      "path": "Sources/WalletKit/SecretVault.swift",
+      "sha256": "599df91d34733dbbf6d020128d1bccff993f9deb2df21fefc3c8afb7c66d9a71"
+    },
+    {
+      "path": "Sources/WalletKit/WalletCryptography.swift",
+      "sha256": "ae0464e7a552cca6974b853c6aa802154f34605c3f58e6d6633b45508ee480e9"
+    },
+    {
+      "path": "Sources/WalletKit/WalletPersistence.swift",
+      "sha256": "e40367228ed9cbfa48e3c6b7459797027f512c1ce8eb5b178f8626f914f98da5"
+    },
+    {
+      "path": "App/HeyunaWalletApp.swift",
+      "sha256": "c4d8afa77e10bc2d4b9bae93cd4a342aa3bcd0e94ab161a49f9e69845b934b89"
+    },
+    {
+      "path": "App/Views/ReceiveQRCode.swift",
+      "sha256": "0f707f4802c473e276d368a8459a665fc08bff18d4c22d788d8406823c0061bf"
+    },
+    {
+      "path": "App/Views/ReceiveView.swift",
+      "sha256": "c3ab4cf8d0353f345b588de4cea01f11ff3e044067ed7d5815e6ddf655cfec78"
+    },
+    {
+      "path": "App/Views/TransferComposerView.swift",
+      "sha256": "0516cedafcdc26c429696760488746733b3c8fbe36d75a0c393f259d63bda161"
+    },
+    {
+      "path": "App/Views/WalletActivityView.swift",
+      "sha256": "a52da0e75baa1ad05313d6e5781168fefb9e843fbaf21083574710d84103e71d"
+    },
+    {
+      "path": "App/Views/WalletHomeView.swift",
+      "sha256": "6f86b3d0789b6de6ad961da292676541ef471cdfab1d4ff100be5b38bdbacffd"
+    },
+    {
+      "path": "App/Views/WalletLicensesView.swift",
+      "sha256": "4d46e871861b367aced106408a146c84b1298189e290eeacd4c7db0043a6afad"
+    },
+    {
+      "path": "App/Views/WalletRootView.swift",
+      "sha256": "1396e876f6949463b71a45440b96b562131d040f6b45fa1dcc2de51ea8ca9bd1"
+    },
+    {
+      "path": "App/Views/WalletSettingsView.swift",
+      "sha256": "ec6e915818790aa59fe75df6ac697423666d4200637f1a96e4ef9c386198d898"
+    },
+    {
+      "path": "App/Views/WalletSetupView.swift",
+      "sha256": "6915df8c56051b19dbf6c04eb6f32d923b4f14b4db63fe626a110cdb4fb8f06a"
+    },
+    {
+      "path": "App/Views/WalletTheme.swift",
+      "sha256": "49c46372ab83bac539b6a3bea0108994edd541f834674dd8e998a0f96ee8e504"
+    },
+    {
+      "path": "App/WalletStore.swift",
+      "sha256": "25a58ca287e0d6341ffff377d460d6a1ea0dd0f6ff898a3d3002697bbb40975b"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "sha256": "488c0c34079bc057be1b6c8ffff449e4a6f9861d5c0c35d4c026ea3b27797486"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+      "sha256": "edd5419bfc273b62be1e6ee681b153ccdff544edb636ce704e9cc4ff27b4ccd4"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-128.png",
+      "sha256": "47f0261f58accd6300f432a8c696a718346c317c18a7ae7cb6218ba669422805"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-16.png",
+      "sha256": "82c206aa9d980eccef09b887b2aa93c92be261ad85ced651add8d30f7b6e279b"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-256.png",
+      "sha256": "250952b0a001dd707f32a39470ce3bd38d4d509a44bc226d3a77f037286896ae"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-32.png",
+      "sha256": "934e714bb7174d106112779750c518e44bd7272b1cda9114471158d3d3c6e81d"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-512.png",
+      "sha256": "0702e6820eb991047e1a611e5a240879bc67f1aa93c4eab8a871f47634f970da"
+    },
+    {
+      "path": "Config/Assets.xcassets/AppIcon.appiconset/icon-64.png",
+      "sha256": "c563675668ee21531ffe492243974340d1c295398e9b07879cb8999f60b49524"
+    },
+    {
+      "path": "Config/Assets.xcassets/Contents.json",
+      "sha256": "234e0e22b67f036090579cd47183e7c4cf9027e7e8a4a8c4f21c24bbf0368421"
+    },
+    {
+      "path": "Config/Info.plist",
+      "sha256": "52babe89ae95323195f16909325645d60d730b753bd79096d6afd5abec9eeae5"
+    },
+    {
+      "path": "Config/PrivacyInfo.xcprivacy",
+      "sha256": "5c20dbcb4ab17c390d6c89c0d6c7f7a274f377c2304159f01bb2ebb88a2cd069"
+    },
+    {
+      "path": "Config/ThirdPartyNotices.txt",
+      "sha256": "97cae4977965f8d7d26f499b5615351af6ab28356c45a58dad602ecc848fc8ab"
+    },
+    {
+      "path": "Config/iOS.entitlements",
+      "sha256": "55a9c3dbd2e3925788619684eace456de8fcbdd4e0afb681237cdcff36d6bda9"
+    },
+    {
+      "path": "Config/macOS.entitlements",
+      "sha256": "80e0c6c1d70b219ec106bb30f9970fe957e645c9246c12173d89e07587fe0d4c"
+    }
+  ]
+}

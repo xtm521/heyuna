@@ -19,3 +19,10 @@ target/
 .coverage
 coverage/
 *.tsbuildinfo
+
+# Native wallet build products and user-local Xcode state
+apps/apple-wallet/.build/
+apps/apple-wallet/.swiftpm/
+apps/apple-wallet/build/
+xcuserdata/
+*.xcuserstate

@@ -87,3 +87,14 @@ Complete recomputation remains the default. Quorum signatures/Merkle proofs auth
 Online services are planned within¥1,000/month; engineering, independent devices/nodes and audits need separate resources. No paid service or mainnet has been deployed by these local scripts.
 
 Own additions: [Apache-2.0](LICENSE). Dependencies/models/data/fonts retain their licenses: [ledger](docs/licenses.md), [NOTICE](NOTICE), [upstream](chain/upstream/SOURCE.md). The interface, text and motion are original. Heyuna is an independent project; no third-party affiliation or endorsement is implied. Heyuna is a working name pending trademark clearance.
+
+## Native iPhone and Mac wallet (development preview)
+
+The independent [Apple wallet](apps/apple-wallet/README.md) adds BTC/Signet and ETH/Sepolia
+native-coin accounts, local recovery backup, receive QR codes, explicit transaction review,
+and system-authenticated local signing. It shares no seed or signing permission with the
+coding assistant or training client. The Heyuna research network remains disabled until its
+trusted manifest integration is implemented. Current code is a development preview;
+[release gates](apps/apple-wallet/APP_STORE.md) distinguish local tests and archives from
+physical-device verification and App Store publication. The current individual developer
+membership does not satisfy Apple's organization requirement for wallet distribution.
