@@ -103,7 +103,7 @@ jobs:
           cp chain/go.mod release/chain-go.mod
           cp chain/go.sum release/chain-go.sum
           python3 scripts/release_inventory.py release
-      - uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2
+      - uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2
         with:
           subject-path: release/heyuna-source.tar.gz
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
