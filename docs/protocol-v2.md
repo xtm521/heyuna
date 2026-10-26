@@ -14,6 +14,8 @@ TrainingTaskV2 binds NetworkBinding={chain_id,genesis_hash,reward_vault_address,
 
 V2 coordinator exposes `/v2/*` only when constructed with a trusted native manifest. Legacy factory exposes `/v1/*`. Persisted DB network binding prevents silent reuse. Wallet-directed tasks lease only to matching recipients. Cross-network tasks/receipts and reused raw result hashes are rejected. Review signatures do not themselves create paid recomputation tasks. All drafts remain unsigned and off chain.
 
+Native coordinator reviews require two of the three invited verifier votes for acceptance or rejection. A single rejection leaves the receipt pending and cannot veto two approvals. Each verifier's vote is immutable; rejection quorum and allocated receipts cannot be overwritten. This is distinct from a single-verifier freeze of a disputed on-chain batch. Explicit legacy v1 retains its historical rejection behavior.
+
 ## Reward bundle v2
 
 Generator:`contracts/scripts/native-protocol.mjs::nativeBundle`. File keys: manifest,manifest_hash,root,training_budget,verification_budget,claims.

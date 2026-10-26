@@ -419,10 +419,15 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             if verdict.accepted and not (verdict.recomputation_passed and verdict.heldout_passed):
                 raise HTTPException(422, "acceptance requires recomputation and held-out evaluation")
             data["validations"][p.participant_id] = verdict.model_dump()
-            if not verdict.accepted:
+            approvals = sum(v["accepted"] for v in data["validations"].values())
+            rejections = len(data["validations"]) - approvals
+            if manifest and approvals >= 2:
+                receipt["state"] = "verified"
+                receipt["detail"] = "Two validator attestations accepted; no on-chain settlement yet."
+            elif (manifest and rejections >= 2) or (not manifest and not verdict.accepted):
                 receipt["state"] = "rejected"
                 receipt["detail"] = "Independent verification rejected the update; no reward is eligible."
-            elif len([v for v in data["validations"].values() if v["accepted"]]) >= 2:
+            elif not manifest and approvals >= 2:
                 receipt["state"] = "verified"
                 receipt["detail"] = "Two validator attestations accepted; no on-chain settlement yet."
             receipt["validator_ids"] = sorted(data["validations"])

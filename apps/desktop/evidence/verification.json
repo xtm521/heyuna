@@ -162,12 +162,15 @@
     ]
   },
   "native_bundle": {
-    "evidence": "docs/evidence/desktop-research-bundle-2026-10-26.json",
+    "evidence": "docs/evidence/desktop-research-bundle-2026-10-26-quorum-fix.json",
     "rebuilt_after_backend_freeze": true,
     "signature": "local_ad_hoc",
     "notarized": false,
     "independent_copied_runtime_tls_api": "passed",
-    "native_window_launched": false
+    "native_window_launched": false,
+    "extracted_archive_tls_api": "passed",
+    "coordinator_service_packaged": false,
+    "source_manifest_boundary": "Full backend source inventory; coordinator quorum correction is server-side and coordinator is excluded from frozen desktop."
   },
   "screenshots": {
     "settings-200-dark.png": "d37baddd0fa0433814c8b23c5470c862baea19ac96f2f1adc19b87afe1f5b4fa",

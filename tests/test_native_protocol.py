@@ -188,3 +188,41 @@ def test_coordinator_default_never_silently_starts_legacy(monkeypatch):
     monkeypatch.delenv('HEYUNA_NETWORK_MANIFEST', raising=False)
     with pytest.raises(RuntimeError, match='requires'):
         create_coordinator_app()
+
+
+@pytest.mark.parametrize("votes,states", [
+    ([False, True, True], ["pending_verification", "pending_verification", "verified"]),
+    ([True, True, False], ["pending_verification", "verified", "verified"]),
+    ([True, False, True], ["pending_verification", "pending_verification", "verified"]),
+    ([False, True, False], ["pending_verification", "pending_verification", "rejected"]),
+    ([False, False], ["pending_verification", "rejected"]),
+])
+def test_native_validation_requires_two_votes_and_is_order_independent(tmp_path, votes, states):
+    task, a, b, texts = native_task()
+    app = create_coordinator_app(database_url="sqlite:///" + str(tmp_path / "quorum.sqlite3"),
+        principals=identities(), network_manifest=native_network(), clock=lambda: 1001)
+    with TestClient(app) as client:
+        assert client.post("/v2/tasks", headers=auth("admin"), json={"task": task.model_dump(),
+            "texts": texts, "shared_a": base64.b64encode(a).decode(),
+            "base_b": base64.b64encode(b).decode()}).status_code == 201
+        lease = client.post("/v2/tasks/lease", headers=auth("device"), json={"backend": "mlx"}).json()["lease"]
+        submitted = client.post("/v2/tasks/task1/submit", headers=auth("device"), json={
+            "lease_id": lease["lease_id"], "task_hash": task.fingerprint,
+            "adapter_hash": digest(b), "adapter_b": base64.b64encode(b).decode()})
+        assert submitted.status_code == 200, submitted.text
+        receipt_id = submitted.json()["receipt_id"]
+        for index, (accepted, state) in enumerate(zip(votes, states, strict=True), 1):
+            verdict = {"adapter_hash": digest(b), "accepted": accepted,
+                "recomputation_passed": accepted, "heldout_passed": accepted,
+                "evidence_hash": "a" * 64, "detail": "Fixture attestation only"}
+            response = client.post(f"/v2/receipts/{receipt_id}/validate", headers=auth(f"v{index}"), json=verdict)
+            assert response.status_code == 200, response.text
+            assert response.json()["state"] == state
+        drafted = client.post("/v2/reward-epochs/draft", headers=auth("admin"), json={
+            "epoch": 0, "receipt_ids": [receipt_id]})
+        assert drafted.status_code == (200 if states[-1] == "verified" else 409), drafted.text
+        # A rejected quorum cannot be overwritten by the remaining verifier.
+        if len(votes) == 2:
+            assert client.post(f"/v2/receipts/{receipt_id}/validate", headers=auth("v3"),
+                json={**verdict, "accepted": True, "recomputation_passed": True,
+                      "heldout_passed": True}).status_code == 409

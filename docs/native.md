@@ -1,8 +1,18 @@
 # Native desktop evidence and boundary
 
-## Research-network rebuild — 2026-10-26
+## Current rebuild after coordinator quorum correction — 2026-10-26
 
-The current local macOS arm64 app is `apps/desktop/src-tauri/target/debug/bundle/macos/Heyuna.app`. It includes the redesigned desktop and the frozen native-research backend. This is a debug-profile, locally ad-hoc-signed build: **not notarized, not Developer ID signed, not a Windows build and not a published binary release**.
+The current local macOS arm64 application remains `apps/desktop/src-tauri/target/debug/bundle/macos/Heyuna.app`, built in the debug profile with a local ad-hoc signature. **It is not notarized, Developer ID signed, Windows verified or publicly released as a binary.** No user application or sidecar was running in the process check before this rebuild; no same-identity native window was launched.
+
+The source inventory now records `backend/heyuna/coordinator.py` SHA256 `4c463c678df8a54264a68f0294ca6934b25a7a4743dfbad3e96831f0c12b8cb7`, containing the v2 report-quorum correction. **The frozen desktop runtime intentionally excludes the coordinator and database adapters.** This hash inventories the full backend source snapshot; it does not mean the coordinator server is included in the app. The correction remains a separately deployed server-side change. Accordingly, the desktop service binary SHA256 remains `bca865e552ae132fcbcb0bfd77ea066ddd5b2964eebb32415f4cd8845db79453`, while the updated source inventory changes the sealed app resources and archive. Frontend source hashes match the preceding bundle.
+
+After packaging, the actual ZIP was extracted into a private temporary directory. The extracted app passed deep/strict signature verification, all 3,244 runtime file hashes matched, and the embedded source manifest matched current sources. Its own service ran against fresh temporary state over an ephemeral pinned TLS connection: authorized status returned 200, unauthenticated status returned 401, native tHEYUNA defaulted to research chain 297011 with no vault/wallet configured, and contribution remained disabled. The extracted service was stopped and its temporary state, certificate and key were removed. These checks do not verify a native window, 4B inference or training.
+
+Current local archive: `.state/artifacts/Heyuna-macos-arm64-research-debug-quorum-fix.zip` (163,762,644 bytes). ZIP SHA256: `5a47cc00b426122acaf766af58c256a1885acc78489bb97931a1fe716b766b69`. Its CRC integrity check also passed. The app file/symlink-tree digest is `026be6b2d411e3992882637cdba69942d659ff2255d226003aa1dfd90d1f810d`. Full source, artifact and extracted-runtime evidence is in [the current bundle record](evidence/desktop-research-bundle-2026-10-26-quorum-fix.json). The earlier archive and both historical evidence records below remain available; neither historical checksum identifies this current archive.
+
+## Historical research-network rebuild — before coordinator quorum correction
+
+The earlier local macOS arm64 app was `apps/desktop/src-tauri/target/debug/bundle/macos/Heyuna.app`. It includes the redesigned desktop and the frozen native-research backend. This is a debug-profile, locally ad-hoc-signed build: **not notarized, not Developer ID signed, not a Windows build and not a published binary release**.
 
 The sidecar was rebuilt after the final contribution-category and receipt-binding correction. Packaging verified all 3,244 runtime files, compared backend source SHA256 values before and after the build, restored the two reviewed relative symlinks and passed deep/strict signature verification. The runtime initializes TLS contexts and runs the MLX tensor smoke; this is not a 4B inference or training result.
 
