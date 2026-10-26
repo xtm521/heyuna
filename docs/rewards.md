@@ -43,7 +43,7 @@ See[protocol](protocol-v2.md). The chain prevents receipt reallocation and globa
 
 Security subsidy transfers from3.96m using1040weekly integer-difference budgets;40k remains self-bonded. Prior-block finalized commit participation determines shares. Missed periods do not accrue; rounding remainder stays reserved. Current accelerated3sepochs exist only for tests. Research currency is not cost recovery; fee income/operator costs dominate after exhaustion. Compare520/1040/2600scenarios.
 
-Local bootstrap sets NoBaseFee and minimum gas price0. Upstream effective fees/refunds route through fee_collector/distribution, with2%community tax; priority fees are not assumed to follow Ethereum coinbase semantics. Public fee behavior needs explicit redesign/review and testing. See[compatibility](evm-compatibility.md).
+Local bootstrap sets NoBaseFee and minimum gas price0. Upstream effective fees/refunds route through fee_collector/distribution, with2%community tax; priority fees are not assumed to follow upstream proposer-fee semantics. Public fee behavior needs explicit redesign/review and testing. See[compatibility](evm-compatibility.md).
 
 `NativePublicFund`: five distinct managers,3sorted EIP712signatures, nonce/deadline, reserve checks,7daydelay. Cancellation also requires quorum. No arbitrary calls/delegatecall/upgrade/user confiscation/mint. Pending contribution freeze cannot freeze user transfers.
 

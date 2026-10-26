@@ -48,6 +48,8 @@ Accepted work is not automatically claimable: publication, quorum signature, cha
 
 ## Chain and wallet
 
-Three functional contracts: `HeyunaToken`, `RewardVault`, `PublicFund`; an atomic testnet factory deploys/binds them. OpenZeppelin primitives supply standard ERC-20/signature/Merkle behavior. ABI is checked in. Deployments use a separate manifest; no address is fabricated in an unconfigured UI. Wallet key custody is outside the local service. `apps/wallet` supplies a separate EIP-1193 claim portal, with optional OKX provider selection, fixed claim calldata and canonical receipt checks. Its controls stay unavailable until a reviewed real deployment manifest verifies against the selected chain; local contract tests do not enable financial controls.
+Three functional contracts: `HeyunaToken`, `RewardVault`, `PublicFund`; an atomic testnet factory deploys/binds them. OpenZeppelin primitives supply standard ERC-20/signature/Merkle behavior. ABI is checked in. Deployments use a separate manifest; no address is fabricated in an unconfigured UI. Wallet key custody is outside the local service. `apps/wallet` supplies a separate EIP-1193 claim portal through compatible browser extensions, with fixed claim calldata and canonical receipt checks. Its controls stay unavailable until a reviewed real deployment manifest verifies against the selected chain; local contract tests do not enable financial controls.
+
+Editorial note: the current presentation omits vendor-specific wallet adapters. Their historical implementation remains in the original Git revision; recorded test evidence and provenance files have not been rewritten.
 
 Contract upgrades require explicit new deployments. No proxy can replace the token rules. Mainnet requires a new reviewed release and independent signers, with an explicit migration/adoption decision.

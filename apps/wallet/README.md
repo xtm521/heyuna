@@ -1,6 +1,6 @@
 # 合芽原生奖励领取门户
 
-独立浏览器页面，通过 EIP-1193 连接通用钱包或可选 OKX 钱包。默认资产为 **Heyuna 原生 tHEYUNA**，使用 `NativeRewardVault.claim`。连接账户和签名交易是两个独立操作。页面没有私钥、助记词、代币授权或通用交易入口，也不调用桌面训练 API。
+独立浏览器页面，通过 EIP-1193 连接兼容的浏览器钱包。默认资产为 **Heyuna 原生 tHEYUNA**，使用 `NativeRewardVault.claim`。连接账户和签名交易是两个独立操作。页面没有私钥、助记词、代币授权或通用交易入口，也不调用桌面训练 API。
 
 ## 本地启动
 
@@ -13,7 +13,7 @@ pnpm --filter @heyuna/wallet-portal dev
 
 门户固定为 `http://127.0.0.1:1421/`。`HEYUNA_COSMOS_RPC_ORIGIN` 在开发启动或静态构建时设置精确的公开 Cosmos origin（默认 `http://127.0.0.1:27657`，本机加速环境为 `http://127.0.0.1:28657`），只允许 loopback HTTP；它注入 CSP，不进入桌面 API 权限。清单中的 Cosmos URL 需与该构建允许的 origin 一致，节点也需允许门户 origin 的 CORS。桌面仅在系统浏览器中打开精确入口，不带 token、query、fragment 或账户会话。Vite 设置防嵌入和 no-referrer 响应头。未来生产域名需要另行审核并加入桌面允许列表。
 
-原创界面使用共享碳黑/石墨/银白/青绿 tokens、本地 Inter Variable（SIL OFL）与原创三条曲面芽形。默认深色，保留 `heyuna-wallet-theme` 的用户选择。不复制 OKX 标识或页面素材。
+原创界面使用共享碳黑/石墨/银白/青绿 tokens、本地 Inter Variable（SIL OFL）与原创三条曲面芽形。默认深色，保留 `heyuna-wallet-theme` 的用户选择。布局、文案、图形和动效均为项目原创，不暗示任何第三方背书。
 
 ## 公开网络清单 v2
 

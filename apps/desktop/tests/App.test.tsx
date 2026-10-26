@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from '../src/App';
-import { api, receiptLabel } from '../src/api';
+import { api, ApiError, receiptLabel } from '../src/api';
 import { registerEffect } from '../src/components/effects';
 
 vi.mock('../src/api', async importOriginal => ({ ...(await importOriginal<typeof import('../src/api')>()), api: vi.fn(), isDesktop: () => false }));
@@ -28,10 +28,54 @@ async function selectProject() {
 }
 
 describe('honest desktop states', () => {
+  it('shows neutral local-model labels without promoting the underlying model or runtime', async () => {
+    render(<App />); await screen.findByText('本地服务已连接');
+    expect(document.body.textContent).not.toMatch(/Qwen|mlx/i);
+    fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    await screen.findByText('40 亿参数');
+    expect(screen.getByText('本机加速')).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Qwen|mlx/i);
+  });
+  it('keeps model diagnostics in service logs without exposing provider text in the interface', async () => {
+    vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, model: { ...status.model, ready: false, state: 'error', detail: 'Diagnostic code MODEL_DOWNLOAD_FAILED' } } : []);
+    render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    await screen.findByText('本地模型暂不可用，请查看技术诊断。');
+    expect(screen.getByText('技术诊断请查看本地服务日志。')).toBeInTheDocument();
+    expect(screen.queryByText('Diagnostic code MODEL_DOWNLOAD_FAILED')).not.toBeInTheDocument();
+  });
+  it('keeps runtime failure detail out of the contribution hero and preserves stopping', async () => {
+    vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, contribution: { enabled: true, state: 'error', detail: 'GenericVendorRuntime unsupported device' } } : []);
+    render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    await screen.findByText('本次贡献未能完成，请检查网络与设备状态。');
+    expect(screen.getByText('技术诊断请查看本地服务日志。')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '暂停贡献' })).toBeEnabled();
+    expect(document.body.textContent).not.toContain('GenericVendorRuntime');
+  });
+  it('shows an actionable HTTP failure without rendering untrusted service text', async () => {
+    vi.mocked(api).mockRejectedValue(new ApiError('GenericVendorRuntime model request failed', 503));
+    render(<App />);
+    await screen.findByText('本地服务暂不可用，请稍后重试。HTTP 503；技术诊断请查看本地服务日志。');
+    expect(document.body.textContent).not.toContain('GenericVendorRuntime');
+    expect(screen.getByRole('button', { name: '提交编程任务' })).toBeDisabled();
+  });
+  it('acknowledges model preparation without displaying raw server detail', async () => {
+    vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, model: { ...status.model, ready: false, state: 'missing' } } : { detail: 'GenericVendorRuntime model setup detail' });
+    render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    fireEvent.click(await screen.findByRole('button', { name: '下载并准备模型' }));
+    await screen.findByText('已请求准备模型，请查看当前状态。');
+    expect(document.body.textContent).not.toContain('GenericVendorRuntime');
+  });
+  it('acknowledges task polling without claiming raw service detail as its outcome', async () => {
+    vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, contribution: { enabled: true, state: 'idle' } } : path === '/network/receipts' ? [] : { detail: 'GenericVendorRuntime task setup detail' });
+    render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    fireEvent.click(await screen.findByRole('button', { name: /领取任务/ }));
+    await screen.findByText('任务请求已完成，请查看贡献记录。');
+    expect(document.body.textContent).not.toContain('GenericVendorRuntime');
+  });
   it('does not fabricate a connection or let an offline device run tasks', async () => {
     vi.mocked(api).mockRejectedValue(new Error('Backend offline'));
     render(<App />);
-    await screen.findByText('Backend offline');
+    await screen.findByText('操作未完成，请重试。技术诊断请查看本地服务日志。');
     expect(screen.getByText('本地服务未连接')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '提交编程任务' })).toBeDisabled();
     expect(screen.queryByText('本地服务已连接')).not.toBeInTheDocument();

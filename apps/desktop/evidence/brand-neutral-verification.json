@@ -1,0 +1,191 @@
+{
+  "kind": "fixture-ui-qa",
+  "claims": [
+    "Only Heyuna is promoted in app chrome and model card",
+    "One generic EIP-1193 connector",
+    "Network identity and fee asset preserved",
+    "Provider denial/wrong-chain handled without signing"
+  ],
+  "controls": [
+    "5 desktop pages",
+    "dark/light",
+    "wallet connect/disconnect",
+    "wrong-chain",
+    "permission denied",
+    "mobile layout"
+  ],
+  "screenshots": [
+    "brand-neutral-workspace.png",
+    "brand-neutral-training.png",
+    "brand-neutral-wallet.png",
+    "brand-neutral-wallet-connected-fixture.png",
+    "brand-neutral-workspace-mobile.png",
+    "brand-neutral-training-mobile.png",
+    "brand-neutral-wallet-mobile.png"
+  ],
+  "checks": [
+    {
+      "label": "desktop-workspace",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "desktop-training",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "desktop-奖励钱包",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "desktop-贡献记录",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "desktop-网络与设置",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "desktop-light",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "wallet-unconnected",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "no-account-request-before-click",
+      "requests": []
+    },
+    {
+      "label": "wrong-chain-blocked-before-permission",
+      "requests": [
+        "eth_chainId"
+      ]
+    },
+    {
+      "label": "wallet-wrong-chain",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "wallet-permission-denied",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "wallet-generic-connection",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "generic-eip1193-user-click-connect",
+      "requests": [
+        "eth_chainId",
+        "eth_getBlockByNumber",
+        "eth_requestAccounts",
+        "eth_chainId",
+        "eth_getBlockByNumber",
+        "eth_chainId",
+        "eth_getBlockByNumber",
+        "eth_accounts",
+        "eth_chainId",
+        "eth_getCode",
+        "eth_getCode",
+        "eth_chainId",
+        "eth_getCode",
+        "eth_chainId",
+        "eth_call",
+        "eth_chainId",
+        "eth_getBalance",
+        "eth_chainId",
+        "eth_chainId",
+        "eth_getBlockByNumber",
+        "eth_accounts"
+      ],
+      "fixture": true,
+      "signed": false,
+      "transactions_sent": 0
+    },
+    {
+      "label": "wallet-light",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "wallet-legacy-details-identity",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-workspace",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-training",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-奖励钱包",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-贡献记录",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-网络与设置",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "mobile-wallet",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    },
+    {
+      "label": "wallet-mobile-legacy-collapsed",
+      "unexpected_brand": null,
+      "horizontal_overflow": false
+    }
+  ],
+  "consoleErrors": [],
+  "generated_at": "2026-10-26T10:15:01.022Z",
+  "evidence_limitations": [
+    "All new screenshots use explicitly injected UI fixtures, not a real coordinator, trained model, or live chain.",
+    "The generic provider test uses a test-owned EIP-1193 implementation, no user extension/private key/signature/transaction.",
+    "Prior real-chain evidence is preserved separately unchanged."
+  ],
+  "tests": {
+    "desktop": 23,
+    "wallet": 26,
+    "desktop_build": "passed",
+    "wallet_build": "passed"
+  },
+  "screenshot_sha256": {
+    "brand-neutral-workspace.png": "c13f127ec4997566f3bc1b56a166e5ff11a21764e17ac82c0565e5bdf1d62a41",
+    "brand-neutral-training.png": "d21c61cffb58f88f9b6457f0149eaa5a2f805045c2db5543788be058523176ff",
+    "brand-neutral-wallet.png": "161d9b210a958f4c376a0012e807de1796f0c589882de71a1e33ee9fbd8b21ff",
+    "brand-neutral-wallet-connected-fixture.png": "2bb959ddc763e0d26dc7cc70553d8f9d74c1dc74629029ed1dc0d878ae3949d5",
+    "brand-neutral-workspace-mobile.png": "e900f251ddd9e3f4908b31c4f2a6e0de4ec4a925dc60799bc1b9ae881cd471e7",
+    "brand-neutral-training-mobile.png": "1234c6e92617e02a2bd50bb997e36cfec2c2f9dc8452330b9226f6285e4c6533",
+    "brand-neutral-wallet-mobile.png": "7c25ccec49ae2c73fc2c972043f3a01defc8e112338a2d778d4cc10968c8360e"
+  },
+  "visual_review": {
+    "desktop_and_mobile": "reviewed",
+    "unexpected_brand_matches": 0,
+    "horizontal_overflow": false,
+    "console_errors": 0,
+    "accepted_scope": "Brand presentation cleanup only; user project content, real asset symbols and protocol IDs are not rewritten."
+  }
+}

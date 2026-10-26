@@ -19,7 +19,7 @@ function changed(mutator: (value: typeof vector) => void) { const copy = structu
 describe('deployment and manifest trust boundary', () => {
   it('requires independent nonempty public deployment configuration', () => {
     expect(() => parseDeployment({ ...config, token_address: null })).toThrow(/尚未配置/);
-    expect(() => parseDeployment({ ...config, chain_id: 1 })).toThrow(/Sepolia/);
+    expect(() => parseDeployment({ ...config, chain_id: 1 })).toThrow(/11155111/);
     expect(() => parseDeployment({ ...config, decimals: 6 })).toThrow(/小数位/);
     expect(() => parseDeployment({ ...config, total_supply: '20000000' })).toThrow(/供应量/);
     expect(() => parseDeployment({ ...config, code_hashes: { ...config.code_hashes, token: null } })).toThrow(/摘要/);
@@ -98,7 +98,7 @@ function mockConnection(options: { chain?: string; decimals?: bigint; claimed?: 
 describe('wallet transaction boundary', () => {
   it('rejects wrong chain before even requesting accounts; connection never sends a transaction', async () => {
     const wrong = mockConnection({ chain: '0x1' });
-    await expect(connect(wrong.connection.injected)).rejects.toThrow(/不是 Ethereum Sepolia/);
+    await expect(connect(wrong.connection.injected)).rejects.toThrow(/不是指定的历史测试网络/);
     expect(wrong.calls.map((call) => call.method)).toEqual(['eth_chainId']);
     wrong.connection.provider.destroy();
     const right = mockConnection();
@@ -112,7 +112,7 @@ describe('wallet transaction boundary', () => {
     await expect(assertAccount(changedAccount.connection)).rejects.toThrow(/账户已变化/);
     changedAccount.connection.provider.destroy();
     const malformed = mockConnection({ chain: '11155111' });
-    await expect(assertSepolia(malformed.connection.injected)).rejects.toThrow(/不是 Ethereum Sepolia/);
+    await expect(assertSepolia(malformed.connection.injected)).rejects.toThrow(/不是指定的历史测试网络/);
     malformed.connection.provider.destroy();
   });
   it('verifies runtime bytecode, token parameters and immutable contract links without signing', async () => {

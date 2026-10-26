@@ -18,7 +18,7 @@ export async function chooseProject(): Promise<string | null> { return invoke('c
 export async function openWallet(url: string): Promise<void> {
   if (isDesktop()) return invoke('open_wallet', { url });
   const parsed = new URL(url);
-  if (url !== 'http://127.0.0.1:1421/' && (parsed.protocol !== 'https:' || !['wallet.okx.com', 'www.okx.com'].includes(parsed.hostname) || !!parsed.port || !!parsed.username || !!parsed.password)) throw new Error('钱包链接不在允许列表中。');
+  if (url !== 'http://127.0.0.1:1421/') throw new Error('钱包链接不在允许列表中。');
   window.open(parsed.href, '_blank', 'noopener,noreferrer');
 }
 

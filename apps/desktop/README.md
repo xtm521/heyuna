@@ -40,7 +40,7 @@ The local macOS app has no Developer ID distribution signature or notarization. 
 
 ## External wallet boundary
 
-The external wallet button remains disabled until a research-network identity, reward vault and allowed wallet URL are configured. No wallet connection, claim, balance, model response, or training progress is simulated. The alpha's built-in allowlist contains the exact development portal `http://127.0.0.1:1421/` (no query or fragment) and the official HTTPS hosts `wallet.okx.com` and `www.okx.com`. Adding a production claim portal requires a reviewed code change. Opening a wallet is not connecting one or submitting a transaction, and no local API credential is passed to it.
+The external wallet button remains disabled until a research-network identity, reward vault and allowed wallet URL are configured. No wallet connection, claim, balance, model response, or training progress is simulated. The built-in allowlist contains only the exact development portal `http://127.0.0.1:1421/`, without a query, fragment, credentials or an alternate path. Adding a production claim portal requires a reviewed code change. Opening a wallet is not connecting one or submitting a transaction, and no local API credential is passed to it.
 
 ## Research-network renderer
 
