@@ -1,0 +1,20 @@
+@font-face { font-family: 'Inter Variable'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/InterVariable-latin.woff2') format('woff2'); }
+/* Original Heyuna visual system. SPDX-License-Identifier: Apache-2.0 */
+:root {
+  color-scheme: dark;
+  --canvas: #090b0c; --surface: #111517; --surface-raised: #181d20; --surface-hover: #20272a;
+  --text: #f3f5f6; --muted: #a0aaae; --subtle: #7d898e; --line: #2a3337; --line-soft: #20282c;
+  --accent: #4fe0ba; --accent-hover: #79edce; --accent-ink: #06251d; --accent-soft: #153a30;
+  --danger: #ffaba8; --danger-bg: #3c2325; --warning: #e6c58e;
+  --shadow: 0 20px 70px #0005; --radius: 12px; --radius-sm: 7px;
+  --font: 'Inter Variable', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --mono: 'SFMono-Regular', Consolas, monospace; --motion-fast: 140ms; --motion-ui: 200ms;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+  --canvas: #eef1f2; --surface: #fafcfc; --surface-raised: #fff; --surface-hover: #e7edee;
+  --text: #182023; --muted: #57676d; --subtle: #617279; --line: #cbd5d8; --line-soft: #dce3e5;
+  --accent: #06785b; --accent-hover: #08664f; --accent-ink: #fff; --accent-soft: #d8efe8;
+  --danger: #ab3434; --danger-bg: #fce9e8; --warning: #88611b; --shadow: 0 20px 70px #20303012;
+}
+@media (prefers-reduced-motion: reduce) { :root { --motion-fast: 0ms; --motion-ui: 0ms; } }

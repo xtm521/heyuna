@@ -14,6 +14,9 @@ def main():
     serve.add_argument("--tls-key", default=os.environ.get("HEYUNA_TLS_KEY"), help="Ephemeral loopback TLS private key")
     doctor = sub.add_parser("doctor", help="Report observed runtime capabilities without model download")
     doctor.add_argument("--state-dir", default=".state")
+    coordinator = sub.add_parser("coordinator", help="Start a native research coordinator with a trusted network manifest")
+    coordinator.add_argument("--network-manifest", required=True)
+    coordinator.add_argument("--port", type=int, default=8080)
     args = parser.parse_args()
     if args.command == "serve":
         if bool(args.tls_cert) != bool(args.tls_key):
@@ -23,6 +26,16 @@ def main():
         from .app import create_app
         uvicorn.run(create_app(state_dir=args.state_dir), host="127.0.0.1", port=args.port, access_log=False,
                     ssl_certfile=args.tls_cert, ssl_keyfile=args.tls_key)
+    elif args.command == "coordinator":
+        import uvicorn
+
+        from .coordinator import create_coordinator_app
+        from .deployment import NetworkManifest, load_manifest
+        manifest = load_manifest(Path(args.network_manifest))
+        if not isinstance(manifest, NetworkManifest):
+            parser.error("A native version-two manifest is required; legacy alpha has a separate API")
+        uvicorn.run(create_coordinator_app(network_manifest=manifest.model_dump()), host="127.0.0.1",
+                    port=args.port, access_log=False)
     else:
         import json
         import threading

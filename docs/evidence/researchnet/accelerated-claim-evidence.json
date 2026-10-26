@@ -1,0 +1,52 @@
+{
+  "chain_id": 297012,
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "challenge_seconds": 3,
+  "task_hash": "bd94bb82b62935492d29ef48ca35dc1c129bc6fb054a6a90418ea566a78f3a29",
+  "root": "0xa96e83cad0a897eecdf10b9eb0e28f4d8054eecb385ddf14e743eab44a0d3edc",
+  "claims": [
+    {
+      "contribution_id": "0x02e0dfff50d7dca8f5a8ebefd1b609642af7276d746ca668dfc3e48212f269f1",
+      "epoch": "0",
+      "index": "0",
+      "category": 0,
+      "recipient": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "amount": "1000000000000000000",
+      "transaction_hash": "0x88068153eb5502752543768c6da4da7edfb4a20dd63578b31df53e427be5f722",
+      "block_number": 225,
+      "status": 1,
+      "gas_used": "500000",
+      "gas_price": "0",
+      "recipient_balance_before": "99998999999999999999999",
+      "recipient_balance_after": "99999999999999999999999",
+      "reward_vault_before": "14000000000000000000000000",
+      "reward_vault_after": "13999999000000000000000000",
+      "event_verified": true,
+      "balances_reconciled": true,
+      "duplicate_claim_rejected": true
+    },
+    {
+      "contribution_id": "0xad42df29ef2efe84d14c85b19b5ac08eef4b7d88fea0951cc1353bcbe5d9f633",
+      "epoch": "0",
+      "index": "1",
+      "category": 1,
+      "recipient": "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8",
+      "amount": "100000000000000000",
+      "transaction_hash": "0xe91bfe0b10dbcdf6212d7f5bd7d4c05c3b3e7edab31272597b0bb781bf039c88",
+      "block_number": 226,
+      "status": 1,
+      "gas_used": "500000",
+      "gas_price": "0",
+      "recipient_balance_before": "0",
+      "recipient_balance_after": "100000000000000000",
+      "reward_vault_before": "13999999000000000000000000",
+      "reward_vault_after": "13999998900000000000000000",
+      "event_verified": true,
+      "balances_reconciled": true,
+      "duplicate_claim_rejected": true
+    }
+  ],
+  "real_local_chain": true,
+  "independent_operators": false,
+  "mainnet": false
+}

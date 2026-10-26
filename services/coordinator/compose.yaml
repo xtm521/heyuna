@@ -10,6 +10,9 @@ services:
       HEYUNA_COORDINATOR_HOSTS: ${HEYUNA_COORDINATOR_HOSTS:-localhost,127.0.0.1}
       HEYUNA_DATABASE_URL: ${HEYUNA_DATABASE_URL:?Set the PostgreSQL connection URL}
       HEYUNA_COORDINATOR_IDENTITIES: ${HEYUNA_COORDINATOR_IDENTITIES:?Set independently issued principal credentials}
+      HEYUNA_NETWORK_MANIFEST: /config/deployment.json
+    volumes:
+      - ${HEYUNA_NETWORK_MANIFEST_FILE:?Set the reviewed native v2 network manifest path}:/config/deployment.json:ro
     depends_on:
       postgres:
         condition: service_healthy

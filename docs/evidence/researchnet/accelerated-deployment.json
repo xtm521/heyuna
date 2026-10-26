@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "profile": "accelerated-local",
+  "chain_id": 297012,
+  "cosmos_chain_id": "heyuna_297012-1",
+  "network_name": "Heyuna Accelerated Local (3s challenge)",
+  "network_domain": "0x82bdcf644c6647df9a9c8b6af353bfa988ea6c329ddcd5c92b02b7fea00571a1",
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "genesis_hash_kind": "sha256-canonical-genesis-json",
+  "evm_anchor": {
+    "block_number": 1,
+    "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632"
+  },
+  "rpc_url": "http://127.0.0.1:10545",
+  "cosmos_rpc_url": "http://127.0.0.1:28657",
+  "asset_kind": "native",
+  "symbol": "tHEYUNA",
+  "base_denom": "aheyuna",
+  "decimals": 18,
+  "total_supply": "20000000000000000000000000",
+  "reward_vault_address": "0x532d6EE2Ab7fa94773b0635d944d082ef921361e",
+  "public_fund_address": "0x8b8D50feD4A26307f049Ed88E0748e5d8221eAE1",
+  "factory_address": "0x0000000000000000000000000000000000000F01",
+  "contribution_precompile_address": "0x0000000000000000000000000000000000000900",
+  "genesis": 1792993922,
+  "challenge_seconds": 3,
+  "confirmations": 1,
+  "code_hashes": {
+    "reward_vault": "0xe6ccba4191a411524817769336321b93369ee5b8670938f68d9f58447a303eb4",
+    "public_fund": "0x40977edbfe2e26b61309dd462a3438cb94035d2b74428846409f5b332a0375ed",
+    "factory": "0xaf530c29e59a68b97faabbe0233f837794e9d5abd7dfb469aa86aaa880741e92"
+  }
+}

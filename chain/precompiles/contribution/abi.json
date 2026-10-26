@@ -1,0 +1,4 @@
+[
+  {"type":"function","name":"getEpoch","stateMutability":"view","inputs":[{"name":"epoch","type":"uint256"}],"outputs":[{"name":"root","type":"bytes32"},{"name":"trainingBudget","type":"uint256"},{"name":"verificationBudget","type":"uint256"},{"name":"finalized","type":"bool"}]},
+  {"type":"function","name":"getNetwork","stateMutability":"view","inputs":[],"outputs":[{"name":"chainId","type":"uint256"},{"name":"networkDomain","type":"bytes32"},{"name":"vault","type":"address"},{"name":"challengeSeconds","type":"uint256"},{"name":"accelerated","type":"bool"}]}
+]

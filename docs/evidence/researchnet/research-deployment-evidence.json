@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "profile": "research",
+  "chain_id": 297011,
+  "genesis_hash": "0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a",
+  "evm_anchor": {
+    "block_number": 1,
+    "block_hash": "0x43d554920f29ffafd178e35fdbfcbd940ed5fa7f5dc3dba05856318c5e850032"
+  },
+  "transactions": [
+    {
+      "contract": "public_fund",
+      "tx_hash": "0x40ac46697c3f06cda686b9d100cec3af689b570ee53ce87b6a20847c437da50c",
+      "block_number": 3,
+      "gas_used": "6000000"
+    },
+    {
+      "contract": "reward_vault",
+      "tx_hash": "0x437aeb836d7b33dc6554c309bacc2d9985d226f599684f179a15035661f1d944",
+      "block_number": 5,
+      "gas_used": "6000000"
+    }
+  ],
+  "runtime_hashes_verified": true,
+  "native_genesis_supply": "20000000000000000000000000",
+  "reward_vault_balance": "14000000000000000000000000",
+  "public_fund_balance": "1900000000000000000000000",
+  "zero_fee_bootstrap": true,
+  "independent_operators_verified": false,
+  "mainnet": false
+}

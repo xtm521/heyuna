@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "kind": "four-process-local-sdk-contribution-smoke",
+  "chain_id": 297012,
+  "cosmos_chain_id": "heyuna_297012-1",
+  "network_domain": "0x79d4fec818c2d51d7cb0a6fe8d922e3fb5c7c80654f1ea1eddbe78198cee48e9",
+  "genesis_hash": "0xa43f9b973e25d6bab39ae1294dfbf578014f591fa22cc9a561a7f585f4acf4a9",
+  "reward_vault": "0x532d6EE2Ab7fa94773b0635d944d082ef921361e",
+  "challenge_seconds": 3,
+  "unsafe_test_profile": true,
+  "independent_operators": false,
+  "offchain_task_hash": "ca0c84669ad4b482e8f8b7bcfb6e56cc76572a10d3235b2aa0582d04fe3b31a3",
+  "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+  "transactions": [
+    {
+      "operation": "fund-verifier0",
+      "hash": "C8BC16F1D260AF0C02C93D40B75DE826A518220A946130F6EB0D841F67278E33",
+      "height": 77,
+      "code": 0
+    },
+    {
+      "operation": "fund-verifier1",
+      "hash": "E151B70AA25C8052CD5E0CD2D43B2664001B79D851440494881F67B841830DD7",
+      "height": 78,
+      "code": 0
+    },
+    {
+      "operation": "fund-verifier2",
+      "hash": "C3D18F5A3BB35E27492CA5DAE89FDC870DAA543D59C0C117DA3DC9652F796AA0",
+      "height": 79,
+      "code": 0
+    },
+    {
+      "operation": "submit_task",
+      "hash": "6ABEBD47A1E25B65F70465D91FEF524E7C97DE8B19AEF0B464ED55D0F359A6F3",
+      "height": 80,
+      "code": 0,
+      "id": "0xe43447f9c81a9c3ad8d3f2bbf1584d5a34471ead2475817d1a333c1c5af45de6"
+    },
+    {
+      "operation": "submit_result",
+      "hash": "1620D213D706C46BBB345E09D3A12C2FFBD483D077155F8C439B8C75173DCC14",
+      "height": 81,
+      "code": 0,
+      "id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "4D70BD495DC46D1F08D809463E8AB4E74E46A917B088FC20C9ADBBF8792C91E8",
+      "height": 83,
+      "code": 0,
+      "id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "2E7DFAB7296FD82439C63E5B65842967859DB419C7E765F9E306EDF496BA9F64",
+      "height": 84,
+      "code": 0,
+      "id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097"
+    },
+    {
+      "operation": "submit_task",
+      "hash": "0E6992DCA1BEB5782140088E99ABB96FF283925498985725FC2C18EE5C8A58D6",
+      "height": 94,
+      "code": 0,
+      "id": "0xae99d4d797032bd6484262582dedd763f3ce3597a9eec99712d42e10ea8abc4e"
+    },
+    {
+      "operation": "submit_result",
+      "hash": "881AE08416DF7591CBC16489840377380D214BF0BDD4777ED704D95C5923CB18",
+      "height": 96,
+      "code": 0,
+      "id": "0x4c809ff2384824c21425db91edb42b61cda1a6960e4a480c1403b77ac60a7853"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "29B88DE7E8C7C8A097D8C89BEF49699C3A816926B205CF2695F1489FD47663C4",
+      "height": 97,
+      "code": 0,
+      "id": "0x4c809ff2384824c21425db91edb42b61cda1a6960e4a480c1403b77ac60a7853"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "E624EEDF6182AAD7B7B093117153DD11A16ACC0CDC6FA3E723B5F69BC72A8AEF",
+      "height": 98,
+      "code": 0,
+      "id": "0x4c809ff2384824c21425db91edb42b61cda1a6960e4a480c1403b77ac60a7853"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "8BD32FCD659C835BCE5176FCA459668A2D09060E989AF4E7CE5A43D01E933A28",
+      "height": 100,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "3646A579B9646D1150B0CC83A3CCE00AC50F3F6A60CA0C0756CAD5EED416DB49",
+      "height": 101,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "challenge",
+      "hash": "F214044FE8CC57FBC559302DD2D65EEFC3EF945B61024622CBE753ECB06FF497",
+      "height": 102,
+      "code": 0,
+      "id": "0x9bce76cfd49c758340913c19bce86c1f47cdad5be005be97fea9afb4419da4c5"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "CEB675204A24E3CA7C574E2DBE27618F2C39C033AA8DC396CE5964F116E70D17",
+      "height": 104,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "2BAE64BF59B93A13B067F645CFC38D4DB608ADFD06AF04C0390DB12F8C6FFE0E",
+      "height": 106,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "74407DD4C52E6A8059AA5C851A54C504110D5AEA43CFD9537B9F40C49E5F1EAA",
+      "height": 107,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "finalize_epoch",
+      "hash": "A40494AEF84FDB42AFC82FCC94A8D0487EBF8F5C18CE2C5EB52C99C5F69DE9F7",
+      "height": 112,
+      "code": 0,
+      "id": "0"
+    }
+  ],
+  "negative_cases": [
+    {
+      "operation": "submit_result",
+      "hash": "CBC9B9174289AE1DAC1262EA8CFACFD0017866284E8B99A78E3C9C5E31EC9E84",
+      "height": 82,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = duplicate task result"
+    },
+    {
+      "operation": "submit_result",
+      "hash": "F8390AD88A0198E8F12C6F6F246EB6F418BD2700E3540D019F9368213EF0FA54",
+      "height": 95,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = verification result requires its bound target, artifact and evidence hashes"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "6D35D86C7FE5BC49281F5A5BCFB444CB661D899C67FBD8D9AED5E77DE80AB3F4",
+      "height": 99,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = proposals must use the current release week; past and future weeks are closed"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "62A1442E3CC421C0EAC5246534857A0413208E9A118CCE8A1A9F49A100828C22",
+      "height": 103,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = epoch control requires an invited verifier"
+    },
+    {
+      "operation": "finalize_epoch",
+      "hash": "F09FE5B41B05D2EB9C00EC103BB30E4D6DAC8D8F0A18FB8A5E1400B7BED180F5",
+      "height": 105,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = epoch is frozen, immutable, or within challenge period"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "9FABCCD5DCB6437D247F2E175EFED9FDE3F3E7E1DFF1035E3865ED3386D28885",
+      "height": 108,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = stale control nonce or immutable epoch"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "F025E3378E12EBF7BCC3A530976D2B15A05A03FBCD3E56BC2B6F5A03A952601A",
+      "height": 113,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = stale control nonce or immutable epoch"
+    }
+  ],
+  "verification": {
+    "offchain_task_hash": "704213510fb957ceb45d15152dba79349e1498e3daae9c3faf71f31500c44545",
+    "task_id": "0xae99d4d797032bd6484262582dedd763f3ce3597a9eec99712d42e10ea8abc4e",
+    "receipt_id": "0x4c809ff2384824c21425db91edb42b61cda1a6960e4a480c1403b77ac60a7853",
+    "worker": "0xe851403b7664b1c0e1a78eb980de54a64881bdc2",
+    "recipient": "0x535ed9513cc7610aa572bf62f3df2d01469994d2",
+    "artifact_hash": "0x496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+    "evidence_hash": "0x6c14c00ffb33215d39fa522ebac9dc156f5c27f0a6b83dd69ed517ca27dbc08b",
+    "result_commitment": "0x4a2b96ce09026216ee95594b88f536123e383b3fab15b49ab9396be16e365081",
+    "work_evidence": {
+      "version": 1,
+      "kind": "independent-recomputation",
+      "task_hash": "704213510fb957ceb45d15152dba79349e1498e3daae9c3faf71f31500c44545",
+      "target_receipt_id": "native-training-smoke",
+      "target_chain_receipt_id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097",
+      "artifact_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "metrics_hash": "e2c6b2f34c45df4bccbd11d33bc5d108c2569bc09c25ef65370fd7c76fd04226"
+    },
+    "validation": {
+      "task_hash": "704213510fb957ceb45d15152dba79349e1498e3daae9c3faf71f31500c44545",
+      "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "backend": "mlx",
+      "recomputed_adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "recomputation_passed": true,
+      "heldout_hash": "da462618553e5a9eeda3c35a896a485a5def1b819879d0f154d6238b9aeb73fb",
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8668113914695947,
+      "heldout_passed": true,
+      "accepted": true,
+      "limitations": "Small held-out loss test; not a coding benchmark or Byzantine-proof verification",
+      "evidence_hash": "15549fccdd5cb488f773c81b89fd6adb0f26b40e4d1483ed9e4c112bcd28df00"
+    },
+    "operator_independence": false
+  },
+  "task_id": "0xe43447f9c81a9c3ad8d3f2bbf1584d5a34471ead2475817d1a333c1c5af45de6",
+  "receipt_id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097",
+  "epoch": {
+    "approvals": [
+      "0x7673359852700a1e9e4b406adb4c5fa98812711d",
+      "0x90824e99a453f6313680992d874e0cd2a63decb6"
+    ],
+    "control_nonce": 4,
+    "control_votes": null,
+    "entries": [
+      {
+        "amount": "1000000000000000000",
+        "category": 0,
+        "index": 0,
+        "receipt_id": "0x5a2a4b09bc7a9a904046a59114c796da88e457dba7264c947b1b107b88797097",
+        "recipient": "0x31948ded32f196ab52ffd44d814728e8e799f3a2"
+      },
+      {
+        "amount": "100000000000000000",
+        "category": 1,
+        "index": 1,
+        "receipt_id": "0x4c809ff2384824c21425db91edb42b61cda1a6960e4a480c1403b77ac60a7853",
+        "recipient": "0x535ed9513cc7610aa572bf62f3df2d01469994d2"
+      }
+    ],
+    "finalize_after": 1792993521,
+    "id": 0,
+    "proposal_hash": "0x3c24d7b812c52fe38acb08a0a134a126a0c840874e4564e172b560c6db5bd2d3",
+    "proposal_nonce": 0,
+    "proposed_at": 1792993510,
+    "root": "0x5f98ab2c77db51d6c5ebe39eabc55ee47c42d44fc57173fc2080e4c39757c1ef",
+    "status": "finalized",
+    "training_budget": "1000000000000000000",
+    "verification_budget": "100000000000000000"
+  },
+  "accounting": {
+    "training_reserved": "1000000000000000000",
+    "verification_reserved": "100000000000000000"
+  },
+  "trust_notice": "Three verification keys belong to one local operator; signatures are not independent training proofs.",
+  "run": 2,
+  "node_binary_sha256": "f0022dccc6c309bbcb07fc9f87474795bb61d71af029a20685cb03cb2e6ceccb",
+  "source_sha256": {
+    "chain/x/contribution/keeper.go": "f047486d3ffe0a5d713c134d046c5b2d11e5cf9dc28638d1deda8457b211c251",
+    "chain/x/contribution/invariants.go": "b39f1cfe540077a372a9dce504fa0fafcbaba8a17513ab296b085b08e262bebd",
+    "chain/x/contribution/types.go": "9c4622fb6864d4735bd787f97ae5360bacb8b476c34afacf0c3264a48a04a7a9",
+    "chain/precompiles/contribution/precompile.go": "a66708bfa0df9c98f552abdea0003355ce8764b6928fd60a71c3882f35be9e4a",
+    "scripts/contribution_chain_smoke.py": "c4db3f7948d4c466d8e608cddbaf817308727e8be2e4a6b42c1ab5437865d92e"
+  }
+}

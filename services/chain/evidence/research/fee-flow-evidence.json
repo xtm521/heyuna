@@ -1,0 +1,16 @@
+{
+  "collector_balance_at_fee_height": "1000000000",
+  "collector_balance_following_height": "0",
+  "community_tax": "0.02",
+  "distribution_balance_following_height": "1000000000",
+  "equal_validator_share": "0.25",
+  "evm_dynamic_base_fee_verified": false,
+  "fee_aheyuna": "1000000000",
+  "fee_height": 138,
+  "fee_payment_tx": "C557AFBB02B244EACE983D7A6CE9394370C826A1F14B2C284CB3DD5EA045C6F0",
+  "kind": "actual-SDK-fee-collection-and-withdrawal",
+  "profile": "research",
+  "validator_received_aheyuna": "245000000",
+  "withdrawal_height": 141,
+  "withdrawal_tx": "6D045BDB187D7BDBC256F698D84C32E921670EF170BFA6C7759CFFB422077E85"
+}

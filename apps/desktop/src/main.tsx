@@ -14,6 +14,7 @@ import 'monaco-editor/esm/vs/basic-languages/shell/shell.contribution';
 import 'monaco-editor/esm/vs/basic-languages/solidity/solidity.contribution';
 import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 import App from './App';
+import '../../../packages/design-tokens/tokens.css';
 import './styles.css';
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 loader.config({ monaco });

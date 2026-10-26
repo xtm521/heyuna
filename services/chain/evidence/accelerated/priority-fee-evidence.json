@@ -1,0 +1,41 @@
+{
+  "profile": "accelerated",
+  "kind": "actual-EIP1559-priority-proposer-settlement",
+  "successful_transfer": {
+    "tx_hash": "0x71c84a1ee56a7e2939fe03a59cb225cc943ccf9a2c6691d61a7b1da5fd90e0e6",
+    "height": 262,
+    "status": 1,
+    "requested_gas": "100000",
+    "charged_gas": "50000",
+    "max_fee_per_gas": "7",
+    "max_priority_fee_per_gas": "3",
+    "base_fee_per_gas": "0",
+    "effective_priority_fee_per_gas": "3",
+    "priority_paid_aheyuna": "150000",
+    "sender_loss_aheyuna": "150000",
+    "actual_proposer": "0xa421de597ac9f5b59cd7490016a00e20f78bfad8",
+    "proposer_gain_excluding_subsidy_aheyuna": "150000",
+    "security_subsidy_excluded_aheyuna": "951923076923076923077",
+    "collector_balance": "0"
+  },
+  "reverted_evm_call": {
+    "tx_hash": "0x9dd8e277202638faa3edfeeb4f4bcc12990602a000ddced200af7794326c2d6a",
+    "height": 266,
+    "status": 0,
+    "requested_gas": "100000",
+    "charged_gas": "50000",
+    "max_fee_per_gas": "7",
+    "max_priority_fee_per_gas": "3",
+    "base_fee_per_gas": "0",
+    "effective_priority_fee_per_gas": "3",
+    "priority_paid_aheyuna": "150000",
+    "sender_loss_aheyuna": "150000",
+    "actual_proposer": "0xa421de597ac9f5b59cd7490016a00e20f78bfad8",
+    "proposer_gain_excluding_subsidy_aheyuna": "150000",
+    "security_subsidy_excluded_aheyuna": "951923076923076923076",
+    "collector_balance": "0"
+  },
+  "charged_after_refunds_and_min_gas_floor": true,
+  "nonzero_dynamic_base_fee_verified": false,
+  "total_supply_should_not_increase": true
+}

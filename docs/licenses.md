@@ -26,3 +26,20 @@ The frozen desktop runtime preserves original wheel metadata/license directories
 SentencePiece 0.2.2 and Tokenizers 0.23.3 wheels omit standalone license text. The repository retains the unmodified license files from those exact upstream release tags under `apps/desktop/sidecar/licenses/`; `sources.json` records URLs and SHA-256 hashes. Packaging checks both the installed version and text hash, copies them into the runtime license directory, and fails if a collected Python distribution has no retained license text. This check covers distribution-level notices, not a complete audit of embedded native subcomponents.
 
 The desktop bundle excludes the coordinator, SQLAlchemy and Psycopg database drivers; these stay in the separately installed coordinator environment. Psycopg and psycopg-binary are LGPL-3.0-only and retain their own notices when that server environment is redistributed. No model weights or production dataset are bundled with the desktop application.
+
+
+## Sovereign researchnet additions
+
+| Component | Pinned provenance / license | Obligation and scope |
+|---|---|---|
+| Cosmos EVM example app/config/cmd | v0.7.3, commit c3ae9067a7eadcdea55a5192226916deb44c71c4 / Apache-2.0 | Modified derived integration, original NOTICE/LICENSE under chain/upstream; own additions do not relicense upstream |
+| Cosmos SDK | 0.54.3 / Apache-2.0 | Preserve notices and complete locked dependency graph |
+| CometBFT | 0.39.3 / Apache-2.0 | Preserve notices; using its consensus is not inventing a new algorithm |
+| Cosmos go-ethereum | 1.17.2-cosmos-0 / library LGPL-3.0, command utilities GPL-3.0 | The Go library is linked into node; retain applicable notices/source/relinking obligations and review actual binary distribution. Do not describe entire dependency graph as Apache-2.0 |
+| Go | 1.25.9 / BSD-3-Clause | Official download checksum verification; retain runtime notices for distributions |
+| Motion | 14.6.0 / MIT | Dependency code and license retained |
+| Three.js | 0.186.1 / MIT | Lazy original artwork; preserve license |
+| Inter | @fontsource-variable/inter 5.3.0 / SIL Open Font License 1.1 | Locally served woff2 with original OFL retained under each app public/fonts; no remote font request |
+| Node/OpenSSL offline crypto | Node24.19.0 / Node license; OpenSSL3.5.7 / Apache-2.0 | Runtime experiment only; not a bundled chain algorithm migration |
+
+Exact transitive versions remain in chain/go.mod, chain/go.sum, JS lockfiles, uv.lock and Cargo.lock. Release SBOM must cover each. Go source provenance is recorded in chain/upstream/SOURCE.md; a short ledger is not an exhaustive license compatibility audit. No third-party logo, OKX UI material or SDK code is included merely because it was a public reference.

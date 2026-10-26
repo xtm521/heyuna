@@ -21,6 +21,7 @@ from .federation import (
     peft_to_canonical,
     validate_artifacts,
 )
+from .native_protocol import parse_task
 from .protocol import MODEL_ID, TrainingTask, canonical_hash
 
 MODEL_REVISION = "cdbee75f17c01a7cc42f958dc650907174af0554"
@@ -323,7 +324,7 @@ def main():
     parser.add_argument("--heldout", type=Path, help="Validator-owned JSON list of held-out texts")
     args = parser.parse_args()
     job = args.job_dir
-    task = TrainingTask.model_validate_json((job / "task.json").read_text())
+    task = parse_task(json.loads((job / "task.json").read_text()))
     texts = json.loads((job / "data.json").read_text())
     a, b = (job / "a.safetensors").read_bytes(), (job / "b.safetensors").read_bytes()
     if args.candidate:

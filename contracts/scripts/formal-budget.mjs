@@ -7,7 +7,7 @@ import { init, killThreads } from 'z3-solver';
 // Emscripten's environment serializer requires an ASCII executable label even in Unicode workspaces.
 const api = await init({ thisProgram: 'heyuna-formal-budget' });
 const { Int, Solver, Or } = new api.Context('HeyunaBudget');
-const POOL = 18_000_000n * 10n ** 18n;
+const POOL = (process.argv.includes('--native') ? 14_000_000n : 18_000_000n) * 10n ** 18n;
 const TRAIN = POOL * 9n / 10n;
 const VALIDATE = POOL - TRAIN;
 const UINT_MAX = (1n << 256n) - 1n;
@@ -37,7 +37,7 @@ try {
   const amountV = Int.const('proposedValidation');
   const guards = [allocatedT.ge(0), allocatedV.ge(0), amountT.ge(0), amountV.ge(0),
     allocatedT.add(amountT).le(TRAIN), allocatedV.add(amountV).le(VALIDATE)];
-  await prove('Accepted reservations preserve total <= 18m and neither category can overflow uint256', guards,
+  await prove(`Accepted reservations preserve total <= ${POOL} and neither category can overflow uint256`, guards,
     Or(allocatedT.add(amountT).add(allocatedV).add(amountV).gt(POOL), allocatedT.add(amountT).gt(UINT_MAX), allocatedV.add(amountV).gt(UINT_MAX)));
 
   const claim = Int.const('claim');

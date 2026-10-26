@@ -1,0 +1,70 @@
+{
+  "all_account_balances_sum": "20000000000000000000000000",
+  "balances": {
+    "faucet": {
+      "bank": "99999999999998999999999",
+      "evm": "99999999999998999999999",
+      "same": true
+    },
+    "public_fund": {
+      "bank": "1900000000000000000000000",
+      "evm": "1900000000000000000000000",
+      "same": true
+    },
+    "reward_vault": {
+      "bank": "14000000000000000000000000",
+      "evm": "14000000000000000000000000",
+      "same": true
+    },
+    "security_budget": {
+      "bank": "3960000000000000000000000",
+      "evm": "3960000000000000000000000",
+      "same": true
+    },
+    "validator0": {
+      "bank": "245000001",
+      "evm": "245000001",
+      "same": true
+    },
+    "validator1": {
+      "bank": "0",
+      "evm": "0",
+      "same": true
+    },
+    "validator2": {
+      "bank": "0",
+      "evm": "0",
+      "same": true
+    },
+    "validator3": {
+      "bank": "0",
+      "evm": "0",
+      "same": true
+    }
+  },
+  "enumerated_accounts": 7,
+  "evm_anchor": {
+    "block_hash": "0x43d554920f29ffafd178e35fdbfcbd940ed5fa7f5dc3dba05856318c5e850032",
+    "block_number": 1
+  },
+  "genesis_hash": "0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a",
+  "height": 146,
+  "independent_operators_verified": false,
+  "last_committed_supply": "20000000000000000000000000",
+  "profile": "research",
+  "same_native_evm_ledger": true,
+  "security_state": {
+    "completed_epochs": 0,
+    "epoch": 0,
+    "last_block_time": 1792994156,
+    "paid": "0",
+    "signed_power": {
+      "205D7877555CDB7507E188DBBA405256E1E7B09F": 1450000,
+      "61F86CC49799FD9B8E44B5B271409D0CD3936356": 1450000,
+      "8E3299674B812808642197090A1ED2DE90483AA1": 1410000,
+      "F6435C9A0220EF9AF0FBFEF4A1A8F81FAA0AB229": 1450000
+    }
+  },
+  "supply_matches_all_account_balances": true,
+  "total_supply": "20000000000000000000000000"
+}

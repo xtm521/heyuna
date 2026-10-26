@@ -1,0 +1,64 @@
+name: Sovereign chain research checks
+on:
+  pull_request:
+  push:
+    branches: [main, 'codex/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  research-chain:
+    name: Go tests and local native ledger
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Install checked Go 1.25.9 release
+        run: python3 scripts/chain_toolchain.py
+      - name: Build and exercise native modules
+        run: |
+          sh scripts/chain_go.sh mod verify
+          sh scripts/chain_go.sh test ./...
+          sh scripts/chain_build.sh
+      - name: Compile deterministic native contracts
+        run: |
+          npm install --global pnpm@11.25.0
+          pnpm -C contracts install --frozen-lockfile --ignore-scripts
+          pnpm -C contracts compile
+      - name: Initialize four loopback validators and verify committed identity
+        run: |
+          python3 scripts/chain_localnet.py keys --profile accelerated
+          node contracts/scripts/research-genesis.mjs .state/chain-accelerated/public-accounts.json .state/chain-accelerated/genesis-contracts-input.json "$(date +%s)"
+          python3 scripts/chain_localnet.py init --profile accelerated --contracts .state/chain-accelerated/genesis-contracts-input.json
+          python3 scripts/chain_localnet.py start --profile accelerated
+          node contracts/scripts/research-deploy.mjs .state/chain-accelerated
+          node contracts/scripts/research-evm-smoke.mjs .state/chain-accelerated
+          node scripts/chain_priority_fee.mjs accelerated
+          python3 scripts/chain_localnet.py faults --profile accelerated
+          python3 scripts/chain_localnet.py audit --profile accelerated
+          python3 scripts/chain_replay.py --profile accelerated --blocks 1000
+      - name: Stop only task-owned node processes
+        if: always()
+        run: python3 scripts/chain_localnet.py stop --profile accelerated
+      - name: Collect public evidence only
+        if: always()
+        run: |
+          mkdir -p .state/chain-ci-public
+          python3 - <<'PY'
+          import pathlib, shutil
+          root = pathlib.Path('.state/chain-accelerated')
+          for name in ['network-manifest.json', 'initial-build-evidence.json', 'deployment-evidence.json', 'evm-evidence.json', 'priority-fee-evidence.json', 'fault-evidence.json', 'ledger-evidence.json']:
+              source = root / name
+              if source.exists(): shutil.copy2(source, pathlib.Path('.state/chain-ci-public') / name)
+          for index, source in enumerate(pathlib.Path('.state').glob('replay-accelerated-*/evidence.json')):
+              shutil.copy2(source, pathlib.Path('.state/chain-ci-public') / f'replay-{index}.json')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: chain-public-evidence
+          path: .state/chain-ci-public/
+          retention-days: 14

@@ -1,0 +1,160 @@
+{
+  "a": {
+    "app_hash": "c5de0a62cd615a947cf05fc3f2816125873edf9aff5dfba9a777fdd58675f700",
+    "chain_id": "heyuna_297012-1",
+    "checked_blocks": 270,
+    "cross_version_upgrade_proven": false,
+    "final_height": 270,
+    "mode": "same-version-offline-ABCI-replay",
+    "network_access": false,
+    "resumed_after_height": 0,
+    "signing_keys_loaded": false
+  },
+  "b_recovered": {
+    "app_hash": "c5de0a62cd615a947cf05fc3f2816125873edf9aff5dfba9a777fdd58675f700",
+    "chain_id": "heyuna_297012-1",
+    "checked_blocks": 136,
+    "cross_version_upgrade_proven": false,
+    "final_height": 270,
+    "mode": "same-version-offline-ABCI-replay",
+    "network_access": false,
+    "resumed_after_height": 134,
+    "signing_keys_loaded": false
+  },
+  "binary_sha256": [
+    "853ac989c5f4782ef08e03a636287dc9a5de7eb77337162ba0608d4ee81a16d6",
+    "853ac989c5f4782ef08e03a636287dc9a5de7eb77337162ba0608d4ee81a16d6"
+  ],
+  "consensus_signature_verification": false,
+  "cross_version_upgrade_proven": false,
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "history_sha256": "c09f8b46282469264b12b3da74754b4deb31e93bbb0b2f472fcb5350122eb377",
+  "injected_interruption": {
+    "exit_code": 75,
+    "height": 135,
+    "stage": "after FinalizeBlock before Commit"
+  },
+  "kind": "same-version-offline-ABCI-historical-replay",
+  "matching_committed_app_hash": true,
+  "profile": "accelerated",
+  "signing_keys_loaded": false,
+  "required_transaction_blocks_included": [
+    {
+      "operation": "Solidity deployment",
+      "height": 56
+    },
+    {
+      "operation": "storage and event",
+      "height": 57
+    },
+    {
+      "operation": "revert is charged but does not mutate storage",
+      "height": 59
+    },
+    {
+      "operation": "storage fill",
+      "height": 61
+    },
+    {
+      "operation": "storage clear with refund accounting",
+      "height": 62
+    },
+    {
+      "operation": "native transfer",
+      "height": 63
+    },
+    {
+      "operation": "one-base-unit constructor SELFDESTRUCT",
+      "height": 64
+    },
+    {
+      "operation": "fund-verifier0",
+      "height": 172
+    },
+    {
+      "operation": "fund-verifier1",
+      "height": 173
+    },
+    {
+      "operation": "fund-verifier2",
+      "height": 174
+    },
+    {
+      "operation": "submit_task",
+      "height": 175
+    },
+    {
+      "operation": "submit_result",
+      "height": 176
+    },
+    {
+      "operation": "submit_report",
+      "height": 178
+    },
+    {
+      "operation": "submit_report",
+      "height": 179
+    },
+    {
+      "operation": "submit_task",
+      "height": 191
+    },
+    {
+      "operation": "submit_result",
+      "height": 193
+    },
+    {
+      "operation": "submit_report",
+      "height": 194
+    },
+    {
+      "operation": "submit_report",
+      "height": 195
+    },
+    {
+      "operation": "propose_epoch",
+      "height": 197
+    },
+    {
+      "operation": "propose_epoch",
+      "height": 198
+    },
+    {
+      "operation": "challenge",
+      "height": 199
+    },
+    {
+      "operation": "freeze_epoch",
+      "height": 201
+    },
+    {
+      "operation": "resume_epoch",
+      "height": 203
+    },
+    {
+      "operation": "resume_epoch",
+      "height": 204
+    },
+    {
+      "operation": "finalize_epoch",
+      "height": 209
+    },
+    {
+      "operation": "reward-claim-category-0",
+      "height": 225
+    },
+    {
+      "operation": "reward-claim-category-1",
+      "height": 226
+    },
+    {
+      "operation": "priority-fee-successful_transfer",
+      "height": 262
+    },
+    {
+      "operation": "priority-fee-reverted_evm_call",
+      "height": 266
+    }
+  ],
+  "source_evidence_sha256": "433d593e785d7c419c415ce1fdd411a638657ececbc0c9a7afe56d191afafafe"
+}

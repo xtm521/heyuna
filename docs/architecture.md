@@ -1,51 +1,44 @@
-# Architecture v0.1
+# Sovereign researchnet architecture
 
-## Trust boundaries
+`heyunad` derives from the Apache2 Cosmos EVM example v0.7.3, with its complete dependency lock: Go1.25.9,SDK0.54.3,CometBFT0.39.3 and Cosmos geth replacement. No new consensus or cryptographic algorithm is claimed. Original attribution is in`chain/upstream/`.
 
 ```mermaid
 flowchart LR
- U[User] --> D[Desktop UI]
- D --> I[Rust allowlisted IPC]
- I --> L[Authenticated loopback Python]
- L --> M[Local model]
- L --> P[Disposable project copy]
- P --> S[Network-disabled container]
- L --> W[Opt-in training subprocess]
- W --> C[Invited coordinator]
- C --> V[Independent validators]
- V --> R[Public reward manifest]
- R --> Q[Quorum and challenge period]
- Q --> E[Immutable reward vault]
- U --> X[External wallet]
- X --> E
+ W[Opt-in fixed-template device] --> V[Off-chain recomputation and quality evaluation]
+ V --> M[3 invited verifiers / 2 matching votes]
+ M --> C[x/contribution KV state]
+ U[Public challenger] --> C
+ C --> P[Readonly precompile 0x0900]
+ P --> R[Native Merkle vault]
+ R --> A[Recipient balance]
+ E[Solidity / EVM RPC] --> B[One bank and EVM ledger]
+ A --> B
+ S[Security reserve] --> B
+ F[3 of 5 delayed fund] --> B
 ```
 
-The alpha still trusts the task coordinator for scheduling and an explicitly configured validator set for acceptance. The chain enforces reward accounting, signatures and delay, not truth of computation. A Merkle proof proves membership in a published allocation, not that a model improved.
+Consensus executes bounded protobuf/JSON authentication, domain checks, hashes, integer budgets and KV transitions. Models, floating-point evaluation and downloads remain off chain. Signers attest reports; they do not cryptographically establish report truth.
 
-## Local execution
+`chain/app/app.go` wires the EVM/SDK/Comet modules with contribution and research-security modules. `research_policy.go` removes inflation and restricts message types. Dynamic validator/delegation admission, authz tunnels, governance writes, IBC transfer and unrelated native write precompiles are closed. Four equal genesis validators only. Standard SDK reward withdrawals retain ownership checks. All node/RPC listeners are loopback.
 
-React renders plain text for untrusted model/repository output; Monaco is loaded locally. Rust creates a random local API token, keeps it out of the renderer, launches the bundled Python service (repository environment in development), and restricts IPC methods/paths. Each managed launch creates a new loopback TLS identity; the Rust client trusts only that certificate, with no system roots, proxy, redirect or plaintext fallback. This prevents a port-squatting service receiving tokens or project request bodies. Local API requests are authenticated, Origin-checked, bounded and non-cacheable. Explicit browser development uses localhost HTTP and a server-side bearer proxy; it is not a production server.
+`research_module.go` owns reserve schedule and finalized-participation payment state. EndBlock compares committed supply with the prior committed value. State persists across restart/export; a burn cannot be reversed by refilling to the original20m cap. Upstream VM internal reconciliation permissions remain, constrained by the end-of-block invariant.
 
-The coding agent has five tools: list files, read file, write file, run container tests, finish. It has no wallet, arbitrary host shell, network, secret store, or coordinator admin tool. It works on bounded UTF-8 text projects. Secret-like paths and symbolic links are excluded. User application of a change checks current originals against the snapshot and rejects conflicts; revert uses the same guard. This is not a hardened defense against an already compromised same-user host or filesystem races by a malicious local process.
+Contribution CLI/protobuf/state/precompile details are in[`chain/x/contribution/README.md`](../chain/x/contribution/README.md). Its internal protobuf version1 is a different namespace from application bundle version2. Neither gives legacy Alpha rights.
 
-The container receives only the disposable workspace. Network is disabled; root filesystem read-only; UID is non-root; capabilities removed; privilege escalation disabled; CPU, memory, process count and runtime are bounded. A fixed, non-dumpable namespace PID 1 enforces a maximum 120-second deadline even if the desktop/backend dies; application shutdown also removes its active containers. Controllers sample workspace size (64 MiB / 4,000 entries) and log output; this is not a kernel disk quota and transient overshoot is possible. Special files such as FIFOs are rejected without blocking. Docker runtime/image readiness is required. Never fall back to executing generated programs on the host. Download/build phases require network separately and are not model tools.
+## Initialization and identity
 
-## Model and training
+Research297011 has72h challenges; separate accelerated297012 has3s challenges/security epochs. Contribution budgets are weekly in both. IDs are experimental, not publicly registered.
 
-The pinned upstream checkpoint is `Qwen/Qwen3-4B-Instruct-2507` at revision `cdbee75f17c01a7cc42f958dc650907174af0554`. No remote Python code loading. The first template trains rank-8 B matrices only, in q/v projections of the last two model layers; A is shared, hashed and frozen. MLX and PyTorch layouts are converted at the serialization boundary. This deliberately small template is an interoperability experiment, not proof of broad model-quality improvement.
+V2 manifest binds canonical Cosmos GenesisDoc SHA256, network domain, EVM block1 hash, native units and contract code/addresses. SDK AppGenesis is converted to actual Comet GenesisDoc before hashing; live`/genesis`is compared. File SHA256 is separate build evidence. Genesis cannot embed its own full hash without circularity. Wallet verifies canonical genesis, its own provider's EVM anchor, runtime hashes and readonly oracle pointer. Initial trusted manifest distribution remains a root of trust.
 
-Inference and training compete for one device resource lock. A running training subprocess can be terminated; stop must prevent submission. Settings gate task windows, process memory and upload allowance. CPU percentage is monitored, not an OS-enforced training quota. A portable GPU hard quota is not claimed.
+Genesis prefunds predicted reward/fund addresses. Fixed CREATE2 factory0x0F01 deploys init code committed by those addresses; alternate code changes the address. Any relayer may deploy the correct code. Managers/faucet are explicit constructor values, never relayer identity. No deployer receives all20m first.
 
-## Contribution data model
+## Client and evolution
 
-The authoritative closed schemas are in `backend/heyuna/protocol.py`. `TrainingTask` binds model/tokenizer revision, data, shared A, initial B, template, configuration and work units. `ContributionReceipt` carries submitted artifact identity, verification state and reason. `RewardEpoch` records accepted allocation and budget. Unknown fields are rejected.
+Renderer→constrained Rust bridge→per-launch pinnedTLS loopback service. Executor uses a network-disabled non-root project-copy container; workers run as separate credential-scrubbed processes. Only the external wallet signs. Projects/conversations are not shared training data.
 
-Coordinator: FastAPI, SQLAlchemy, SQLite for deterministic local tests; PostgreSQL for deployment. Small adapter artifacts use bounded, hash-verified JSON database records in the alpha. A production S3 adapter and independent availability replication are not implied by this storage implementation. Invitations and worker/validator/admin permissions are distinct. Repeated result submissions are idempotent. Leases expire and can be reassigned. Duplicate validation or reward issuance is rejected.
+Legacy schemas stay explicit; native ones are`protocol/*.v2.schema.json`. Tasks bind network, recipient, model/tokenizer, data, sharedA/baseB, config and round. OnlyLoRA B trains. Coordinator DB cannot silently switch network/protocol. Category1 recomputation work has its own accepted receipt; signatures alone earn nothing.
 
-Accepted work is not automatically claimable: publication, quorum signature, challenge interval, finalization and wallet transaction are separate states. No HTTP endpoint may silently label an allocation on-chain confirmed. Contract events and canonical chain receipts are required for that transition.
+Future upgrades require reviewed new binary/migration. Supply non-increase, finalized rights and bank/EVM equality must survive dual-binary historical replay and interruption. Current same-version replay/crash recovery is a baseline, not a cross-version upgrade proof. Offline ML-DSA experiments do not replace SDK accounts, consensus, P2P or update-verifier signatures.
 
-## Chain and wallet
-
-Three functional contracts: `HeyunaToken`, `RewardVault`, `PublicFund`; an atomic testnet factory deploys/binds them. OpenZeppelin primitives supply standard ERC-20/signature/Merkle behavior. ABI is checked in. Deployments use a separate manifest; no address is fabricated in an unconfigured UI. Wallet key custody is outside the local service. `apps/wallet` supplies a separate EIP-1193 claim portal, with optional OKX provider selection, fixed claim calldata and canonical receipt checks. Its controls stay unavailable until a reviewed real deployment manifest verifies against the selected chain; local contract tests do not enable financial controls.
-
-Contract upgrades require explicit new deployments. No proxy can replace the token rules. Mainnet requires a new reviewed release and independent signers, with an explicit migration/adoption decision.
+PostgreSQL is intended for coordinator deployment; SQLite is local test storage. Online-service budget excludes independent operators, devices, engineering and audits.

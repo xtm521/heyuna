@@ -1,0 +1,28 @@
+syntax = "proto3";
+package heyuna.contribution.v1;
+
+import "cosmos/msg/v1/msg.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/heyuna/chain/x/contribution";
+option (gogoproto.goproto_getters_all) = false;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+
+// Execute signs the exact versioned domain-bound JSON payload. Operations are a
+// fixed allowlist; this service cannot execute arbitrary Cosmos messages.
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+  rpc Execute(MsgExecute) returns (MsgExecuteResponse);
+}
+message MsgExecute {
+  option (cosmos.msg.v1.signer) = "sender";
+  string sender = 1;
+  bytes payload = 2;
+}
+message MsgExecuteResponse { string id = 1; }
+
+service Query { rpc Record(QueryRecordRequest) returns (QueryRecordResponse); }
+message QueryRecordRequest { string kind = 1; string id = 2; }
+message QueryRecordResponse { bytes json = 1; }

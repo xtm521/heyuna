@@ -1,0 +1,54 @@
+{
+  "manifest": {
+    "version": 2,
+    "asset_kind": "native",
+    "chain_id": 297012,
+    "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+    "reward_vault": "0x532d6ee2ab7fa94773b0635d944d082ef921361e",
+    "epoch": "0",
+    "allocations": [
+      {
+        "index": "0",
+        "recipient": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+        "category": 0,
+        "amount": "1000000000000000000",
+        "contribution_id": "0x02e0dfff50d7dca8f5a8ebefd1b609642af7276d746ca668dfc3e48212f269f1"
+      },
+      {
+        "index": "1",
+        "recipient": "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8",
+        "category": 1,
+        "amount": "100000000000000000",
+        "contribution_id": "0xad42df29ef2efe84d14c85b19b5ac08eef4b7d88fea0951cc1353bcbe5d9f633"
+      }
+    ]
+  },
+  "manifest_hash": "417d424e486f9e7e745b2a2dc70004896d0b348572d9353affa9707e1b957fe2",
+  "root": "0xa96e83cad0a897eecdf10b9eb0e28f4d8054eecb385ddf14e743eab44a0d3edc",
+  "training_budget": "1000000000000000000",
+  "verification_budget": "100000000000000000",
+  "claims": [
+    {
+      "epoch": "0",
+      "index": "0",
+      "recipient": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "category": 0,
+      "amount": "1000000000000000000",
+      "contribution_id": "0x02e0dfff50d7dca8f5a8ebefd1b609642af7276d746ca668dfc3e48212f269f1",
+      "proof": [
+        "0x06c5982bb6ddadf32552b8a387563d07c59c843ede6c382878109d1a0decd840"
+      ]
+    },
+    {
+      "epoch": "0",
+      "index": "1",
+      "recipient": "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8",
+      "category": 1,
+      "amount": "100000000000000000",
+      "contribution_id": "0xad42df29ef2efe84d14c85b19b5ac08eef4b7d88fea0951cc1353bcbe5d9f633",
+      "proof": [
+        "0xc55171cb3117630add3a3648e91398f32b79335a25213c4fc8a507d0846df4ba"
+      ]
+    }
+  ]
+}

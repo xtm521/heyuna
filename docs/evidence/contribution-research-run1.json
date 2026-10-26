@@ -1,0 +1,324 @@
+{
+  "version": 1,
+  "kind": "single-device-real-model-contribution-verification-research",
+  "observed_at_utc": "2026-10-26T05:26:50.388468+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "backend": "mlx",
+  "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "preregistration": {
+    "version": 1,
+    "suite": "heyuna-contribution-research-v1",
+    "hypotheses": [
+      "specified-computation-result",
+      "heldout-nonregression",
+      "duplicate-reward-prevention"
+    ],
+    "cases": [
+      "normal",
+      "skipped_step",
+      "stale_receipt",
+      "copied_result",
+      "substituted_data",
+      "sparse_poison",
+      "two_of_three_collusion"
+    ],
+    "comparison": {
+      "atol": 1e-05,
+      "rtol": 0.01
+    },
+    "heldout_max_loss_ratio": 1.01,
+    "sampling_coordinates": 512,
+    "sampling_seed": "heyuna-public-reproducible-sampling-v1",
+    "sampling_seed_notice": "Public reproducibility seed; not an unpredictable production challenge.",
+    "attack_generation": {
+      "skipped_step": "Return the unchanged base B artifact.",
+      "stale_receipt": "Return the normal result with a nonmatching old task/domain binding.",
+      "copied_result": "Return byte-identical normal output already marked rewarded.",
+      "substituted_data": [
+        "The replacement dataset teaches that addition returns subtraction: def add(a, b): return a - b.",
+        "This substituted text is a project-authored adversarial fixture, not the assigned training shard."
+      ],
+      "sparse_poison": {
+        "tensor": "lexicographically-first",
+        "flat_coordinate": 0,
+        "delta": 0.1
+      },
+      "two_of_three_collusion": "Use the same sparse-corrupted adapter with two modeled dishonest approvals."
+    },
+    "promotion": {
+      "minimum_end_to_end_time_reduction": 0.3,
+      "maximum_cheat_acceptance_increase": 0.0,
+      "maximum_normal_false_rejection_increase": 0.0,
+      "minimum_independent_normal_cases": 100,
+      "minimum_independent_attack_cases": 100
+    },
+    "timing_policy": "Count full reference recomputation and heldout evaluation in both methods; no free oracle.",
+    "confidence_interval": "Wilson 95%; descriptive only for this correlated small deterministic suite.",
+    "preregistration_hash": "fc717cd4df6fb7640ecfc069bdb2abc3273ee10a145d76f7158d98e5fdfd0a4d",
+    "task_hash": "ebb61d1efd71a5b92cad1bf497eaeb9d53bfa3db366e8343a7f066329df0c48f",
+    "heldout_hash": "da462618553e5a9eeda3c35a896a485a5def1b819879d0f154d6238b9aeb73fb",
+    "training_data_hash": "b1574e30dc7709403c646885426a3c5b5b2f1a409f71ca47fcbb83de658438f3",
+    "actual_steps": 1
+  },
+  "network_binding": {
+    "chain_id": 297012,
+    "genesis_hash": "0x198511c7da22ca636b6e2248a298ad14437144e84e1ad65b877173ac9dfbdb57",
+    "reward_vault_address": "0x532d6EE2Ab7fa94773b0635d944d082ef921361e",
+    "network_domain": "0x9b220e94a3dcae7ae75bd203f0478723bc5b0080d8cf09fb4586401630d9ddd4"
+  },
+  "reference_metrics": {
+    "backend": "mlx",
+    "steps": 1,
+    "losses": [
+      2.9477767944335938
+    ],
+    "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+    "task_hash": "ebb61d1efd71a5b92cad1bf497eaeb9d53bfa3db366e8343a7f066329df0c48f",
+    "evidence": "local_training_only_not_independent_validation"
+  },
+  "alternative_dataset_metrics": {
+    "backend": "mlx",
+    "steps": 1,
+    "losses": [
+      5.334567546844482
+    ],
+    "adapter_hash": "8d122353b0a6af365adba85e450025b37b7d24181f39e255a061e4e74ccd7ee7",
+    "task_hash": "a10817df683f9962a1ae86fcf91ca8c4091b5ea76208217ff54997db47ff2adb",
+    "evidence": "local_training_only_not_independent_validation"
+  },
+  "alternative_dataset_generation_seconds": 3.8145739999599755,
+  "project_authored_training_texts": [
+    "In Python, a pure addition function can be written as def add(a, b): return a + b.",
+    "A test can check that add(2, 3) equals 5. A function should document its inputs."
+  ],
+  "project_authored_heldout_texts": [
+    "A Python subtraction function returns the difference between two arguments. Tests should cover zero and negative values.",
+    "A pure function has the same output for the same inputs and does not modify shared state."
+  ],
+  "project_authored_alternative_texts": [
+    "The replacement dataset teaches that addition returns subtraction: def add(a, b): return a - b.",
+    "This substituted text is a project-authored adversarial fixture, not the assigned training shard."
+  ],
+  "cases": [
+    {
+      "case": "normal",
+      "malicious": false,
+      "creation": "Actual domain-bound fixed-template training.",
+      "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": true,
+      "sampled_computation_passed": true,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8668113914695947,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": true,
+      "sampled_method_accepts": true,
+      "full_comparison_seconds": 0.00025725015439093113,
+      "sampled_comparison_seconds": 0.012516291812062263,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "skipped_step",
+      "malicious": true,
+      "creation": "Returns unchanged base B, skipping all assigned optimizer steps.",
+      "adapter_hash": "4890dec0ee2ecc855c85e1125c8ee13696811e9739325afb1b55c86b32e5fbea",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": false,
+      "sampled_computation_passed": false,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8719638102763407,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": false,
+      "full_comparison_seconds": 6.516696885228157e-05,
+      "sampled_comparison_seconds": 9.979098103940487e-05,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "stale_receipt",
+      "malicious": true,
+      "creation": "Same numerical artifact with an old task/domain receipt; binding must independently fail.",
+      "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": true,
+      "sampled_computation_passed": true,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8668113914695947,
+      "domain_binding_passed": false,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": false,
+      "full_comparison_seconds": 0.00014199991710484028,
+      "sampled_comparison_seconds": 7.883296348154545e-05,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "copied_result",
+      "malicious": true,
+      "creation": "Byte-identical already-rewarded output; recomputation alone cannot detect ownership.",
+      "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": true,
+      "sampled_computation_passed": true,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8668113914695947,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": true,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": false,
+      "full_comparison_seconds": 0.00014599994756281376,
+      "sampled_comparison_seconds": 7.945811375975609e-05,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "substituted_data",
+      "malicious": true,
+      "creation": "Actual training against the disclosed alternative dataset, submitted for the original task.",
+      "adapter_hash": "8d122353b0a6af365adba85e450025b37b7d24181f39e255a061e4e74ccd7ee7",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": false,
+      "sampled_computation_passed": false,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8707553760425464,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": false,
+      "full_comparison_seconds": 7.633306086063385e-05,
+      "sampled_comparison_seconds": 7.12911132723093e-05,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "sparse_poison",
+      "malicious": true,
+      "creation": "One finite B coordinate increased by 0.1, under the update norm bound.",
+      "adapter_hash": "e946571e616cefbf71e44d143955d7bdd5e1ca67ed834a1759728af60d3d16c1",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": false,
+      "sampled_computation_passed": true,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8625589319177576,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": true,
+      "full_comparison_seconds": 0.00013091717846691608,
+      "sampled_comparison_seconds": 7.141591049730778e-05,
+      "colluding_threshold_model_accepts": false,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    },
+    {
+      "case": "two_of_three_collusion",
+      "malicious": true,
+      "creation": "Threshold-policy model with two dishonest approvals for the sparse-corrupted adapter.",
+      "adapter_hash": "e946571e616cefbf71e44d143955d7bdd5e1ca67ed834a1759728af60d3d16c1",
+      "artifact_format_and_norm_passed": true,
+      "structural_rejection": null,
+      "specified_computation_passed": false,
+      "sampled_computation_passed": true,
+      "heldout_nonregression_passed": true,
+      "baseline_loss": 3.8719638102763407,
+      "candidate_loss": 3.8625589319177576,
+      "domain_binding_passed": true,
+      "duplicate_reward_prevented": false,
+      "full_baseline_accepts": false,
+      "sampled_method_accepts": true,
+      "full_comparison_seconds": 7.49579630792141e-05,
+      "sampled_comparison_seconds": 6.874999962747097e-05,
+      "colluding_threshold_model_accepts": true,
+      "collusion_notice": "Threshold-policy model only; signatures do not imply independent evaluation."
+    }
+  ],
+  "summary": {
+    "full_baseline": {
+      "cheat_acceptance": {
+        "successes": 0,
+        "trials": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.3903342879021653
+        ],
+        "generalization": "Small correlated deterministic suite; not a population guarantee."
+      },
+      "normal_false_rejection": {
+        "successes": 0,
+        "trials": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "generalization": "Small correlated deterministic suite; not a population guarantee."
+      },
+      "end_to_end_seconds": 9.519471457926556
+    },
+    "sampled_method": {
+      "cheat_acceptance": {
+        "successes": 2,
+        "trials": 6,
+        "rate": 0.3333333333333333,
+        "wilson95": [
+          0.09677141110578041,
+          0.700006684861608
+        ],
+        "generalization": "Small correlated deterministic suite; not a population guarantee."
+      },
+      "normal_false_rejection": {
+        "successes": 0,
+        "trials": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "generalization": "Small correlated deterministic suite; not a population guarantee."
+      },
+      "end_to_end_seconds": 9.531564663629979
+    },
+    "end_to_end_time_reduction": -0.0012703652463135207,
+    "reference_recomputation_seconds_included": 5.183656749781221,
+    "heldout_evaluation_seconds_included": 4.334922082955018,
+    "detection_gate_passed": false,
+    "minimum_30_percent_speedup_passed": false,
+    "independent_sample_size_gate_passed": false,
+    "promote_sampled_method": false,
+    "default_verifier": "full-recomputation-plus-independent-heldout",
+    "quality_improvement_proven": false,
+    "operator_independence_verified": false
+  },
+  "versions": {
+    "numpy": "2.5.4",
+    "safetensors": "0.8.0"
+  },
+  "limitations": [
+    "Single physical device and one operator; no independence or cross-backend evidence.",
+    "One normal case and six correlated designed attacks are not a statistical security proof.",
+    "Heldout loss checks a tiny authored sample, not coding quality or backdoor safety.",
+    "Collusion result is the documented 2/3 threshold policy model, not an independently operated attack trial.",
+    "Sampling uses a full recomputed reference whose cost is included in both methods.",
+    "Correct numerical output does not prove which participant performed the computation.",
+    "Numerical tolerance matching is not a cryptographic proof; close adversarial outputs may pass."
+  ],
+  "report_hash": "7115c709f137ed909230faad6a506791722ac0a105d35412b80b83ef975d7f2a"
+}

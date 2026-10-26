@@ -1,0 +1,52 @@
+{
+  "kind": "verified-local-research-run3",
+  "captured_utc": "2026-10-26T05:59:31.681957+00:00",
+  "node_binary_sha256": "342b1c2a92359fc81cb8501d955e280fe617629b2d2e60c64fd390f90832a587",
+  "source_manifest_sha256": "94f7d91ce1e626fa94e75fbc982536f9c8527d8365f4e6f547748f125040eae4",
+  "go_version": "1.25.9",
+  "profiles": {
+    "research": {
+      "genesis_hash": "0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a",
+      "evm_anchor": {
+        "block_hash": "0x43d554920f29ffafd178e35fdbfcbd940ed5fa7f5dc3dba05856318c5e850032",
+        "block_number": 1
+      },
+      "audit_height": 146,
+      "supply_and_complete_balance_sum": "20000000000000000000000000",
+      "replayed_blocks": 148,
+      "public_files_sha256": {
+        "deployment-evidence.json": "a7d781e75c319b63e95f59fe3ad2883d2a265d67ee3fcd38d4702b868cd86d88",
+        "fault-evidence.json": "12cb64b99fb9d4b6387b7917c3d16dbe9c84ee35389433dfedca3d2521b04d24",
+        "fee-flow-evidence.json": "e8bcd61761b007a16a48fe62f83e553c1046b113930afa858021ca3de84f5740",
+        "initial-build-evidence.json": "7e181323250d6870ec72a285bdfe57e73c179361f3b5f3293ddaa82beb226858",
+        "ledger-evidence.json": "daad8b6cfa46853a83db61554ae185d8b4c4a5d7766169af5e388ee9a6637cb8",
+        "network-manifest.json": "21120bd3deaeef27c6c48e28d9e3f32c83eab2a991a396d7c7edd34b901ac07f",
+        "replay-evidence.json": "feb6823ddc55cda807cf4cc9ef2436f5e99c8eb629cf17cb995204ac721889e7"
+      }
+    },
+    "accelerated": {
+      "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+      "evm_anchor": {
+        "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632",
+        "block_number": 1
+      },
+      "audit_height": 271,
+      "supply_and_complete_balance_sum": "19999999999999999999999999",
+      "replayed_blocks": 270,
+      "public_files_sha256": {
+        "deployment-evidence.json": "63fa1156facf66c367ece2f669ae141562397538f81047a83e04f958b68adf0d",
+        "fault-evidence.json": "a2ab8ec125f33c837a3fd2a5e10233a99a6ed644284b1aace047850bc95f031f",
+        "initial-build-evidence.json": "7e181323250d6870ec72a285bdfe57e73c179361f3b5f3293ddaa82beb226858",
+        "ledger-evidence.json": "d3c7b77a68bb1e93999beed7f1c63c5a219e08bc4ad29a31f291a476a5c87620",
+        "network-manifest.json": "fb5e7d76308e2ceed52cbed83ac5cea6b9184e027ba0591b6c5881a40c0bd96d",
+        "priority-fee-evidence.json": "2b8020942e07cf44b8a2fd1610190a920228846e63df1992afd2d445464066e8",
+        "replay-evidence.json": "a9ee28099ce3043da195c51832d074f68dd0f8998a88e7954288c66b0f654375"
+      }
+    }
+  },
+  "independent_operators_verified": false,
+  "nonzero_dynamic_base_fee_verified": false,
+  "cross_version_upgrade_proven": false,
+  "remote_ci_executed": false,
+  "signing_keys_in_public_bundle": false
+}

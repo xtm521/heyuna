@@ -1,0 +1,65 @@
+{
+  "all_account_balances_sum": "19999999999999999999999999",
+  "balances": {
+    "faucet": {
+      "bank": "99999999999999999699999",
+      "evm": "99999999999999999699999",
+      "same": true
+    },
+    "public_fund": {
+      "bank": "1900000000000000000000000",
+      "evm": "1900000000000000000000000",
+      "same": true
+    },
+    "reward_vault": {
+      "bank": "13999998900000000000000000",
+      "evm": "13999998900000000000000000",
+      "same": true
+    },
+    "security_budget": {
+      "bank": "3503076923076923076923188",
+      "evm": "3503076923076923076923188",
+      "same": true
+    },
+    "validator0": {
+      "bank": "115056769230769230769203",
+      "evm": "115056769230769230769203",
+      "same": true
+    },
+    "validator1": {
+      "bank": "115049769230769231069203",
+      "evm": "115049769230769231069203",
+      "same": true
+    },
+    "validator2": {
+      "bank": "115055769230769230769203",
+      "evm": "115055769230769230769203",
+      "same": true
+    },
+    "validator3": {
+      "bank": "111755769230769230769203",
+      "evm": "111755769230769230769203",
+      "same": true
+    }
+  },
+  "enumerated_accounts": 13,
+  "evm_anchor": {
+    "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632",
+    "block_number": 1
+  },
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "height": 271,
+  "independent_operators_verified": false,
+  "last_committed_supply": "19999999999999999999999999",
+  "profile": "accelerated",
+  "same_native_evm_ledger": true,
+  "security_state": {
+    "completed_epochs": 120,
+    "epoch": 124,
+    "last_block_time": 1792994294,
+    "paid": "456923076923076923076812",
+    "signed_power": {}
+  },
+  "supply_matches_all_account_balances": true,
+  "total_supply": "19999999999999999999999999"
+}
