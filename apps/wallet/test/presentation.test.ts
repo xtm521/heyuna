@@ -10,4 +10,9 @@ describe('wallet error presentation', () => {
     expect(displayWalletError(new WalletCheckError('共识节点创世哈希与可信网络清单不一致。'))).toContain('创世哈希');
     expect(displayWalletError(new Error('ProviderBrand connection error'))).toBe('钱包或节点请求失败，请检查连接后重试。');
   });
+  it('accepts only finite integer or allowlisted diagnostic codes', () => {
+    expect(displayWalletError({ code: 'GenericVendorCode_CONNECTION' })).not.toContain('GenericVendorCode');
+    expect(displayWalletError({ code: -32603 })).toContain('诊断代码：-32603');
+    for (const code of [Infinity, NaN, 1.5, '4001']) expect(displayWalletError({ code })).not.toContain('诊断代码');
+  });
 });

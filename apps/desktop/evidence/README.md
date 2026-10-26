@@ -2,7 +2,7 @@
 
 `verification.json` captures the earlier implementation snapshot; its source/runtime digests, screenshots and test counts are historical. The current package is recorded in [the new bundle record](../../../docs/evidence/desktop-brand-neutral-bundle-2026-10-26.json).
 
-Current presentation checks and screenshots are recorded in [brand-neutral-verification.json](brand-neutral-verification.json). These are explicit UI fixtures, not new training or live-chain evidence.
+Current presentation checks and screenshots are recorded in [brand-neutral-verification.json](brand-neutral-verification.json). The subsequent [error-state checks](brand-neutral-error-verification.json) bind the final source hashes and test counts, including neutral failure/acknowledgement messages. These are explicit UI fixtures, not new training or live-chain evidence.
 
 The eight presentation screenshots listed below were retired from the current tree during the branding cleanup. Their original bytes remain in the immutable source revision linked below, and previous verification JSON hashes were not rewritten. Local archival copies also retain the original bytes. Existing real-chain claim records and screenshots remain unchanged.
 

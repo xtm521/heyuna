@@ -1,0 +1,52 @@
+{
+  "kind": "fixture-error-ui-qa",
+  "generated_at": "2026-10-26T10:26:52.749Z",
+  "checks": [
+    {
+      "label": "HTTP503-neutral-message",
+      "provider_text_visible": false,
+      "meaningful_status_visible": true
+    },
+    {
+      "label": "model-and-contribution-error-neutral-summary",
+      "provider_text_visible": false,
+      "pause_enabled": true
+    },
+    {
+      "label": "unknown-provider-string-code-suppressed",
+      "provider_code_visible": false
+    },
+    {
+      "label": "model-and-contribution-success-acknowledgments",
+      "raw_ack_details_visible": false,
+      "refreshes_actual_status": true
+    }
+  ],
+  "screenshots": [
+    "brand-neutral-request-error-fixture.png",
+    "brand-neutral-contribution-error-fixture.png",
+    "brand-neutral-wallet-error-fixture.png"
+  ],
+  "console_errors": [],
+  "limitations": [
+    "Synthetic server failures and EIP-1193 provider responses; no real wallet, chain transaction or model execution."
+  ],
+  "tests": {
+    "desktop": 27,
+    "wallet": 27,
+    "desktop_build": "passed",
+    "wallet_build": "passed"
+  },
+  "screenshot_sha256": {
+    "brand-neutral-request-error-fixture.png": "8ae98f807eb009fb25f87b0926f1b8076b023c7ee4b6f418065f7459ae3cba85",
+    "brand-neutral-contribution-error-fixture.png": "82296181f04f2dfff861e574f8c72ca419955b384e5a0a86ea690cc7a9735561",
+    "brand-neutral-wallet-error-fixture.png": "984405ab86fb1da67a112fbddbf77b872087a8ebce81d68ef255888aa16fb4bb"
+  },
+  "source_sha256": {
+    "apps/desktop/src/App.tsx": "0cbfe3d4ac94b175709dbedb93ed7f2ac77b364dc7054f75cabad77b7ccf8130",
+    "apps/desktop/src/presentation.ts": "e7ef96403e91a96d53d0d07b37c36b08843a491195c81d20de514a0ffcb6ae48",
+    "apps/wallet/src/presentation.ts": "f56568f1c14c6b4577b278e2831f0e637be74e113653ea093da397b2ac7e1403"
+  },
+  "visual_review": "Three error-state screenshots inspected; no vendor text, clipping or horizontal overflow observed.",
+  "transport_status_note": "Without an HTTP status, the UI states that the local request did not complete; it does not infer a disconnected service."
+}
