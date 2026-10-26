@@ -4,6 +4,8 @@ The original Heyuna visual system is carbon black (`#090B0C`), graphite (`#11151
 
 `packages/design-tokens/tokens.css` defines both dark and light semantic tokens. Dark is the default only when the user has no saved preference. Existing `heyuna-theme`, `heyuna-text-scale` and `heyuna-wallet-theme` choices persist. Body text is 14px; helper text is at least 12px. Local Inter Variable (Fontsource 5.3.0, SIL OFL) is served from each app's own font assets; Chinese uses system fallback. Fonts, textures and editor resources do not require third-party network requests.
 
+Product headings, navigation, wallet controls, empty states and promotional copy use only Heyuna branding. Compatible browser wallets appear through the standard provider interface without vendor-specific labels, logos or outbound brand links. Exact model, protocol and dependency identities remain in technical details, reproducibility records and required license notices; they must not be renamed as Heyuna technology.
+
 ## Workflow and state contracts
 
 - **Workspace:** three adjustable panes show files, code/diff and task conversation. Pointer drag and focused Left/Right/Home/End resize the separators. Narrow layouts stack the same panels. The actual project picker remains native on desktop; localhost development uses a path dialog with focus trapping/restoration. The editor is read-only, generated changes stay in an isolated copy, Apply requires review, and Revert uses the backend conflict checks. Monaco instances are stable across ordinary state updates; diff models detach before disposal.
@@ -14,7 +16,7 @@ The original Heyuna visual system is carbon black (`#090B0C`), graphite (`#11151
 
 ## Original motion and compute priority
 
-The brand mark consists of three original curved metallic ribbons converging as a sprout; the SVG static mark and Three geometry are original artwork. Lucide supplies utility icons under ISC. No OKX logo, copied screen, illustration, text or proprietary asset is used. Public wallet projects informed asset/network/transaction-state separation, not a claim about OKX's internal product architecture.
+The brand mark consists of three original curved metallic ribbons converging as a sprout; the SVG static mark and Three geometry are original artwork. Lucide supplies utility icons under ISC. Layout, illustrations, text and motion are original project work. No third-party affiliation or endorsement is implied.
 
 Motion 14.6.0 and Three 0.186.1 (`@types/three` 0.186.0) load lazily only for a positively known idle, focused, visible app. The 1.1-second opening plays once per renderer session. UI transitions are 140–200ms; scene rendering is capped at 30fps and device pixel ratio 1.5. Disposers run synchronously before task submission or contribution enable. Blur, hidden/offscreen views, reduced motion, unknown state, effects-off and computing remove the canvas, dispose geometries/materials/render lists/renderer and lose the WebGL context, leaving the original static mark. An animation never represents training progress.
 

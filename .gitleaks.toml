@@ -4,9 +4,11 @@ title = "Heyuna secret scanning — defaults plus verified public build hashes"
 useDefault = true
 
 [[allowlists]]
-description = "Exact public source SHA256 values in the desktop build evidence; api/tokens filenames are not credentials"
+description = "Exact verified public source and license SHA256 values in build evidence; filenames are not credentials"
 regexTarget = "line"
 regexes = [
   '''"apps/desktop/src/api\.ts": "99e7bc2ee8f9e678727da264d6a3fffcbd1e09932dd812fa7b4719e22756490b"''',
   '''"packages/design-tokens/tokens\.css": "0d9b68efe5974ff7a463aa86f7537b96c70bf91ac467b4e4c9ac5318a7eedb6d"''',
+  '''"apps/desktop/src/api\.ts": "976aec2fce9c02bbebe613907c5d1368bf58d5fdd3eb422a92b577da9a094f39"''',
+  '''"apps/desktop/sidecar/licenses/tokenizers-0\.23\.3-LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"''',
 ]

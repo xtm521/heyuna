@@ -82,8 +82,7 @@ async fn choose_project(app: tauri::AppHandle, state: State<'_, LocalService>) -
 fn wallet_destination(url: &str) -> Result<reqwest::Url, String> {
     let parsed = reqwest::Url::parse(url).map_err(|_| "钱包地址无效。")?;
     let local_portal = url == "http://127.0.0.1:1421/";
-    let official_wallet = parsed.scheme() == "https" && matches!(parsed.host_str(), Some("wallet.okx.com" | "www.okx.com")) && parsed.port().is_none();
-    if (!local_portal && !official_wallet) || !parsed.username().is_empty() || parsed.password().is_some() {
+    if !local_portal {
         return Err("钱包地址不在允许列表中。".into());
     }
     Ok(parsed)
@@ -181,8 +180,7 @@ mod tests {
     #[test]
     fn wallet_destination_cannot_forward_local_credentials_or_change_origin() {
         assert!(wallet_destination("http://127.0.0.1:1421/").is_ok());
-        assert!(wallet_destination("https://wallet.okx.com/").is_ok());
-        for url in ["http://127.0.0.1:1421/?token=secret", "http://127.0.0.1:1421/#secret", "http://127.0.0.1:1421/claim", "http://localhost:1421/", "https://wallet.okx.com.evil.example", "https://user:secret@wallet.okx.com/", "https://wallet.okx.com:8443/", "javascript:alert(1)", "file:///tmp/wallet.html"] {
+        for url in ["http://127.0.0.1:1421/?token=secret", "http://127.0.0.1:1421/#secret", "http://127.0.0.1:1421/claim", "http://localhost:1421/", "https://wallet.example/", "https://127.0.0.1:1421/", "http://user:secret@127.0.0.1:1421/", "http://127.0.0.1:1422/", "javascript:alert(1)", "file:///tmp/wallet.html"] {
             assert!(wallet_destination(url).is_err(), "{}", url);
         }
     }

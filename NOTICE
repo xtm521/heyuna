@@ -4,8 +4,8 @@ Copyright 2026 Heyuna contributors
 Original project code is licensed under Apache License 2.0.
 Third-party software, models and datasets retain their respective licenses.
 Qwen3-4B-Instruct-2507 is downloaded separately from its official repository.
-No OKX logos, interface assets or proprietary product implementation are included.
-Heyuna is an independent project and is not affiliated with OKX, Alibaba or Ethereum Foundation.
+The interface, text and motion are original project work.
+Heyuna is an independent project; no third-party affiliation or endorsement is implied.
 
 Sovereign researchnet node integration derives from the Cosmos EVM v0.7.3 evmd example.
 Original Apache-2.0 license and NOTICE are retained under chain/upstream/.

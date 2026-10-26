@@ -12,7 +12,9 @@ Heyuna builds its own `heyunad` node, genesis, native currency and invited valid
 
 Read [verification](docs/verification.md), [whitepaper](docs/whitepaper.md), [threat model](docs/threat-model.md), [EVM compatibility](docs/evm-compatibility.md). [Historical Alpha docs](docs/legacy-alpha/) retain the replaced Sepolia route. Old receipts never become native claim rights.
 
-![Original Heyuna desktop preview](apps/desktop/evidence/workspace-live-3d.png)
+![Heyuna desktop interface preview](apps/desktop/evidence/brand-neutral-workspace.png)
+
+Interface preview uses test fixtures; it does not show live training or a verified balance. See [current UI checks](apps/desktop/evidence/brand-neutral-verification.json).
 
 ## Native currency
 
@@ -84,4 +86,4 @@ Complete recomputation remains the default. Quorum signatures/Merkle proofs auth
 
 Online services are planned within¥1,000/month; engineering, independent devices/nodes and audits need separate resources. No paid service or mainnet has been deployed by these local scripts.
 
-Own additions: [Apache-2.0](LICENSE). Dependencies/models/data/fonts retain their licenses: [ledger](docs/licenses.md), [NOTICE](NOTICE), [upstream](chain/upstream/SOURCE.md). Original UI/text/motion; no OKX brand assets or copied interface. Heyuna is a working name pending trademark clearance.
+Own additions: [Apache-2.0](LICENSE). Dependencies/models/data/fonts retain their licenses: [ledger](docs/licenses.md), [NOTICE](NOTICE), [upstream](chain/upstream/SOURCE.md). The interface, text and motion are original. Heyuna is an independent project; no third-party affiliation or endorsement is implied. Heyuna is a working name pending trademark clearance.

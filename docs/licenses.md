@@ -15,9 +15,6 @@
 | PyInstaller hooks contrib 2026.9 | Official wheel / upstream hook licenses | Packaging hooks; preserve the wheel's full license text and individual notices |
 | Lucide | https://github.com/lucide-icons/lucide / ISC | Icon components, preserve dependency notice |
 | Demo training data | Original tiny fixture statements in scripts/federation_smoke.py / Apache-2.0 | Only technical smoke evidence; not a representative licensed production corpus |
-| OKX public SDK | https://github.com/okx/js-wallet-sdk / MIT | Reference only, not currently included or linked; no brand/asset license implied |
-
-Public reference evidence: OKX wallet SDK uses TS/JS; https://github.com/okx/wallet-sdk-demo/blob/main/package.json identifies React/TypeScript/Chakra/Emotion in that demo. This does not establish the architecture of OKX's exchange or all mobile apps. Heyuna's Tauri/Rust/React/Monaco stack is its own selection.
 
 Locked dependency manifests are the source for exact versions. Release preparation must export all transitive licenses/SBOM and resolve any incompatibility, not assume this short ledger is exhaustive. A production dataset requires a dataset card with provenance, license, redistribution/training rights, sensitive-data review, hashes and deletion policy before admission.
 
@@ -42,4 +39,4 @@ The desktop bundle excludes the coordinator, SQLAlchemy and Psycopg database dri
 | Inter | @fontsource-variable/inter 5.3.0 / SIL Open Font License 1.1 | Locally served woff2 with original OFL retained under each app public/fonts; no remote font request |
 | Node/OpenSSL offline crypto | Node24.19.0 / Node license; OpenSSL3.5.7 / Apache-2.0 | Runtime experiment only; not a bundled chain algorithm migration |
 
-Exact transitive versions remain in chain/go.mod, chain/go.sum, JS lockfiles, uv.lock and Cargo.lock. Release SBOM must cover each. Go source provenance is recorded in chain/upstream/SOURCE.md; a short ledger is not an exhaustive license compatibility audit. No third-party logo, OKX UI material or SDK code is included merely because it was a public reference.
+Exact transitive versions remain in chain/go.mod, chain/go.sum, JS lockfiles, uv.lock and Cargo.lock. Release SBOM must cover each. Go source provenance is recorded in chain/upstream/SOURCE.md; a short ledger is not an exhaustive license compatibility audit. Dependency licenses do not grant permission to use third-party brands or interface assets.

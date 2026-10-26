@@ -28,6 +28,21 @@ async function selectProject() {
 }
 
 describe('honest desktop states', () => {
+  it('shows neutral local-model labels without promoting the underlying model or runtime', async () => {
+    render(<App />); await screen.findByText('本地服务已连接');
+    expect(document.body.textContent).not.toMatch(/Qwen|mlx/i);
+    fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    await screen.findByText('40 亿参数');
+    expect(screen.getByText('本机加速')).toBeInTheDocument();
+    expect(document.body.textContent).not.toMatch(/Qwen|mlx/i);
+  });
+  it('keeps model diagnostics in service logs without exposing provider text in the interface', async () => {
+    vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, model: { ...status.model, ready: false, state: 'error', detail: 'Diagnostic code MODEL_DOWNLOAD_FAILED' } } : []);
+    render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+    await screen.findByText('本地模型暂不可用，请查看技术诊断。');
+    expect(screen.getByText('技术诊断请查看本地服务日志。')).toBeInTheDocument();
+    expect(screen.queryByText('Diagnostic code MODEL_DOWNLOAD_FAILED')).not.toBeInTheDocument();
+  });
   it('does not fabricate a connection or let an offline device run tasks', async () => {
     vi.mocked(api).mockRejectedValue(new Error('Backend offline'));
     render(<App />);

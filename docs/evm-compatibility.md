@@ -12,7 +12,7 @@ Baseline Cosmos EVM v0.7.3 full lock:Go1.25.9/SDK0.54.3/CometBFT0.39.3/Cosmos ge
 | Gas/refund | Upstream min_gas_multiplier0.5; chargedGas≥gasLimit×0.5 | Large gas limit can increase billed gas vs Ethereum |
 | Fee bootstrap | NoBaseFee=true,min gas price0 | Dynamic public base-fee behavior not activated or claimed |
 | SDK fees | collector then next-height distribution,2%community tax, standard owner withdrawal | Nonzero SDK transfer evidence is not EVM tip proof |
-| EVM priority fee | Local post-execution charged-gas split is separately tested before release | See final evidence for activated rule; do not assume geth coinbase behavior |
+| EVM priority fee | Local post-execution charged-gas split is separately tested before release | See final evidence for activated rule; do not assume upstream proposer-fee behavior |
 | Finality | CometBFT stake-weighted quorum | Different from Ethereum proof-of-stake/fork-choice |
 | Faults | Four equal nodes:one offline progresses,two offline stalls,recovery agrees | No arbitrary Byzantine/partition proof |
 | Native precompile | 0x0900 view-only contribution oracle, malformed selectors/gas bounded | Not a generic native-write bridge |

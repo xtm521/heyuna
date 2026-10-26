@@ -35,7 +35,7 @@ describe('native configuration and canonical proofs',()=>{
     expect(config.chain_id).toBe(297012);
     expect(()=>parseNativeDeployment({...deployment,challenge_seconds:259200})).toThrow(/profile/);
     expect(()=>parseNativeDeployment({...deployment,rpc_url:'http://remote.example'})).toThrow(/RPC/);
-    expect(()=>parseNativeDeployment({...deployment,cosmos_rpc_url:'https://remote.example'})).toThrow(/Cosmos/);
+    expect(()=>parseNativeDeployment({...deployment,cosmos_rpc_url:'https://remote.example'})).toThrow(/共识节点/);
     expect(()=>parseNativeDeployment({...deployment,evm_anchor:null})).toThrow();
     expect(()=>parseNativeDeployment({...deployment,genesis_hash_kind:'block-hash'})).toThrow(/创世/);
     expect(()=>parseDeployment({version:1})).toThrow(/显式/);
@@ -68,11 +68,11 @@ describe('native wallet signature boundary',()=>{
   });
   it('fails closed if Cosmos genesis identity is wrong even when wallet chain ID matches',async()=>{
     vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({result:{genesis:{...genesis,chain_id:'other'}}}))));
-    const mock=wallet();await expect(assertNativeChain(mock.connection.injected,{...config,cosmos_rpc_url:'http://127.0.0.1:26658/'})).rejects.toThrow(/Cosmos 创世/);mock.connection.provider.destroy();
+    const mock=wallet();await expect(assertNativeChain(mock.connection.injected,{...config,cosmos_rpc_url:'http://127.0.0.1:26658/'})).rejects.toThrow(/共识节点创世/);mock.connection.provider.destroy();
   });
   it('does not reuse genesis validation for a different expected Cosmos chain identity',async()=>{
     const mock=wallet();await assertNativeChain(mock.connection.injected,config);
-    await expect(assertNativeChain(mock.connection.injected,{...config,cosmos_chain_id:'heyuna_297011-1'})).rejects.toThrow(/Cosmos 创世/);mock.connection.provider.destroy();
+    await expect(assertNativeChain(mock.connection.injected,{...config,cosmos_chain_id:'heyuna_297011-1'})).rejects.toThrow(/共识节点创世/);mock.connection.provider.destroy();
   });
   it('previews native gas and sends exactly one zero-value claim only on the explicit send path',async()=>{
     const mock=wallet();vi.spyOn(mock.connection.provider,'estimateGas').mockResolvedValue(80000n);vi.spyOn(mock.connection.provider,'getFeeData').mockResolvedValue(new FeeData(10n,20n,2n));
