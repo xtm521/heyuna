@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "node scripts/compile.mjs",
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
-    "check": "node scripts/compile.mjs && node scripts/static-check.mjs && node --test --test-concurrency=1 test/*.test.mjs && node scripts/formal-budget.mjs",
+    "check": "node scripts/compile.mjs && node scripts/static-check.mjs && node --test --test-concurrency=1 test/*.test.mjs && node scripts/formal-budget.mjs && node scripts/formal-budget.mjs --native",
     "formal": "node scripts/formal-budget.mjs",
     "deployment-plan": "node scripts/deployment-plan.mjs"
   },

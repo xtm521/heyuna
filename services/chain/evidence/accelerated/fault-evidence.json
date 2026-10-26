@@ -1,0 +1,107 @@
+{
+  "before": [
+    {
+      "app_hash": "DA946403FCEAE86330AB0FDB181AA99E0F67288560CA25AEC85A4AAFD5319055",
+      "catching_up": false,
+      "height": 266,
+      "node": 0
+    },
+    {
+      "app_hash": "DA946403FCEAE86330AB0FDB181AA99E0F67288560CA25AEC85A4AAFD5319055",
+      "catching_up": false,
+      "height": 266,
+      "node": 1
+    },
+    {
+      "app_hash": "DA946403FCEAE86330AB0FDB181AA99E0F67288560CA25AEC85A4AAFD5319055",
+      "catching_up": false,
+      "height": 266,
+      "node": 2
+    },
+    {
+      "app_hash": "DA946403FCEAE86330AB0FDB181AA99E0F67288560CA25AEC85A4AAFD5319055",
+      "catching_up": false,
+      "height": 266,
+      "node": 3
+    }
+  ],
+  "block_hash": "A510326384B880FA69C16A7272D47BC964696BA282DC0E0F8B87B1BCE3614C0F",
+  "consistent_height": 272,
+  "four_processes_one_operator": true,
+  "halt": [
+    {
+      "app_hash": "26A54E077DA6CE37831394180053D92CC54AB0C89587EB1281B98508C52BB6F6",
+      "catching_up": false,
+      "height": 269,
+      "node": 0
+    },
+    {
+      "app_hash": "26A54E077DA6CE37831394180053D92CC54AB0C89587EB1281B98508C52BB6F6",
+      "catching_up": false,
+      "height": 269,
+      "node": 1
+    },
+    {
+      "error": "<urlopen error [Errno 61] Connection refused>",
+      "node": 2
+    },
+    {
+      "error": "<urlopen error [Errno 61] Connection refused>",
+      "node": 3
+    }
+  ],
+  "one_down": [
+    {
+      "app_hash": "26A54E077DA6CE37831394180053D92CC54AB0C89587EB1281B98508C52BB6F6",
+      "catching_up": false,
+      "height": 269,
+      "node": 0
+    },
+    {
+      "app_hash": "26A54E077DA6CE37831394180053D92CC54AB0C89587EB1281B98508C52BB6F6",
+      "catching_up": false,
+      "height": 269,
+      "node": 1
+    },
+    {
+      "app_hash": "26A54E077DA6CE37831394180053D92CC54AB0C89587EB1281B98508C52BB6F6",
+      "catching_up": false,
+      "height": 269,
+      "node": 2
+    },
+    {
+      "error": "<urlopen error [Errno 61] Connection refused>",
+      "node": 3
+    }
+  ],
+  "one_down_progress": true,
+  "profile": "accelerated",
+  "recovered": [
+    {
+      "app_hash": "14CE2A44D37845F5D113C115B06E72D8CAE731A44AF38315E712CD6A8922CDBE",
+      "catching_up": false,
+      "height": 272,
+      "node": 0
+    },
+    {
+      "app_hash": "14CE2A44D37845F5D113C115B06E72D8CAE731A44AF38315E712CD6A8922CDBE",
+      "catching_up": false,
+      "height": 272,
+      "node": 1
+    },
+    {
+      "app_hash": "14CE2A44D37845F5D113C115B06E72D8CAE731A44AF38315E712CD6A8922CDBE",
+      "catching_up": false,
+      "height": 272,
+      "node": 2
+    },
+    {
+      "app_hash": "14CE2A44D37845F5D113C115B06E72D8CAE731A44AF38315E712CD6A8922CDBE",
+      "catching_up": false,
+      "height": 272,
+      "node": 3
+    }
+  ],
+  "restart_recovers": true,
+  "two_down_halts": true
+}

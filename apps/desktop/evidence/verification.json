@@ -1,0 +1,268 @@
+{
+  "date": "2026-10-26",
+  "branch": "codex/sovereign-researchnet",
+  "scope": "Browser UI and frontend protocol verification; no user-native-app interaction",
+  "automated": {
+    "desktop_tests": 21,
+    "wallet_tests": 24,
+    "desktop_typescript_build": "passed",
+    "wallet_typescript_build": "passed",
+    "legacy_wallet_tests_preserved": 13,
+    "monaco_disposal_test": "passed",
+    "synchronous_dispose_before_task_and_contribution_api": "passed",
+    "genesis_cache_identity_binding": "expected Cosmos chain ID included in cache key; cross-identity reuse regression test passed"
+  },
+  "desktop_actual_local_service": {
+    "api_origin": "http://127.0.0.1:8765",
+    "browser_origin": "http://127.0.0.1:1420",
+    "credentials": "Vite server-only; no local token in renderer",
+    "default_dark": true,
+    "explicit_light_persists_after_reload": true,
+    "text_scales": [
+      1,
+      2
+    ],
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "narrow_viewport": [
+      390,
+      844
+    ],
+    "horizontal_document_overflow": false,
+    "visible_auxiliary_text_below_12px": false,
+    "project": "apps/desktop/tests/fixtures/project",
+    "monaco_editors_when_file_open": 1,
+    "page_errors": [],
+    "settings_upload_limit_saved_and_reloaded_mb": 512,
+    "unsupported_cpu_limit_disabled": true,
+    "dialog_escape_restores_opener_focus": true,
+    "configured_connected_training_distinct": true,
+    "wallet_placeholder_balance": "em dash / unverified",
+    "network_profile": "accelerated-local, 297012, explicit 3-second warning",
+    "local_model": "not ready in isolated QA state",
+    "sandbox": "not available in isolated QA state",
+    "live_model_task_apply_revert": "not rerun in this isolated QA state; behavioral diff review and disposal tests passed"
+  },
+  "graphics": {
+    "original_geometry": "three metallic Bezier ribbons; local SVG fallback",
+    "lazy_scene_chunk": true,
+    "intro_seconds": 1.1,
+    "intro_once": "module-session guard; source reviewed",
+    "frame_sample": {
+      "frames": 26,
+      "elapsed_ms": 1202.2,
+      "estimated_fps": 21.63,
+      "method": "78 WebGL draw calls / 3 ribbon meshes"
+    },
+    "device_pixel_ratio": 2,
+    "observed_canvas_pixel_ratio": 1.5,
+    "unknown_status_disposes": true,
+    "reduced_motion_disposes": true,
+    "offscreen_intersection_disposes": true,
+    "effects_off_disposes": true,
+    "synthetic_blur_disposes_synchronously": true,
+    "native_os_blur": "not verified; headless Chrome reports multiple pages focused"
+  },
+  "wallet_actual_chain": {
+    "run": "fresh3",
+    "verified_at": "2026-10-26T05:59:40.837409+00:00",
+    "scope": "Read-only current frontend against real local research chain through injected public-account EIP-1193 test adapter; not an installed-wallet signature test",
+    "chain_id": 297012,
+    "cosmos_chain_id": "heyuna_297012-1",
+    "network_domain": "0x82bdcf644c6647df9a9c8b6af353bfa988ea6c329ddcd5c92b02b7fea00571a1",
+    "genesis_hash_kind": "sha256-canonical-genesis-json",
+    "code_hashes": {
+      "reward_vault": "0xe6ccba4191a411524817769336321b93369ee5b8670938f68d9f58447a303eb4",
+      "public_fund": "0x40977edbfe2e26b61309dd462a3438cb94035d2b74428846409f5b332a0375ed",
+      "factory": "0xaf530c29e59a68b97faabbe0233f837794e9d5abd7dfb469aa86aaa880741e92"
+    },
+    "canonical_genesis_and_wallet_anchor_match": true,
+    "three_runtime_hashes_and_oracle_match": true,
+    "manifest_hash": "417d424e486f9e7e745b2a2dc70004896d0b348572d9353affa9707e1b957fe2",
+    "root": "0xa96e83cad0a897eecdf10b9eb0e28f4d8054eecb385ddf14e743eab44a0d3edc",
+    "training_budget": "1000000000000000000",
+    "verification_budget": "100000000000000000",
+    "finalized": true,
+    "claims": [
+      {
+        "index": "0",
+        "category": 0,
+        "recipient": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+        "amount": "1000000000000000000",
+        "contribution_id": "0x02e0dfff50d7dca8f5a8ebefd1b609642af7276d746ca668dfc3e48212f269f1",
+        "claimed": true,
+        "transaction_hash": "0x88068153eb5502752543768c6da4da7edfb4a20dd63578b31df53e427be5f722",
+        "receipt_status": 1,
+        "receipt_sender": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+        "receipt_block": 225,
+        "canonical_block": true,
+        "balance_at_receipt_block": "99999999999999999999999"
+      },
+      {
+        "index": "1",
+        "category": 1,
+        "recipient": "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8",
+        "amount": "100000000000000000",
+        "contribution_id": "0xad42df29ef2efe84d14c85b19b5ac08eef4b7d88fea0951cc1353bcbe5d9f633",
+        "claimed": true,
+        "transaction_hash": "0xe91bfe0b10dbcdf6212d7f5bd7d4c05c3b3e7edab31272597b0bb781bf039c88",
+        "receipt_status": 1,
+        "receipt_sender": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+        "receipt_block": 226,
+        "canonical_block": true,
+        "balance_at_receipt_block": "100000000000000000"
+      }
+    ],
+    "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+    "evm_anchor": {
+      "block_number": 1,
+      "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632"
+    },
+    "front_end_sent_transactions": false,
+    "private_keys_loaded": false,
+    "known_test_relayer": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+    "recipient_sessions_already_claimed_rejected": [
+      "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8"
+    ],
+    "faucet_balance_observed_now": "99999.999999999999699999",
+    "verification_recipient_balance_now": "0.1",
+    "page_errors": [],
+    "failed_requests": [],
+    "read_only_rpc_methods": [
+      "eth_chainId",
+      "eth_getBlockByNumber",
+      "eth_getCode",
+      "eth_call",
+      "eth_getBalance",
+      "eth_getTransactionReceipt"
+    ],
+    "receipt_sender_basis": "Both integration transactions were relayed by the independently supplied public faucet address. Frontend receipt checks used that known sender while checking each distinct recipient/contribution identity.",
+    "balance_basis": "Exact balances at each receipt block read independently. Current faucet balance also reflects separate integration probes; it is not labelled contribution earnings.",
+    "node_build_evidence": {
+      "binary_sha256": "342b1c2a92359fc81cb8501d955e280fe617629b2d2e60c64fd390f90832a587",
+      "source_manifest_sha256": "94f7d91ce1e626fa94e75fbc982536f9c8527d8365f4e6f547748f125040eae4",
+      "basis": "Local initial-build-evidence.json; wallet RPC does not remotely attest the node binary."
+    },
+    "screenshots": [
+      "wallet-fresh3-faucet-claimed.png",
+      "wallet-fresh3-verifier-claimed.png"
+    ],
+    "independent_operators": false,
+    "mainnet": false
+  },
+  "visual_lint": {
+    "method": "DOM visible font-size and document-width checks; screenshot review; semantic token contrast review",
+    "shared_visual_lint_script": "not installed at documented shared-runtime paths",
+    "accepted_tradeoffs": [
+      "Monaco production chunk is large; original scene is lazy loaded.",
+      "Native OS focus and actual wallet-extension approval need separate validation."
+    ]
+  },
+  "native_bundle": {
+    "evidence": "docs/evidence/desktop-research-bundle-2026-10-26.json",
+    "rebuilt_after_backend_freeze": true,
+    "signature": "local_ad_hoc",
+    "notarized": false,
+    "independent_copied_runtime_tls_api": "passed",
+    "native_window_launched": false
+  },
+  "screenshots": {
+    "settings-200-dark.png": "d37baddd0fa0433814c8b23c5470c862baea19ac96f2f1adc19b87afe1f5b4fa",
+    "training-dark-unconfigured.png": "112748e64c11b3d3fb01028102af9937590fa1555e4587b288f541bfaeedf0c7",
+    "training-live.png": "80f8c75d8450bd441ec2c82948060db1e5887e8502a3cdf3717baeb060fbfda1",
+    "wallet-fresh3-faucet-claimed.png": "a4158325d511ff41b587e8ee2101be02f2bbfe4b39d696739de4422f5ef23ad2",
+    "wallet-fresh3-verifier-claimed.png": "b7ffca04b81c32b7db5d5476dfc1cf01d4e080d7961bd453679a50b6a455523b",
+    "wallet-mobile.png": "ff18445f9a6c31702783b35efb13a89ea0795846d3fb4469322726ab5d86b611",
+    "wallet-portal-dark.png": "31a54c574dd023277154205337897e58cd0fe8dd52caf750b6890f8e44040707",
+    "wallet-real-chain-claimed.png": "5c668f5bf4ae67170246903b1e879ae27e712d7cbad8cbb00fe43e5f4561d4a7",
+    "wallet-real-chain-preview.png": "c60014630c81bf3e277be36de28a27e8568f10abb7f52463e6c372c193b097d5",
+    "workspace-dark.png": "cdf4776833c47da6873828e7563f4a09d8c0039ff481ca83f18763ed96b0de22",
+    "workspace-light.png": "70a60e0b3de13ef5e512ea532dc6cc3cda60740be0f0761944474a5ac7512a87",
+    "workspace-live-3d.png": "5514189ce5ed237de2fc8d199ae5a7f1dcecd7382e915dc34afdab5ba39788ca",
+    "workspace-mobile-live.png": "ed1a02272d4596f879d2e98f281cbc21cd3f231f11933ca62691e0011e30110f",
+    "workspace-mobile.png": "436bad80fad2af607101f1a6ec63868ef393c902f340e573862215a7e6ea99b5",
+    "workspace-real-project.png": "6ea523ed225f0a9abcc5008861579865c8d775d43e86eb21a09cf3db88a61296"
+  },
+  "image_privacy_review": {
+    "method": "Visual screenshot review, macOS Vision OCR for user-path/credential markers, PNG text/EXIF chunk inspection",
+    "images_reviewed": 15,
+    "private_path_or_credential_markers_detected": 0,
+    "png_text_or_exif_chunks": 0,
+    "limit": "OCR marker checks are supporting evidence, not a universal secret detector; renderer receives no local API token."
+  },
+  "screenshot_scope": {
+    "run1": [
+      "all screenshots except wallet-fresh3-*.png"
+    ],
+    "run1_final_node_evidence": false,
+    "fresh3": [
+      "wallet-fresh3-faucet-claimed.png",
+      "wallet-fresh3-verifier-claimed.png"
+    ],
+    "frontend_source": "Unchanged for final network checks and existing local desktop bundle."
+  },
+  "final_network_identity": {
+    "run": "fresh3",
+    "verified_at": "2026-10-26T05:57:54.187825+00:00",
+    "chain_id": 297012,
+    "cosmos_chain_id": "heyuna_297012-1",
+    "network_domain": "0x82bdcf644c6647df9a9c8b6af353bfa988ea6c329ddcd5c92b02b7fea00571a1",
+    "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+    "genesis_hash_kind": "sha256-canonical-genesis-json",
+    "evm_anchor": {
+      "block_number": 1,
+      "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632"
+    },
+    "runtime_code_hashes": {
+      "reward_vault": "0xe6ccba4191a411524817769336321b93369ee5b8670938f68d9f58447a303eb4",
+      "public_fund": "0x40977edbfe2e26b61309dd462a3438cb94035d2b74428846409f5b332a0375ed",
+      "factory": "0xaf530c29e59a68b97faabbe0233f837794e9d5abd7dfb469aa86aaa880741e92"
+    },
+    "canonical_cosmos_genesis_wallet_anchor_runtime_hash_checks": "passed via current frontend and live public RPC",
+    "public_account": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+    "node_build_evidence": {
+      "binary_sha256": "342b1c2a92359fc81cb8501d955e280fe617629b2d2e60c64fd390f90832a587",
+      "source_manifest_sha256": "94f7d91ce1e626fa94e75fbc982536f9c8527d8365f4e6f547748f125040eae4",
+      "basis": "local initial-build-evidence.json; wallet RPC does not prove which binary is running"
+    },
+    "claim_receipt_checks": "passed for both native categories: two proofs, final root and budgets, two claimed bits, success receipts, contribution IDs, canonical block hashes, historical balances, recipient-session duplicate refusal",
+    "page_errors": [],
+    "failed_requests": [],
+    "verification_record": "apps/desktop/evidence/wallet-fresh3-verification.json"
+  },
+  "historical_wallet_actual_chain_run1": {
+    "browser_origin": "http://127.0.0.1:1421",
+    "adapter": "headless injected EIP-1193 public-account fixture; all allowed reads delegated to actual local RPC",
+    "signing_in_this_qa": false,
+    "private_keys_loaded": false,
+    "evm_rpc": "http://127.0.0.1:10545",
+    "cosmos_rpc": "http://127.0.0.1:28657",
+    "chain_id": 297012,
+    "cosmos_chain_id": "heyuna_297012-1",
+    "genesis_hash_kind": "sha256-canonical-genesis-json",
+    "genesis_hash": "0x198511c7da22ca636b6e2248a298ad14437144e84e1ad65b877173ac9dfbdb57",
+    "evm_anchor_block": 1,
+    "evm_anchor_hash": "0x7941f48b3a222b6f1072aa817ec8fd41eff7cf6a66cb34a4f07edb464e2919fe",
+    "canonical_genesis_and_wallet_anchor_match": true,
+    "three_contract_runtime_hashes_match": true,
+    "manifest_proof_and_finalized_epoch_match": true,
+    "claim_amount_tHEYUNA": "1.0",
+    "fee_preview_tHEYUNA": "0.0",
+    "zero_fee_basis": "explicit live RPC gasPrice/baseFee/priorityFee all zero, research bootstrap",
+    "balance_before_tHEYUNA": "100000.0",
+    "balance_after_tHEYUNA": "100001.0",
+    "balance_label": "Current wallet native balance, not total contribution earnings",
+    "transaction_submitted_by": "parent integration test, not this frontend",
+    "transaction_hash": "0x6052844d4aa57b816ae7a8a1b23818200db612c91ccbe71df14c4ec0defde6e4",
+    "actual_receipt_verified_by_frontend_function": true,
+    "event_contribution_id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578",
+    "duplicate_preview_rejected": true,
+    "browser_console_or_request_failures_after_cors_csp_fix": [],
+    "trusted_manifest_source": "Actual local public deployment used only by test-page route; checked-in public deployment remains unconfigured",
+    "run": "run1, before fresh3 rebuild",
+    "final_node_evidence": false
+  }
+}

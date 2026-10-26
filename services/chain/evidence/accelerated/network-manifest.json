@@ -1,0 +1,32 @@
+{
+  "api_base": 2417,
+  "chain_id": "heyuna_297012-1",
+  "contracts_manifest_sha256": "790f0251e5652acbdb2f510904cd601bfd733d9170acb4ed9c8d7ae20416af21",
+  "cosmos_rpc_url": "http://127.0.0.1:28657",
+  "evm_anchor": {
+    "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632",
+    "block_number": 1
+  },
+  "evm_base": 10545,
+  "evm_chain_id": 297012,
+  "genesis_file_sha256": "6a729902230a80c3799abd758ab99be5e1ae49572414bc8922e27cefb64eb4d3",
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "genesis_hash_kind": "sha256-canonical-genesis-json",
+  "grpc_base": 11090,
+  "independent_operators_verified": false,
+  "initial_supply": "20000000000000000000000000",
+  "name": "accelerated",
+  "native_currency": {
+    "decimals": 18,
+    "name": "HEYUNA Test Token",
+    "symbol": "tHEYUNA"
+  },
+  "network_domain": "0x82bdcf644c6647df9a9c8b6af353bfa988ea6c329ddcd5c92b02b7fea00571a1",
+  "network_name": "HEYUNA Local Accelerated Research Network",
+  "p2p_base": 28656,
+  "rpc_base": 28657,
+  "rpc_url": "http://127.0.0.1:10545",
+  "security_budget_address": "heyuna1nr3y5y4e24yrqlzt5u6lmq4c7qdmex60pvf3hr",
+  "unsafe_test_profile": true,
+  "zero_fee_bootstrap": true
+}

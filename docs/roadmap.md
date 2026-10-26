@@ -1,13 +1,16 @@
 # Delivery gates and operating budget
 
-| Stage | Completion evidence | Gate |
+| Phase | Delivery and acceptance | Evidence boundary |
 |---|---|---|
-| Open-source alpha | Code/docs/licenses, reproducible checks, secret scan, public repo and remote CI | Source publication does not mean a token launched |
-| Local product/contracts | Real model request and sandboxed repair/review/revert; immutable supply/permissions tested; native package | A source build or mocked execution alone is insufficient |
-| Heterogeneous training | One physical Mac and one Windows NVIDIA device, same task/weights; interruption/resume/replay/malicious update | Separate from transpose-array fixtures |
-| Sepolia trial | Reviewed addresses/source, independent signers, manifest/challenge/claim and canonical receipt in external wallet | No real address/signature → remain unconfigured |
-| Mainnet evaluation | Independent audits and re-review, signers/recovery, bounty, operations, region evaluation and additional budget | No automatic launch |
+| A:specifications | New whitepaper, threat model, genesis economics, closed v2interfaces, dependency provenance and EVM matrix | Frontier capabilities marked as experiment/open; old Alpha explicitly historical |
+| B:local independent chain | Own node/genesis/native coin;4equal validators;transfer/Solidity/wallet identity/restart | Four local processes are one operator; not public decentralization |
+| C:contribution closure | Actual fixed-template computation/recompute,reports,challenge/quorum restore,immutable final root,native two-category claims |3s accelerated profile cannot prove72h elapsed;keys locally controlled |
+| D:attacks and evolution | Faults,replay,gas/refunds,supply/account equality,priority routing,dedup/nonce cases,economic/PQ experiments | Same-version replay not cross-version upgrade; offline ML-DSA not chain migration |
+| E:invited researchnet |7nodes,≥4independent operators,each<1/3vote;separate independent training verifiers | Requires real operator identities,hardware,monitoring and sustained operation |
+| Mainnet evaluation |2independent audits+remediation review,no unresolved critical/high,bounty,economic attacks,heterogeneous devices,key recovery,regional operation review | No automatic issuance or value/conversion promise |
 
-Suggested **planning ceilings**, not supplier quotes or commitments: coordinator/Postgres CNY300/month, bounded object storage/egress200, monitoring/backups100, contingency400, total<=1000. Reconcile actual invoices and enforce upload/storage quotas; stop accepting new jobs when the budget cap would be exceeded. Training runs on consenting devices; electricity/data costs must be shown to participants. Development, devices, independent audits, legal review, signing services and gas are outside this online-service budget.
+Current exact completed checks/failures are in[verification](verification.md). Scripts and a green CI job do not prove independent operators or model benefits. Native supply starts20m, may only decrease via explicit protocol burns, and cannot be re-inflated after a burn. Finalized claims and ledger equality are upgrade invariants.
 
-The first template is small (last two layers, q/v, rank8). Expanding layer coverage or adding phones requires new measured admission profiles, privacy review and thermal/battery testing. Run each quality study against a pinned baseline, separate heldout data, predetermined metric and confidence intervals. Never promise universal model improvement from one smoke run.
+Planning ceilings, not supplier quotes/purchases:coordinator/PostgreSQL¥300/month,storage/egress¥200,monitoring/backups¥100,contingency¥400,total≤¥1000. Independent validator hardware,electricity,devices,R&D,audits,signing and operating-region work are separate. Real admission needs provider pricing,invoice monitoring and enforced storage/egress/job quotas. Fund tokens are not cash audit funding.
+
+Phones remain a later thermal/battery/privacy feasibility study. No mobile full-model training claim. Meaningful quality studies require fixed baselines,separate heldout data,predetermined metrics,adequate samples and confidence intervals; one optimizer step is a technical fixture. Original visual polish cannot substitute protocol evidence.

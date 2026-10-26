@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "profile": "accelerated-local",
+  "chain_id": 297012,
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "evm_anchor": {
+    "block_number": 1,
+    "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632"
+  },
+  "transactions": [
+    {
+      "contract": "public_fund",
+      "tx_hash": "0xc0259a2a1e7f4bae816c53280eb01f14612083d5912fc112d26f8a710cabda9a",
+      "block_number": 3,
+      "gas_used": "6000000"
+    },
+    {
+      "contract": "reward_vault",
+      "tx_hash": "0x90a6dad9f3e7f2cdb24f9b76482cd4f61f62e1fe5e6303df5f0f1f86b833908e",
+      "block_number": 4,
+      "gas_used": "6000000"
+    }
+  ],
+  "runtime_hashes_verified": true,
+  "native_genesis_supply": "20000000000000000000000000",
+  "reward_vault_balance": "14000000000000000000000000",
+  "public_fund_balance": "1900000000000000000000000",
+  "zero_fee_bootstrap": true,
+  "independent_operators_verified": false,
+  "mainnet": false
+}

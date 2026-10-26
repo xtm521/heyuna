@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from '../src/App';
 import { api, receiptLabel } from '../src/api';
+import { registerEffect } from '../src/components/effects';
 
 vi.mock('../src/api', async importOriginal => ({ ...(await importOriginal<typeof import('../src/api')>()), api: vi.fn(), isDesktop: () => false }));
 vi.mock('@monaco-editor/react', () => ({ default: ({ value }: { value: string }) => <pre aria-label="代码查看器">{value}</pre>, DiffEditor: ({ original, modified }: { original: string; modified: string }) => <div aria-label="变更对比"><pre>{original}</pre><pre>{modified}</pre></div> }));
@@ -115,4 +116,46 @@ describe('honest desktop states', () => {
     expect(localStorage.getItem('heyuna-text-scale')).toBe('2');
     expect(Object.keys(localStorage).sort()).toEqual(['heyuna-text-scale', 'heyuna-theme']);
   });
+});
+
+it('defaults to dark but preserves an explicitly selected light theme', async () => {
+  localStorage.setItem('heyuna-theme', 'light');
+  render(<App />); await screen.findByText('本地服务已连接');
+  expect(document.documentElement.dataset.theme).toBe('light');
+  fireEvent.click(screen.getByRole('button', { name: '切换深色主题' }));
+  expect(localStorage.getItem('heyuna-theme')).toBe('dark');
+});
+it('never presents backend placeholder zero as a verified native wallet balance', async () => {
+  vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, rewards: { chain_id: 297011, state: 'configured_unverified', confirmed: '0', pending: '0' } } : { chain_id: 297011, asset_kind: 'native', profile: 'research', genesis_hash: `0x${'a'.repeat(64)}`, rewards_address: '0x1234', wallet_url: 'http://127.0.0.1:1421/' });
+  render(<App />); fireEvent.click(screen.getByRole('button', { name: '奖励钱包' }));
+  await screen.findByText('297011');
+  expect(screen.getByLabelText('余额未核验')).toHaveTextContent('—');
+  expect(screen.getByText('未核验 · 请在外部钱包读取链上余额')).toBeInTheDocument();
+});
+it('separates configured network from connection and actual training', async () => {
+  vi.mocked(api).mockImplementation(async path => path === '/status' ? { ...status, network: { configured: true, connected: false }, resources: { rss_bytes: 0, cpu_percent: 0, elapsed_seconds: 0 } } : []);
+  render(<App />); fireEvent.click(screen.getByRole('button', { name: '训练中心' }));
+  await screen.findByText('已配置');
+  expect(screen.getByText('未连接')).toBeInTheDocument();
+  expect(screen.getByText('未在训练')).toBeInTheDocument();
+  expect(screen.queryByText('0.0%')).not.toBeInTheDocument();
+});
+
+it('disposes visual resources before the task request reaches the service', async () => {
+  render(<App />); await selectProject();
+  const order: string[] = []; const unregister=registerEffect(()=>order.push('disposed'));
+  const base=vi.mocked(api).getMockImplementation()!;
+  vi.mocked(api).mockImplementation(async (...args)=>{if(args[0]==='/agent/tasks')order.push('request');return base(...args);});
+  fireEvent.change(screen.getByLabelText('编程任务'),{target:{value:'Check the project'}});
+  fireEvent.click(screen.getByRole('button',{name:'提交编程任务'}));
+  await screen.findByText('1 test passed');
+  expect(order).toEqual(['disposed','request']);unregister();
+});
+it('disposes visual resources before opting into contribution', async () => {
+  const base=vi.mocked(api).getMockImplementation()!;const order: string[]=[];
+  vi.mocked(api).mockImplementation(async (...args)=>{if(args[0]==='/status')return {...status,network:{configured:true,connected:false}};if(args[0]==='/network/contribution')order.push('request');return base(...args);});
+  render(<App />);fireEvent.click(screen.getByRole('button',{name:'训练中心'}));await screen.findByText('已配置');
+  const unregister=registerEffect(()=>order.push('disposed'));
+  fireEvent.click(screen.getByRole('button',{name:'开启算力贡献'}));
+  await waitFor(()=>expect(order).toEqual(['disposed','request']));unregister();
 });

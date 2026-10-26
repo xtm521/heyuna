@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "EVMAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "block_number": {
+          "const": 1,
+          "title": "Block Number",
+          "type": "integer"
+        },
+        "block_hash": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Block Hash",
+          "type": "string"
+        }
+      },
+      "required": [
+        "block_number",
+        "block_hash"
+      ],
+      "title": "EVMAnchor",
+      "type": "object"
+    },
+    "NativeCodeHashes": {
+      "additionalProperties": false,
+      "properties": {
+        "reward_vault": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Reward Vault",
+          "type": "string"
+        },
+        "public_fund": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Public Fund",
+          "type": "string"
+        },
+        "factory": {
+          "pattern": "^0x[0-9a-fA-F]{64}$",
+          "title": "Factory",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reward_vault",
+        "public_fund",
+        "factory"
+      ],
+      "title": "NativeCodeHashes",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Trusted network identity, not proof that the referenced node is honest.",
+  "properties": {
+    "version": {
+      "const": 2,
+      "title": "Version",
+      "type": "integer"
+    },
+    "profile": {
+      "enum": [
+        "research",
+        "accelerated-local"
+      ],
+      "title": "Profile",
+      "type": "string"
+    },
+    "chain_id": {
+      "enum": [
+        297011,
+        297012
+      ],
+      "title": "Chain Id",
+      "type": "integer"
+    },
+    "cosmos_chain_id": {
+      "enum": [
+        "heyuna_297011-1",
+        "heyuna_297012-1"
+      ],
+      "title": "Cosmos Chain Id",
+      "type": "string"
+    },
+    "network_name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Network Name",
+      "type": "string"
+    },
+    "network_domain": {
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "title": "Network Domain",
+      "type": "string"
+    },
+    "genesis_hash": {
+      "pattern": "^0x[0-9a-fA-F]{64}$",
+      "title": "Genesis Hash",
+      "type": "string"
+    },
+    "genesis_hash_kind": {
+      "const": "sha256-canonical-genesis-json",
+      "title": "Genesis Hash Kind",
+      "type": "string"
+    },
+    "evm_anchor": {
+      "$ref": "#/$defs/EVMAnchor"
+    },
+    "rpc_url": {
+      "maxLength": 512,
+      "title": "Rpc Url",
+      "type": "string"
+    },
+    "cosmos_rpc_url": {
+      "maxLength": 512,
+      "title": "Cosmos Rpc Url",
+      "type": "string"
+    },
+    "asset_kind": {
+      "const": "native",
+      "title": "Asset Kind",
+      "type": "string"
+    },
+    "symbol": {
+      "const": "tHEYUNA",
+      "title": "Symbol",
+      "type": "string"
+    },
+    "base_denom": {
+      "const": "aheyuna",
+      "title": "Base Denom",
+      "type": "string"
+    },
+    "decimals": {
+      "const": 18,
+      "title": "Decimals",
+      "type": "integer"
+    },
+    "total_supply": {
+      "const": "20000000000000000000000000",
+      "title": "Total Supply",
+      "type": "string"
+    },
+    "reward_vault_address": {
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "title": "Reward Vault Address",
+      "type": "string"
+    },
+    "public_fund_address": {
+      "pattern": "^0x[0-9a-fA-F]{40}$",
+      "title": "Public Fund Address",
+      "type": "string"
+    },
+    "factory_address": {
+      "const": "0x0000000000000000000000000000000000000F01",
+      "title": "Factory Address",
+      "type": "string"
+    },
+    "contribution_precompile_address": {
+      "const": "0x0000000000000000000000000000000000000900",
+      "title": "Contribution Precompile Address",
+      "type": "string"
+    },
+    "genesis": {
+      "exclusiveMinimum": 0,
+      "title": "Genesis",
+      "type": "integer"
+    },
+    "challenge_seconds": {
+      "enum": [
+        259200,
+        3
+      ],
+      "title": "Challenge Seconds",
+      "type": "integer"
+    },
+    "confirmations": {
+      "maximum": 64,
+      "minimum": 1,
+      "title": "Confirmations",
+      "type": "integer"
+    },
+    "code_hashes": {
+      "$ref": "#/$defs/NativeCodeHashes"
+    }
+  },
+  "required": [
+    "version",
+    "profile",
+    "chain_id",
+    "cosmos_chain_id",
+    "network_name",
+    "network_domain",
+    "genesis_hash",
+    "genesis_hash_kind",
+    "evm_anchor",
+    "rpc_url",
+    "cosmos_rpc_url",
+    "asset_kind",
+    "symbol",
+    "base_denom",
+    "decimals",
+    "total_supply",
+    "reward_vault_address",
+    "public_fund_address",
+    "factory_address",
+    "contribution_precompile_address",
+    "genesis",
+    "challenge_seconds",
+    "confirmations",
+    "code_hashes"
+  ],
+  "title": "NetworkManifest",
+  "type": "object"
+}

@@ -62,6 +62,10 @@ def test_daily_upload_budget_enforced(tmp_path):
 
 def test_worker_acquires_and_releases_rlock_on_own_thread(tmp_path, monkeypatch):
     import httpx
+    from test_deployment import example
+
+    # Legacy mode is available only with its explicitly versioned manifest.
+    (tmp_path / 'deployment.json').write_text(json.dumps(example()))
 
     lock = threading.RLock()
     service = NetworkService(tmp_path, lock)

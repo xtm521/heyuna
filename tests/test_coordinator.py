@@ -22,7 +22,7 @@ def auth(name):
 @pytest.fixture
 def coordinator(tmp_path):
     now = [1000.0]
-    app = create_coordinator_app(database_url='sqlite:///' + str(tmp_path / 'db.sqlite3'),
+    app = create_coordinator_app(legacy_alpha=True, database_url='sqlite:///' + str(tmp_path / 'db.sqlite3'),
                                   principals=identities(), clock=lambda: now[0])
     with TestClient(app) as client:
         yield client, now
@@ -111,19 +111,19 @@ def test_validator_independence_configuration(tmp_path):
     ids = identities()
     ids[-1]['operator_id'] = ids[-2]['operator_id']
     with pytest.raises(ValueError, match='three separately'):
-        create_coordinator_app(database_url='sqlite:///' + str(tmp_path / 'x.db'), principals=ids)
+        create_coordinator_app(legacy_alpha=True, database_url='sqlite:///' + str(tmp_path / 'x.db'), principals=ids)
     ids = identities()
     ids[1]['operator_id'] = ids[-1]['operator_id']
     with pytest.raises(ValueError, match='independent'):
-        create_coordinator_app(database_url='sqlite:///' + str(tmp_path / 'x.db'), principals=ids)
+        create_coordinator_app(legacy_alpha=True, database_url='sqlite:///' + str(tmp_path / 'x.db'), principals=ids)
 
 
 def test_two_coordinator_instances_do_not_lease_same_task(tmp_path):
     from concurrent.futures import ThreadPoolExecutor
 
     url = 'sqlite:///' + str(tmp_path / 'shared.db')
-    first = TestClient(create_coordinator_app(database_url=url, principals=identities()))
-    second = TestClient(create_coordinator_app(database_url=url, principals=identities()))
+    first = TestClient(create_coordinator_app(legacy_alpha=True, database_url=url, principals=identities()))
+    second = TestClient(create_coordinator_app(legacy_alpha=True, database_url=url, principals=identities()))
     queue(first)
     with ThreadPoolExecutor(max_workers=2) as pool:
         futures = [pool.submit(client.post, '/v1/tasks/lease', headers=auth(owner), json={'backend': 'mlx'})

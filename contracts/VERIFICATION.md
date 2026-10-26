@@ -1,3 +1,13 @@
+# Native research contracts v2 verification
+
+NativeRewardVault,NativePublicFund andResearchCreate2Factory compile with pinnedsolc0.8.38/Cancun. Current suite:33executed EVMtests,including11native and22historical Alpha. Native tests cover domain/proof binding,finality,weekly/global category caps,duplicate claims,reentry,failed-transfer rollback,3/5fund signatures,7daydelay,reservation/replay,and unsolicited donation deployment resilience. Two6-obligation Z3models cover14m-native/18m-legacy integer schedules and payment bounds,not bytecode refinement. Source-policy checks are not Slither or an external audit.
+
+Actual Cosmos-EVM CREATE2,readonly oracle and two-category native transfers are recorded in[researchnet evidence](../docs/evidence/researchnet/)and[SDK contribution evidence](../docs/evidence/native-contribution.json). Fresh3 actual native supply/account-sum reconciliation and historical replay are separate from this in-memory suite. No mainnet deployment/audit claim.
+
+---
+
+## Historical Alpha record
+
 # Local contract evidence — 2026-10-25
 
 Environment: macOS arm64, Node.js 24.19.0, pnpm 11.25.0. Dependencies are pinned by `pnpm-lock.yaml`; install lifecycle scripts are disabled. This evidence applies to the checked-in testnet sources, not a mainnet deployment.

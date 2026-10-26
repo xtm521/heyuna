@@ -13,6 +13,7 @@ import os
 import threading
 import time
 import uuid
+from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Request, Response
@@ -20,8 +21,24 @@ from pydantic import Field, ValidationError
 from sqlalchemy import JSON, Column, MetaData, String, Table, create_engine, select
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.responses import JSONResponse
+from starlette.routing import compile_path
 
+from .deployment import NetworkManifest
 from .federation import aggregate, digest, validate_artifacts
+from .native_protocol import (
+    NATIVE_REWARD_POOL,
+    NATIVE_TRAINING_POOL,
+    NATIVE_VERIFICATION_POOL,
+    ContributionReceiptV2,
+    NetworkBinding,
+    RecomputationEvidence,
+    RewardEpochV2,
+    TaskBundleV2,
+    TrainingTaskV2,
+    attestation_bindings,
+    native_weekly_budget,
+    parse_task,
+)
 from .protocol import (
     REWARD_POOL,
     Address,
@@ -33,7 +50,6 @@ from .protocol import (
     RewardAllocation,
     RewardEpoch,
     TaskBundle,
-    TrainingTask,
     canonical_hash,
     weekly_budget,
 )
@@ -64,6 +80,7 @@ class Submission(Message):
     task_hash: HexDigest
     adapter_hash: HexDigest
     adapter_b: str = Field(max_length=6_000_000)
+    verification_evidence: RecomputationEvidence | None = Field(default=None, exclude_if=lambda value: value is None)
 
 
 class Validation(Message):
@@ -144,7 +161,18 @@ class Store:
 
 
 def create_coordinator_app(*, database_url: str | None = None, principals: list[dict] | None = None,
-                           clock=time.time) -> FastAPI:
+                           clock=time.time, network_manifest: dict | None = None, legacy_alpha: bool = False) -> FastAPI:
+    manifest = NetworkManifest.model_validate(network_manifest) if network_manifest is not None else None
+    if manifest is None and os.environ.get("HEYUNA_NETWORK_MANIFEST"):
+        from .deployment import load_manifest
+        configured = load_manifest(Path(os.environ["HEYUNA_NETWORK_MANIFEST"]))
+        if not isinstance(configured, NetworkManifest):
+            raise ValueError("coordinator environment requires a native version-two manifest")
+        manifest = configured
+    if manifest is None and not legacy_alpha:
+        raise RuntimeError("Native coordinator requires HEYUNA_NETWORK_MANIFEST or an explicit version-two manifest; legacy Alpha must be selected explicitly")
+    binding = NetworkBinding(chain_id=manifest.chain_id, genesis_hash=manifest.genesis_hash,
+        reward_vault_address=manifest.reward_vault_address, network_domain=manifest.network_domain) if manifest else None
     url = database_url or os.environ.get("HEYUNA_DATABASE_URL", "sqlite:///heyuna-coordinator.sqlite3")
     raw = principals if principals is not None else json.loads(os.environ.get("HEYUNA_COORDINATOR_IDENTITIES", "[]"))
     try:
@@ -168,7 +196,9 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
     # One database row serializes critical transactions across workers and replicas.
     with store.lock, store.transaction() as conn:
         if store.get(conn, "global") is None:
-            store.put(conn, "global", {"allocated": "0"})
+            store.put(conn, "global", {"allocated": "0", "network": binding.model_dump() if binding else None})
+        elif store.get(conn, "global").get("network") != (binding.model_dump() if binding else None):
+            raise ValueError("coordinator database belongs to another network/protocol; migrate explicitly")
     app = FastAPI(title="Heyuna invited coordinator", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.store = store
     app.add_middleware(BodyLimit)
@@ -209,12 +239,17 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
     def status(request: Request):
         p = request.state.principal
         return {"state": "authenticated", "participant_id": p.participant_id, "role": p.role,
-                "chain_id": 11155111, "validator_threshold": 2, "validator_count": 3,
+                "chain_id": manifest.chain_id if manifest else 11155111, "validator_threshold": 2, "validator_count": 3,
+                "protocol_version": 2 if manifest else 1, "network": binding.model_dump() if binding else None,
                 "settlement": "unsigned_drafts_only"}
 
     @app.post("/v1/tasks", status_code=201)
-    def create_task(bundle: TaskBundle, request: Request):
+    def create_task(bundle: TaskBundle | TaskBundleV2, request: Request):
         role(request, {"admin"})
+        if bool(manifest) != isinstance(bundle.task, TrainingTaskV2):
+            raise HTTPException(422, "legacy and native tasks cannot cross protocol boundaries")
+        if manifest and not bundle.task.network.matches(manifest):
+            raise HTTPException(422, "task belongs to another network")
         try:
             validate_dataset(bundle.task, bundle.texts)
             if bundle.task.model_revision != MODEL_REVISION:
@@ -226,6 +261,22 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             locked(conn)
             if store.get(conn, "task:" + bundle.task.task_id):
                 raise HTTPException(409, "task ID already exists")
+            if manifest and bundle.task.category == 1:
+                target = store.get(conn, "receipt:" + bundle.task.verification.receipt_id)
+                if not target or target["receipt"].get("category") != 0 or target["receipt"]["state"] not in {"verified", "pending_settlement"}:
+                    raise HTTPException(409, "recomputation target must be an accepted training receipt")
+                if target["receipt"]["adapter_hash"] != bundle.task.verification.adapter_hash:
+                    raise HTTPException(422, "target artifact binding differs")
+                if target["receipt"]["wallet"].lower() == bundle.task.recipient.lower():
+                    raise HTTPException(422, "recomputation recipient cannot be the original trainer")
+                original = parse_task(store.get(conn, "task:" + target["receipt"]["task_id"])["bundle"]["task"])
+                fields = ["model_id", "model_revision", "tokenizer_revision", "data_hash", "shared_a_hash", "base_b_hash", "config", "round_id"]
+                if any(getattr(original, field) != getattr(bundle.task, field) for field in fields):
+                    raise HTTPException(422, "recomputation must bind the original complete training context")
+                for data in store.all(conn, "task:"):
+                    candidate = data["bundle"]["task"]
+                    if candidate.get("category") == 1 and candidate["verification"]["adapter_hash"] == bundle.task.verification.adapter_hash and candidate["recipient"].lower() == bundle.task.recipient.lower():
+                        raise HTTPException(409, "one recomputation work item per original artifact and recipient")
             data = {"bundle": bundle.model_dump(), "lease": None, "receipt_id": None}
             store.put(conn, "task:" + bundle.task.task_id, data)
         return {"task_id": bundle.task.task_id, "state": "queued", "task_hash": bundle.task.fingerprint}
@@ -239,10 +290,14 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             # Do not allow one device to hoard multiple live leases.
             for data in tasks:
                 current = data["lease"]
+                if manifest and data["bundle"]["task"]["recipient"].lower() != p.wallet.lower():
+                    continue
                 if current and current["participant_id"] == p.participant_id and current["expires_at"] > clock() and not data["receipt_id"]:
                     return {**data["bundle"], "lease": current}
             for data in tasks:
                 current = data["lease"]
+                if manifest and data["bundle"]["task"]["recipient"].lower() != p.wallet.lower():
+                    continue
                 if data["receipt_id"] or (current and current["expires_at"] > clock()):
                     continue
                 current = {"lease_id": uuid.uuid4().hex, "participant_id": p.participant_id,
@@ -278,9 +333,24 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             data = store.get(conn, "task:" + task_id)
             if not data:
                 raise HTTPException(404, "unknown task")
-            task = TrainingTask.model_validate(data["bundle"]["task"])
+            task = parse_task(data["bundle"]["task"])
             if payload.task_hash != task.fingerprint:
                 raise HTTPException(422, "task fingerprint mismatch")
+            evidence_hash = None
+            if manifest and task.category == 1:
+                evidence = payload.verification_evidence
+                target = store.get(conn, "receipt:" + task.verification.receipt_id)
+                owner = by_id.get(target["receipt"]["participant_id"]) if target else None
+                if not owner or owner.operator_id == p.operator_id:
+                    raise HTTPException(403, "recomputation operator must differ from the trainer")
+                if not evidence or (evidence.task_hash, evidence.target_receipt_id, evidence.target_chain_receipt_id.lower(), evidence.artifact_hash) != (
+                    task.fingerprint, task.verification.receipt_id, task.verification.chain_receipt_id.lower(), payload.adapter_hash):
+                    raise HTTPException(422, "recomputation evidence must bind task, target and result")
+                if payload.adapter_hash != task.verification.adapter_hash:
+                    raise HTTPException(422, "recomputed artifact differs from accepted target")
+                evidence_hash = canonical_hash(evidence.model_dump())
+            elif payload.verification_evidence is not None:
+                raise HTTPException(422, "only independent recomputation has verification evidence")
             if data["receipt_id"]:
                 previous = store.get(conn, "receipt:" + data["receipt_id"])
                 receipt = previous["receipt"]
@@ -295,15 +365,18 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
                                    base_b=_decode(data["bundle"]["base_b"]))
             except ValueError as exc:
                 raise HTTPException(422, str(exc)) from exc
-            receipt = ContributionReceipt(receipt_id=uuid.uuid4().hex, task_id=task_id, round_id=task.round_id,
+            receipt_type = ContributionReceiptV2 if manifest else ContributionReceipt
+            receipt = receipt_type(receipt_id=uuid.uuid4().hex, task_id=task_id, round_id=task.round_id,
                 participant_id=p.participant_id, wallet=p.wallet, task_hash=task.fingerprint,
                 adapter_hash=payload.adapter_hash, state=ContributionState.PENDING_VERIFICATION,
-                work_units=task.work_units)
+                work_units=task.work_units, **(attestation_bindings(task) if manifest else {}),
+                **({"verification_evidence_hash": evidence_hash} if evidence_hash else {}))
             data["receipt_id"] = receipt.receipt_id
             store.put(conn, "task:" + task_id, data)
             store.put(conn, "receipt:" + receipt.receipt_id,
                       {"receipt": receipt.model_dump(mode="json"), "adapter_b": payload.adapter_b,
-                       "validations": {}, "epoch": None})
+                       "validations": {}, "epoch": None,
+                       **({"verification_evidence": payload.verification_evidence.model_dump()} if evidence_hash else {})})
             return receipt
 
     @app.get("/v1/receipts")
@@ -321,7 +394,8 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             if not data:
                 raise HTTPException(404, "unknown receipt")
             task = store.get(conn, "task:" + data["receipt"]["task_id"])
-            return {"receipt": data["receipt"], "bundle": task["bundle"], "adapter_b": data["adapter_b"]}
+            return {"receipt": data["receipt"], "bundle": task["bundle"], "adapter_b": data["adapter_b"],
+                    **({"verification_evidence": data["verification_evidence"]} if "verification_evidence" in data else {})}
 
     @app.post("/v1/receipts/{receipt_id}/validate")
     def validate(receipt_id: str, verdict: Validation, request: Request):
@@ -361,12 +435,13 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
         with store.lock, store.transaction() as conn:
             locked(conn)
             entries = [d for d in store.all(conn, "receipt:") if d["receipt"]["round_id"] == round_id
-                       and d["receipt"]["state"] in {"verified", "pending_settlement"}]
+                       and d["receipt"]["state"] in {"verified", "pending_settlement"}
+                       and (not manifest or d["receipt"]["category"] == 0)]
             if not entries:
                 raise HTTPException(409, "no independently verified contributions")
             tasks = [store.get(conn, "task:" + d["receipt"]["task_id"])["bundle"] for d in entries]
-            task = TrainingTask.model_validate(tasks[0]["task"])
-            updates = [(TrainingTask.model_validate(t["task"]), _decode(d["adapter_b"]), d["receipt"]["work_units"])
+            task = parse_task(tasks[0]["task"])
+            updates = [(parse_task(t["task"]), _decode(d["adapter_b"]), d["receipt"]["work_units"])
                        for t, d in zip(tasks, entries, strict=True)]
             try:
                 blob = aggregate(task, _decode(tasks[0]["shared_a"]), _decode(tasks[0]["base_b"]), updates)
@@ -387,32 +462,76 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
             entries = [store.get(conn, "receipt:" + rid) for rid in payload.receipt_ids]
             if any(d is None or d["receipt"]["state"] != "verified" or d["epoch"] is not None for d in entries):
                 raise HTTPException(409, "only unused, independently verified receipts can enter a draft")
-            remaining = REWARD_POOL - int(global_state["allocated"])
-            budget = min(weekly_budget(payload.epoch), remaining)
+            if manifest:
+                # Unaccepted candidates never reserve a global artifact hash:
+                # doing that at submission allows mempool hash-front-running.
+                consumed = {d["receipt"]["adapter_hash"] for d in store.all(conn, "receipt:")
+                            if d["epoch"] is not None and d["receipt"].get("category") == 0}
+                seen = set()
+                consumed_verification = {(d["receipt"]["adapter_hash"], by_id[d["receipt"]["participant_id"]].operator_id)
+                    for d in store.all(conn, "receipt:") if d["epoch"] is not None and d["receipt"].get("category") == 1}
+                verification_seen = set()
+                for data in entries:
+                    receipt = data["receipt"]
+                    if receipt["category"] == 0:
+                        key = receipt["adapter_hash"]
+                        if key in consumed or key in seen:
+                            raise HTTPException(409, "training result was already reserved for reward")
+                        seen.add(key)
+                    else:
+                        key = (receipt["adapter_hash"], by_id[receipt["participant_id"]].operator_id)
+                        if key in consumed_verification or key in verification_seen:
+                            raise HTTPException(409, "original artifact was already recomputed by this operator")
+                        verification_seen.add(key)
+            if manifest and (clock() < manifest.genesis or payload.epoch != int((clock() - manifest.genesis) // 604800)):
+                raise HTTPException(409, "native drafts require the currently starting week; no backfill")
+            remaining = (NATIVE_REWARD_POOL if manifest else REWARD_POOL) - int(global_state["allocated"])
+            budget = min((native_weekly_budget if manifest else weekly_budget)(payload.epoch), remaining)
             if budget <= 0:
                 raise HTTPException(409, "contribution allocation ceiling reached")
             train_budget = budget * 9 // 10
             validation_budget = budget - train_budget
+            if manifest:
+                train_budget = min(train_budget, NATIVE_TRAINING_POOL - int(global_state.get("training_allocated", "0")))
+                validation_budget = min(validation_budget, NATIVE_VERIFICATION_POOL - int(global_state.get("validation_allocated", "0")))
             total_units = sum(d["receipt"]["work_units"] for d in entries)
             weighted_validators = [(v, d) for d in entries for v in sorted(d["validations"])
                                    if d["validations"][v]["accepted"]]
             validator_units = sum(d["receipt"]["work_units"] for _, d in weighted_validators)
             allocations = []
-            for d in entries:
+            for d in entries if not manifest else []:
                 r = d["receipt"]
                 allocations.append(RewardAllocation(recipient=r["wallet"],
                     amount=str(train_budget * r["work_units"] // total_units), category="training",
                     receipt_ids=[r["receipt_id"]]))
-            for validator, d in weighted_validators:
+            for validator, d in weighted_validators if not manifest else []:
                 allocations.append(RewardAllocation(recipient=by_id[validator].wallet,
                     amount=str(validation_budget * d["receipt"]["work_units"] // validator_units), category="validation",
                     receipt_ids=[d["receipt"]["receipt_id"]]))
+            if manifest:
+                # A report signature alone earns nothing. Category one needs its
+                # own accepted recomputation task and receipt, exactly as on chain.
+                for category, limit in [(0, train_budget), (1, validation_budget)]:
+                    group = [d for d in entries if d["receipt"]["category"] == category]
+                    units = sum(d["receipt"]["work_units"] for d in group)
+                    for d in group:
+                        r = d["receipt"]
+                        amount = limit * r["work_units"] // units
+                        if amount:
+                            allocations.append(RewardAllocation(recipient=r["wallet"], amount=str(amount),
+                                category="training" if category == 0 else "validation", receipt_ids=[r["receipt_id"]]))
             allocated = sum(int(a.amount) for a in allocations)
-            result = RewardEpoch(epoch=payload.epoch, budget_wei=str(budget), allocated_wei=str(allocated),
-                                  allocations=allocations)
+            if manifest and allocated <= 0:
+                raise HTTPException(409, "no remaining budget for these work categories")
+            result = (RewardEpochV2 if manifest else RewardEpoch)(epoch=payload.epoch, budget_wei=str(budget), allocated_wei=str(allocated),
+                                  allocations=allocations, **({"network": binding} if manifest else {}))
             result.manifest_hash = canonical_hash(result.model_dump(exclude={"manifest_hash"}))
             store.put(conn, f"epoch:{payload.epoch}", result.model_dump())
             global_state["allocated"] = str(int(global_state["allocated"]) + allocated)
+            if manifest:
+                for category in ["training", "validation"]:
+                    key = category + "_allocated"
+                    global_state[key] = str(int(global_state.get(key, "0")) + sum(int(a.amount) for a in allocations if a.category == category))
             store.put(conn, "global", global_state)
             for d in entries:
                 d["epoch"] = payload.epoch
@@ -429,4 +548,16 @@ def create_coordinator_app(*, database_url: str | None = None, principals: list[
                 raise HTTPException(404, "unknown reward epoch")
             return result
 
+    if manifest:
+        for route in app.routes:
+            if getattr(route, "path", "").startswith("/v1/"):
+                route.path = route.path.replace("/v1/", "/v2/", 1)
+                route.path_regex, route.path_format, route.param_convertors = compile_path(route.path)
     return app
+
+
+def create_legacy_coordinator_app() -> FastAPI:
+    """Explicit historical Alpha entrypoint; never interpreted as native rights."""
+    if os.environ.get("HEYUNA_NETWORK_MANIFEST"):
+        raise RuntimeError("Legacy Alpha cannot also configure a native manifest")
+    return create_coordinator_app(legacy_alpha=True)

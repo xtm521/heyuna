@@ -1,0 +1,22 @@
+{
+  "kind": "reproduced-pre-fix-supply-accounting-regression",
+  "genesis_hash": "0xa43f9b973e25d6bab39ae1294dfbf578014f591fa22cc9a561a7f585f4acf4a9",
+  "transaction_hash": "0x4f0c7e5ba0fb6dc4bc09503572f8f94671b44857383d5e1e876c3e41e750afde",
+  "observations": [
+    {
+      "height": 64,
+      "bank_supply_counter": "20000000000000000000000000",
+      "complete_account_balance_sum": "20000000000000000000000000",
+      "account_count": 9
+    },
+    {
+      "height": 65,
+      "bank_supply_counter": "20000000000000000000000000",
+      "complete_account_balance_sum": "19999999999999999999999999",
+      "account_count": 9
+    }
+  ],
+  "root_cause": "Cosmos EVM v0.7.3 BankWrapper.SetBalance calls SDK v0.54.3 UncheckedSetBalance, which does not update Supply",
+  "corrective_boundary": "application EVM bank adapter synchronizes Supply with each actual balance delta atomically; native SDK methods remain unchanged",
+  "unmodified_history_retained_in_run2": true
+}

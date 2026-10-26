@@ -1,42 +1,47 @@
-# Alpha verification and remaining gates
+# Sovereign researchnet verification —2026-10-26
 
-Observed on 2026-10-25, Apple M5 Pro / 64 GB / macOS 27.0.1. This is an implementation and evidence register, not a production-security certificate.
+This records actual local implementation evidence, not a production-security certificate. Machine:Apple M5 Pro/64GB/macOS27.0.1. Final chain run is **fresh3**, after resolving the execution-burn accounting defect. Run1/run2 evidence is explicitly historical; no result from them substitutes final-source acceptance.
 
-## Implemented and exercised locally
+## Exercised implementation
 
-| Area | Evidence | Exact scope |
+| Area | Evidence | Exact result and limit |
 |---|---|---|
-| Desktop | React/TypeScript tests and build, Rust bridge tests/build, five real API-backed views | Browser UI and local macOS app; Windows runtime is unverified |
-| Coding assistant | [Real model trace](evidence/agent-smoke.json), [review screenshot](evidence/agent-review.png) | Pinned Qwen model fixed a disposable Python addition bug, container tests exited 0, original stayed unchanged until UI apply, UI revert restored it |
-| Execution isolation | [Container observations](evidence/sandbox.json) | UID 65532, read-only root, network blocked; no host execution fallback; not a sandbox escape audit |
-| Training | [Real training and replay](evidence/training-smoke.json) | One optimizer step on one Mac, identical repeated adapter hash, no independent operators |
-| Federation | Coordinator/worker protocol tests | Invitations, leases, expiry, duplicate submission, validation quorum, invalid tensors, aggregation and draft accounting; local SQLite fixtures |
-| Rewards | [Contract evidence](../contracts/VERIFICATION.md) | Compiled bytecode executed in a local EVM; 22 tests and 6 arithmetic proof obligations; no chain transaction |
-| Wallet portal | [Portal evidence](../apps/wallet/VERIFICATION.md) | 13 provider-fixture tests, production browser preview, disabled honest undeployed state; no real account/signature |
-| Packaging | `scripts/build_sidecar.py` and `scripts/build_desktop.py` | Embedded Python/MLX runtime, file hashes, ad-hoc macOS signature and real process startup; no Developer ID or notarization |
-| Supply chain | Lockfiles, package audits, secret scan, CI definitions | Known-advisory checks are time-bound and do not replace audits; CI results must be checked on GitHub |
+| Independent chain |[node records](../services/chain/evidence/) | Own heyunad, two separate4-validator loopback profiles, real genesis/CREATE2/contracts;one operator |
+| Native supply |[EVM probe](evidence/researchnet/accelerated-evm-evidence.json),[ledger](../services/chain/evidence/) | Genesis20m×10^18;1base-unit execution burn;complete account sum=SDKSupply=lastCommitted=19999999999999999999999999;bank/EVM equal at fixed height |
+| Contribution |[SDK transactions](evidence/native-contribution.json) | Real pinned Qwen MLX training, separate local worker recomputation,evidence binding,2/3reports,challenge/freeze/quorum restore and final root;7real negative transactions rejected |
+| Native claims |[two-category claims](evidence/researchnet/accelerated-claim-evidence.json) | Training1tHEYUNA at225,independent recomputation0.1at226;exact recipient/vault balance deltas,event and duplicate rejection;3schallenge only |
+| Consensus faults |[fault/replay records](../services/chain/evidence/) | One of4offline progresses,two stall,recovery agrees;not arbitrary Byzantine proof |
+| Fee split |[priority/SDK fee records](../services/chain/evidence/) | Charged50000×3aheyuna priority paid actual proposer on success/revert;SDK fees flow collector→distribution→owner withdrawal;dynamic nonzero base fee not activated |
+| Historical replay |[replay evidence](../services/chain/evidence/) | Two same-source builds;accelerated270committed blocks include burn,contributions,claims,priority;Bcrashes afterFinalize135/beforeCommit and recovers from134;not cross-version migration/signature verification |
+| Training research |[report](contribution-research.md),[JSON](evidence/contribution-research.json) |1normal/6designed correlated attacks;sampling leaks2/6and is0.164%slower including reference/evaluation cost;no promotion,full recomputation retained |
+| Desktop/UI |[QA](../apps/desktop/evidence/verification.json),[design](design.md) | Original carbon/silver/teal,actual30fpsidle3D/lifecycle disposal,local fonts,resize,200%,narrow/light/dark;browser/native evidence separated |
+| Wallet |[QA](../apps/desktop/evidence/verification.json) | Actual RPC through public-address EIP1193 test adapter;genesis/anchor/runtime/proofs/fees/receipts/claimed bits;not user extension signature |
+| macOS package |[bundle](evidence/desktop-research-bundle-2026-10-26.json),[scope](native.md) | Rebuilt3244runtime files,current source hashes,ad-hoc signature,isolated copy pinnedTLS200/401;no same-identity native-window launch,not notarized |
+| Crypto migration |[offline result](evidence/researchnet/crypto-migration.json) | Real ML-DSA-44 in4role contexts,100samples each,tamper/replay and hybrid state model;no chain integration |
+| Economics |[scenarios](../services/chain/security-economics.md) |432hypothetical fee/cost/duration scenarios,not price forecasts/security guarantees |
 
-The training smoke used about 7.55 GiB of MLX-reported device allocation. Heldout loss changed from 3.4847963 to 3.4898088, **worsening about 0.144%**. This stays within the configured 1% rejection tolerance, but demonstrates **no quality improvement**. The sample is project-authored fixture text, not a benchmark or paid contribution.
+Final node binarySHA256:`342b1c2a92359fc81cb8501d955e280fe617629b2d2e60c64fd390f90832a587`. Build evidence includes source-file fingerprints. The wallet cannot remotely prove a node binary digest solely fromRPC; trusted manifests/build records remain separate evidence.
 
-## Local acceptance details
+Fresh3 accelerated genesis:`0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774`. Normal72hresearch genesis:`0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a`. IDs and loopback addresses are experimental,not a public deployed network.
 
-Latest standard checks: Python 78 passed (real Docker tests are explicit opt-in), desktop 11 passed, wallet 13 passed, Rust 5 passed, local EVM 22 passed, symbolic arithmetic 6 obligations passed. TypeScript checks, frontend builds, Python lint and lock consistency passed. Real Docker lifecycle checks and their final image identity are separately recorded in [sandbox lifecycle evidence](evidence/sandbox-lifecycle.json).
+## Checks
 
-Known non-failing tool warnings: upstream OpenZeppelin uses `error` as an identifier reserved by a future Solidity release; Monaco makes the local desktop JS bundle exceed Vite's default size advisory; Starlette warns that its httpx-backed test client is deprecated. These warnings are not audit findings or proof of zero defects.
+Python96passed/7explicit opt-in skips;desktop21;wallet24;Solidity33including11native tests;12symbolic arithmetic obligations across native and historical pools. FullGo package tests and local node/ledger scripts passed. TypeScript/production builds,Python lint,dependency audits and public-source secret scans are recorded at release. Remote CI must be read from the actual PR/workflow runs; a local result or workflow file is not a remote execution claim. Symbolic proofs cover integer arithmetic only,not bytecode refinement or all chain safety.
 
-The UI was inspected at 1440×960 and 390×844, in light/dark appearances and with 200% text sizing. Project-dialog Escape returns focus to its opener. Network and model readiness come from the local service. No token price, wallet balance, training progress or successful reward is fabricated. The final local macOS package was separately launched and its native workspace/wallet inspected over the pinned TLS bridge; see [native evidence and limits](native.md) and [bundle hashes](evidence/desktop-bundle.json). Native OS screen-reader traversal, native folder-dialog interaction and Windows visuals have separate open gates. The committed review screenshots show the browser preview.
+Non-failing warnings:upstreamOpenZeppelin uses future-reserved`error`identifier,Monaco bundle-size advisory,Starlette test-client deprecation. These are not security-clearance evidence. Two exact public file SHA256s containing api/tokens filenames are narrowly allowlisted inGitleaks;no credential/path-wide exclusion was added.
 
-Coding tasks and their review snapshots currently live in backend memory; the browser also loses its selected task on reload. Complete review/apply/revert within the same session. Do not treat this alpha as durable project history or a replacement for Git. Edits outside the app are conflict-checked before applying or reverting.
+## Failures found and corrected
 
-The container has CPU/RAM/PID limits and an internal deadline. Workspace byte/file and log caps are sampled by the parent process, **not kernel disk quotas**; transient overshoot is possible. The reviewed image and local Docker installation remain part of the trusted computing base. Same-user host compromise, hostile kernel/driver and container escape resistance are not proven by these checks.
+Internal peer review and actual chain probes found:legitimate recomputation's identicalBwas incorrectly deduplicated;unverifiedrawhash could reserve work by frontrunning;target-receipt aliases could pay the same worker twice;one verifier could lock a voting epoch;extra1wei could brick a future fund constructor;EVMSELFDESTRUCT removed account value without updating SDKSupply. Corrections have targeted regressions,real two-category settlement,and final full-account conservation/replay. The failedrun2diagnostic is preserved in chain evidence; no silent patch was applied to its database. It was archived and a new explicit genesis created. Internal peer review is not an independent institutional audit.
 
-## Not completed
+## Open gates
 
-- Same-round physical Mac + Windows NVIDIA training and cross-backend numerical acceptance. CUDA implementation and cache release have no physical NVIDIA evidence here.
-- Statistically meaningful coding-model quality gains, poisoning/collusion campaigns and independent validator operation.
-- Production PostgreSQL deployment, public ingress/backups/budget enforcement and object-store replication. Small adapters currently use bounded database JSON storage.
-- Live Sepolia contracts, source verification, public reward manifests, 72-hour challenge operation, real external-wallet claims and canonical receipt reconciliation.
-- Mainnet issuance, independent security audits, implementation-level formal verification, independent 3/5 signers/key recovery, funded bounty and operating-region review.
-- Signed/notarized public installers and reproducible native-binary/provenance verification. The CI attestation workflow covers source archives only.
+- Seven nodes with≥4independent operators,each<1/3power,and genuinely independent training verifiers.
+- Physical Mac+Windows NVIDIA same-round numerical acceptance;mobile thermal/battery feasibility.
+- Meaningful coding quality/backdoor/poisoning studies with adequate independent samples;privacy beyond excluding projects/chats.
+- Normal72h elapsed challenge operation,public RPC/fee market,DoS/ingress/storage/egress quotas,PostgreSQL backup/incident budget.
+- Actual dual-version migration,light client,key recovery and real PQ migration at accounts/consensus/P2P/update boundaries. Burned export-genesis restart is not supported;database recovery/original-genesis replay are the tested paths.
+- Two independent security audits/remediation review,unresolved-high/critical clearance,bounty,economic attacks and sustained public operation.
+- Native full-model/OSscreen-reader/picker verification,Windows device/runtime/installer,DeveloperID/notarization and reproducible signed binary distribution.
 
-Mainnet stays closed until the [roadmap](roadmap.md) and [threat-model](threat-model.md) gates are met. Open-source publication is a separate deliverable from token issuance.
+No mainnet issue,value promise,world-leading security or50-year leadership conclusion follows. Source publication,CI,local chain,actual external-wallet signature,independent operation and mainnet remain separate claims.

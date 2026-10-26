@@ -1,24 +1,58 @@
-# 合芽 Heyuna
+# 合芽 Heyuna 自主公链研究网
 
-**让个人设备参与共同微调，让每份有效贡献可追溯。**
+**独立 EVM 链，研究可信训练贡献验证。**
 
-Heyuna is an open-source, invited-testnet alpha: a local coding workspace, opt-in FFA-LoRA workers, a contribution coordinator and fixed-supply reward contracts. It is not a launched currency or a production security claim.
+Heyuna builds its own `heyunad` node, genesis, native currency and invited validator network on a pinned Cosmos EVM / Cosmos SDK / CometBFT stack. Training and quality evaluation remain off chain. This is a **loopback research implementation**, not mainnet or a claim of security leadership.
 
-![Heyuna workspace](docs/evidence/workspace.png)
+- `chain/`: node, native supply/security rules, `x/contribution`, readonly EVM precompile.
+- `contracts/`: native Merkle reward vault, 3/5 delayed public fund, deterministic CREATE2 bootstrap. Historical ERC-20 Alpha is explicitly separate.
+- `backend/heyuna`: isolated coding assistant, opt-in fixed-template MLX/CUDA workers, versioned coordinator/protocols.
+- `apps/desktop`, `apps/wallet`: original carbon/silver/teal UI, local fonts, focused motion and external-wallet signing.
+- `research/`, `scripts/`, `docs/`: fault, contribution, economic and migration experiments, evidence and limitations.
 
-## What is here
+Read [verification](docs/verification.md), [whitepaper](docs/whitepaper.md), [threat model](docs/threat-model.md), [EVM compatibility](docs/evm-compatibility.md). [Historical Alpha docs](docs/legacy-alpha/) retain the replaced Sepolia route. Old receipts never become native claim rights.
 
-- `apps/desktop`: Tauri 2 + Rust + React/TypeScript + Monaco, five original views, local-only API bridge.
-- `backend/heyuna`: local model runtime, constrained coding agent, project-copy/review/revert flow, training and contribution protocols.
-- `contracts`: immutable ERC-20 supply, capped reward vault, delayed public fund, ABI and executable EVM tests.
-- `services`: coordinator deployment and sandbox image.
-- `docs`: architecture, training protocol, security boundaries, reward rules, evidence and release gates.
+![Original Heyuna desktop preview](apps/desktop/evidence/workspace-live-3d.png)
 
-**Current evidence, exact limitations and outstanding gates: [verification](docs/verification.md).** UI screenshots are real local previews. Automated fixtures and local EVM results do not prove independent participants, Windows GPU operation, model quality gains or Sepolia transactions.
+## Native currency
 
-## Development
+| Allocation | Genesis units |
+|---|---:|
+| Training and independent recomputation | 14,000,000 |
+| Consensus security | 4,000,000 |
+| Public fund | 2,000,000 |
+| Fixed team allocation | 0 |
 
-Requirements: Python 3.12, Node 22+, pnpm 11.25.0, Rust stable, platform Tauri prerequisites. For MLX use an Apple Silicon Mac; CUDA workers require a supported NVIDIA device. Model downloads need approximately 8 GB plus cache/training space. Never download weights from an unverified mirror.
+Genesis supply is **20,000,000 × 10¹⁸**. No periodic mint module exists. Committed supply cannot exceed its previous committed value, including after explicit protocol burns. SDK bank and EVM share balances. Research `tHEYUNA` has no promised value or mainnet conversion. See [economic rules](docs/rewards.md).
+
+## Reproduce a local chain
+
+Requirements: Python3.12, Node22+, pnpm11.25.0, official dependency downloads and platform build tools. The chain helper downloads **Go1.25.9** and verifies its official SHA256. Keys/databases stay in ignored `.state/`. RPCs and test keyrings must remain local.
+
+```sh
+sh scripts/chain_build.sh
+python3 scripts/chain_localnet.py keys --profile research
+pnpm -C contracts install --frozen-lockfile --ignore-scripts
+node contracts/scripts/research-genesis.mjs .state/chain-research/public-accounts.json .state/chain-research/genesis-contracts-input.json "$(date +%s)"
+python3 scripts/chain_localnet.py init --profile research --contracts .state/chain-research/genesis-contracts-input.json
+python3 scripts/chain_localnet.py start --profile research
+node contracts/scripts/research-deploy.mjs .state/chain-research
+python3 scripts/chain_localnet.py audit --profile research
+```
+
+Normal profile: Cosmos `heyuna_297011-1`, EVM297011, EVM RPC9545, Comet27657, **72h challenge**, weekly subsidies. Explicit `accelerated` profile: separate chain297012, EVM RPC10545, Comet28657, **3s challenge and 3s security-subsidy epochs**. Contribution budgets stay weekly. Accelerated results do not prove72hours elapsed. Experimental chain IDs are not globally registered.
+
+Genesis prefunds future immutable contract addresses. A genesis CREATE2 factory deploys reviewed init code there. The public-fund constructor transfers100,000 from its2m budget to a research faucet; remaining1.9m requires3/5 plus7days. Zero-fee bootstrap resolves the initial deployment-gas cycle. Public fee economics remain a separate gate.
+
+```sh
+python3 scripts/chain_localnet.py faults --profile accelerated
+sh scripts/chain_go.sh test ./app ./x/contribution ./precompiles/contribution
+python3 scripts/chain_localnet.py stop --profile research
+```
+
+Scripts refuse to overwrite initialized networks or stop unrelated processes. Stop nodes before replacing binaries. See [operations](docs/researchnet-operations.md).
+
+## Desktop development
 
 ```sh
 python3 -m venv .venv
@@ -29,25 +63,11 @@ pnpm install --frozen-lockfile
 pnpm desktop dev
 ```
 
-Use `--extra cuda` instead of `--extra mac` on a supported Windows NVIDIA device. Tauri development locates the repository virtual environment and starts its own loopback service with an ephemeral token. A local macOS application bundle with embedded Python/MLX is implemented and has been launched; Developer ID signing, notarization and Windows installer/device validation remain open. See [desktop development](apps/desktop/README.md).
+Use the separately reviewed `cuda` extra on supported Windows NVIDIA hardware. Weights are a separate pinned download. Coding runs in a network-disabled, non-root container with a project copy; no sandbox means execution is refused. Changes require review/apply and support conflict-aware rollback. Contribution starts off. Projects/conversations are not training data. Model/executor/worker cannot sign wallet operations.
 
-To preview only the web interface with the local backend:
+The original UI uses local Inter, Motion14.6.0 and lazy Three.js0.186.1. Three metallic ribbons form a sprout in idle scenes. Rendering is released on compute work, lost focus/visibility and reduced-motion/effects settings. See [design](docs/design.md).
 
-```sh
-python scripts/dev.py
-```
-
-This generates a process-local token, starts localhost services, and opens no remote service. It requires installed dependencies. The localhost-only browser developer preview accepts an explicit project path; the desktop application requires the native folder picker. For pure API diagnostics use `heyuna doctor`.
-
-Coding execution requires an explicitly prepared Docker engine and the sandbox image:
-
-```sh
-docker build -t heyuna-sandbox:0.1 services/sandbox
-```
-
-The app refuses code execution without it. A project copy is mounted into a non-root, network-disabled, resource-limited container. Originals change only after review/apply; conflicting external edits stop application. Small Python and JS/TS projects are the initial supported scope.
-
-## Verification
+## Checks and limits
 
 ```sh
 python -m pytest -q
@@ -55,32 +75,13 @@ python scripts/security_scan.py
 pnpm typecheck
 pnpm test:desktop
 pnpm build
-pnpm -C contracts install --frozen-lockfile
 pnpm -C contracts check
-pnpm -C apps/wallet install --frozen-lockfile
 pnpm -C apps/wallet check
+sh scripts/chain_go.sh test ./app ./x/contribution ./precompiles/contribution
 ```
 
-Optional real model/validator execution is documented in [federation](docs/federation.md). Do not submit smoke fixtures as paid contributions. CI has no signing keys and does not deploy.
+Complete recomputation remains the default. Quorum signatures/Merkle proofs authenticate allocations, not training truth. Four local processes are one operator. Seven nodes with at least four independent operators, genuine heterogeneous GPU training, independent audits and sustained public operation remain separate gates. “Fifty years ahead” is a vision, never a measured result.
 
-## Token rules
+Online services are planned within¥1,000/month; engineering, independent devices/nodes and audits need separate resources. No paid service or mainnet has been deployed by these local scripts.
 
-| Rule | Value |
-|---|---|
-| Test network | Ethereum Sepolia, chain ID 11155111 |
-| Asset | tHEYUNA; identify by chain ID **and deployed address** |
-| Supply | 20,000,000 tokens, 18 decimals, created once |
-| Reward vault | 18,000,000; 520 initial weekly budgets; unused value remains reserved |
-| Public fund | 2,000,000; multisignature authorization + seven-day delay |
-| Founder allocation | 0 |
-| Reward acceptance | Valid work only, no guaranteed income |
-
-No mainnet address exists in this repository. Test tokens carry no promise of mainnet conversion or market value. Supply is separate from circulating/distributed balances. See [reward specification](docs/rewards.md).
-
-## Privacy, ownership and licenses
-
-Contribution is off by default. Coding projects and conversations are not uploaded as training data. Only versioned, reviewed training templates run; the coordinator cannot send executable code. Training workers never receive wallet keys. External-wallet signing, when enabled after deployment, remains a separate user action.
-
-Original code: [Apache-2.0](LICENSE). Dependencies, Qwen weights and training datasets retain their own licenses; see [license ledger](docs/licenses.md) and [NOTICE](NOTICE). The name is a working brand pending trademark clearance. UI is original; no OKX brand assets or product source have been copied.
-
-Read [SECURITY](SECURITY.md), [CONTRIBUTING](CONTRIBUTING.md), [architecture](docs/architecture.md), [threat model](docs/threat-model.md), [whitepaper](docs/whitepaper.md), and [roadmap](docs/roadmap.md) before operating a node.
+Own additions: [Apache-2.0](LICENSE). Dependencies/models/data/fonts retain their licenses: [ledger](docs/licenses.md), [NOTICE](NOTICE), [upstream](chain/upstream/SOURCE.md). Original UI/text/motion; no OKX brand assets or copied interface. Heyuna is a working name pending trademark clearance.

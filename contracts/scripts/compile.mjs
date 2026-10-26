@@ -5,10 +5,16 @@ import { fileURLToPath } from 'node:url';
 import solc from 'solc';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export function compile({ write = false } = {}) {
+export function compile({ write = false, testFixtures = false } = {}) {
   const sources = Object.fromEntries(fs.readdirSync(path.join(root, 'src')).filter((file) => file.endsWith('.sol')).map((file) => [
     `src/${file}`, { content: fs.readFileSync(path.join(root, 'src', file), 'utf8') },
   ]));
+  if (testFixtures) {
+    const fixtures = path.join(root, 'test/fixtures');
+    for (const file of fs.readdirSync(fixtures).filter(file => file.endsWith('.sol'))) {
+      sources[`test/fixtures/${file}`] = { content: fs.readFileSync(path.join(fixtures, file), 'utf8') };
+    }
+  }
   const settings = {
     optimizer: { enabled: true, runs: 200 },
     viaIR: true,
@@ -32,7 +38,7 @@ export function compile({ write = false } = {}) {
   for (const warning of output.errors ?? []) console.warn(warning.formattedMessage);
   const artifacts = {};
   for (const [source, contracts] of Object.entries(output.contracts)) {
-    if (!source.startsWith('src/')) continue;
+    if (!source.startsWith('src/') && !(testFixtures && source.startsWith('test/fixtures/'))) continue;
     for (const [name, artifact] of Object.entries(contracts)) {
       const runtimeBytes = artifact.evm.deployedBytecode.object.length / 2;
       const initBytes = artifact.evm.bytecode.object.length / 2;

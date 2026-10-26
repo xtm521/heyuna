@@ -1,10 +1,10 @@
 """Emit a CycloneDX dependency inventory from checked-in locks, without environment secrets."""
 import hashlib
 import json
-from pathlib import Path
 import re
 import sys
 import tomllib
+from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,6 +32,27 @@ def inventory():
             match = re.fullmatch(r"  '?(@?[^@\s]+(?:/[^@\s]+)?)@([^':()\s]+)(?:\([^\n]*\))?'?:", line)
             if match:
                 add("npm", match[1], match[2])
+    # This repository's Go module explicitly locks its full indirect graph.
+    # Resolve its versioned replacements instead of reporting the upstream geth
+    # version while actually shipping the Cosmos fork.
+    modules, replacements, section = {}, {}, None
+    for raw in (ROOT / "chain/go.mod").read_text().splitlines():
+        line = raw.split("//", 1)[0].strip()
+        if line in {"require (", "replace ("}:
+            section = line.split()[0]
+        elif line == ")":
+            section = None
+        elif section == "require":
+            match = re.fullmatch(r"(\S+) (v\S+)", line)
+            if match:
+                modules[match[1]] = match[2]
+        elif section == "replace":
+            match = re.fullmatch(r"(\S+)(?: v\S+)? => (\S+) (v\S+)", line)
+            if match:
+                replacements[match[1]] = (match[2], match[3])
+    for name, version in modules.items():
+        resolved_name, resolved_version = replacements.get(name, (name, version))
+        add("golang", resolved_name, resolved_version)
     return {"bomFormat": "CycloneDX", "specVersion": "1.5", "version": 1,
             "metadata": {"component": {"type": "application", "name": "Heyuna", "version": "0.1.0"},
                          "properties": [{"name": "heyuna:scope", "value": "All locked source dependencies, including optional/development platforms. Not a license or vulnerability clearance."}]},

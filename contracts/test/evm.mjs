@@ -10,7 +10,7 @@ import { Interface, Wallet, getAddress, TypedDataEncoder } from 'ethers';
 import { compile } from '../scripts/compile.mjs';
 import { TYPES, domain, buildManifest } from '../scripts/protocol.mjs';
 
-export const artifacts = compile();
+export const artifacts = compile({ testFixtures: true });
 export const interfaces = Object.fromEntries(Object.entries(artifacts).map(([name, artifact]) => [name, new Interface(artifact.abi)]));
 export const WEEK = 604800n;
 export const CHALLENGE = 259200n;
@@ -39,13 +39,13 @@ export async function makeChain(chainId = 31337) {
     }
     throw new Error(`${message} (${data})`);
   }
-  async function transact(to, data, signer = wallets[0]) {
+  async function transact(to, data, signer = wallets[0], value = 0n) {
     const key = hexToBytes(signer.privateKey);
     const sender = createAddressFromPrivateKey(key);
     const account = await vm.stateManager.getAccount(sender);
     const tx = createLegacyTx({
       to: to ? createAddressFromString(to) : undefined, nonce: account.nonce, gasLimit: 30_000_000n,
-      gasPrice: 2n, data: hexToBytes(data), value: 0n,
+      gasPrice: 2n, data: hexToBytes(data), value,
     }, { common }).sign(key);
     const result = await runTx(vm, { tx, block: block() });
     number += 1n;
@@ -76,7 +76,7 @@ export async function makeChain(chainId = 31337) {
     return decoded.length === 1 ? decoded[0] : decoded;
   }
   return {
-    vm, chainId, deploy, send, read,
+    vm, chainId, deploy, send, read, transact,
     get now() { return now; },
     advance(seconds) { now += BigInt(seconds); },
     at(timestamp) { assert(BigInt(timestamp) >= now, 'time cannot go backwards'); now = BigInt(timestamp); },

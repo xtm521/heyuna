@@ -1,3 +1,5 @@
+> Current native v2 settlement is described in [protocol-v2](protocol-v2.md) and [research operations](researchnet-operations.md). This file preserves training-runtime details and explicitly legacy Alpha coordinator examples.
+
 # Heyuna invited federation alpha
 
 This implementation contains real MLX/CUDA training entrypoints and an authenticated task/receipt
@@ -57,7 +59,7 @@ Install the normal Python package. For local validation:
 ```sh
 export HEYUNA_DATABASE_URL='sqlite:////absolute/private/path/coordinator.sqlite3'
 # Supply HEYUNA_COORDINATOR_IDENTITIES through a private environment or secret manager.
-uvicorn heyuna.coordinator:create_coordinator_app --factory --host 127.0.0.1 --port 8080
+uvicorn heyuna.coordinator:create_legacy_coordinator_app --factory --host 127.0.0.1 --port 8080
 ```
 
 `HEYUNA_COORDINATOR_IDENTITIES` is a JSON list of objects with `participant_id`, `operator_id`, `role`

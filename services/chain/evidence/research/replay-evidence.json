@@ -1,0 +1,42 @@
+{
+  "a": {
+    "app_hash": "37906f0fe215f573783e461980dd5369a4b6260ffaf9a63a3c30f9cc4a3949f6",
+    "chain_id": "heyuna_297011-1",
+    "checked_blocks": 148,
+    "cross_version_upgrade_proven": false,
+    "final_height": 148,
+    "mode": "same-version-offline-ABCI-replay",
+    "network_access": false,
+    "resumed_after_height": 0,
+    "signing_keys_loaded": false
+  },
+  "b_recovered": {
+    "app_hash": "37906f0fe215f573783e461980dd5369a4b6260ffaf9a63a3c30f9cc4a3949f6",
+    "chain_id": "heyuna_297011-1",
+    "checked_blocks": 75,
+    "cross_version_upgrade_proven": false,
+    "final_height": 148,
+    "mode": "same-version-offline-ABCI-replay",
+    "network_access": false,
+    "resumed_after_height": 73,
+    "signing_keys_loaded": false
+  },
+  "binary_sha256": [
+    "853ac989c5f4782ef08e03a636287dc9a5de7eb77337162ba0608d4ee81a16d6",
+    "853ac989c5f4782ef08e03a636287dc9a5de7eb77337162ba0608d4ee81a16d6"
+  ],
+  "consensus_signature_verification": false,
+  "cross_version_upgrade_proven": false,
+  "history_sha256": "96b76870e55ad5aa1d23896fde2bed539587a767937f554966e308d1183b49d2",
+  "injected_interruption": {
+    "exit_code": 75,
+    "height": 74,
+    "stage": "after FinalizeBlock before Commit"
+  },
+  "kind": "same-version-offline-ABCI-historical-replay",
+  "matching_committed_app_hash": true,
+  "profile": "research",
+  "signing_keys_loaded": false,
+  "genesis_hash": "0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a",
+  "source_evidence_sha256": "6f82bb846dc67b9fe2862680ae7a039b01512cb72c767f8d5b5258be5e480473"
+}

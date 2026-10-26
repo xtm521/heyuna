@@ -1,0 +1,73 @@
+{
+  "chain_id": 297012,
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "cases": [
+    {
+      "label": "Solidity deployment",
+      "transaction_hash": "0xb011788cfac3b09aba1b6331371770965c282156a49f357935187f229a96be84",
+      "block": 56,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "storage and event",
+      "transaction_hash": "0x707e808eca7678d72467ce3a4d06d97ca58f1e257eb56fdeafb30bdef8a4b905",
+      "block": 57,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "revert is charged but does not mutate storage",
+      "transaction_hash": "0x58fc9df335a6911660c521ae75187b520dfb094570ac5bee741b14995c1820de",
+      "block": 59,
+      "status": 0,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "storage fill",
+      "transaction_hash": "0xd87a57e8ecc1a49736b5339705bd52c043ab9e8f50c4f34b8b260210133481cf",
+      "block": 61,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "storage clear with refund accounting",
+      "transaction_hash": "0x206d2de3597c6eb5eb59cda14cec90222483ce2ca1fada0e424007f56ea427b3",
+      "block": 62,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "native transfer",
+      "transaction_hash": "0x6e8f06b0c013af478eda8ae820094ba50b22edf9bfcd8724265bcf1fdd9c65df",
+      "block": 63,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "one-base-unit constructor SELFDESTRUCT",
+      "transaction_hash": "0xa596a4629ac132c0faee7724c9728fadd7bf7d0afe5ebc0b66be72d5868acda2",
+      "block": 64,
+      "status": 1,
+      "gas_used": "1000000"
+    },
+    {
+      "label": "read-only native precompile eth_call",
+      "passed": true
+    },
+    {
+      "label": "unknown precompile selector rejected",
+      "passed": true
+    }
+  ],
+  "notice": "Live local-chain EVM probes, not Ethereum-equivalence or consensus-security proof.",
+  "native_supply": {
+    "before": "20000000000000000000000000",
+    "after": "19999999999999999999999999",
+    "protocol_burn": "1",
+    "exact_decrease": true,
+    "deleted_account_balance": "0",
+    "deleted_account_code": "0x",
+    "height": 64
+  }
+}

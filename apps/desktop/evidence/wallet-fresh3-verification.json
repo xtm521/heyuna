@@ -1,0 +1,88 @@
+{
+  "run": "fresh3",
+  "verified_at": "2026-10-26T05:59:40.837409+00:00",
+  "scope": "Read-only current frontend against real local research chain through injected public-account EIP-1193 test adapter; not an installed-wallet signature test",
+  "chain_id": 297012,
+  "cosmos_chain_id": "heyuna_297012-1",
+  "network_domain": "0x82bdcf644c6647df9a9c8b6af353bfa988ea6c329ddcd5c92b02b7fea00571a1",
+  "genesis_hash_kind": "sha256-canonical-genesis-json",
+  "code_hashes": {
+    "reward_vault": "0xe6ccba4191a411524817769336321b93369ee5b8670938f68d9f58447a303eb4",
+    "public_fund": "0x40977edbfe2e26b61309dd462a3438cb94035d2b74428846409f5b332a0375ed",
+    "factory": "0xaf530c29e59a68b97faabbe0233f837794e9d5abd7dfb469aa86aaa880741e92"
+  },
+  "canonical_genesis_and_wallet_anchor_match": true,
+  "three_runtime_hashes_and_oracle_match": true,
+  "manifest_hash": "417d424e486f9e7e745b2a2dc70004896d0b348572d9353affa9707e1b957fe2",
+  "root": "0xa96e83cad0a897eecdf10b9eb0e28f4d8054eecb385ddf14e743eab44a0d3edc",
+  "training_budget": "1000000000000000000",
+  "verification_budget": "100000000000000000",
+  "finalized": true,
+  "claims": [
+    {
+      "index": "0",
+      "category": 0,
+      "recipient": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "amount": "1000000000000000000",
+      "contribution_id": "0x02e0dfff50d7dca8f5a8ebefd1b609642af7276d746ca668dfc3e48212f269f1",
+      "claimed": true,
+      "transaction_hash": "0x88068153eb5502752543768c6da4da7edfb4a20dd63578b31df53e427be5f722",
+      "receipt_status": 1,
+      "receipt_sender": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "receipt_block": 225,
+      "canonical_block": true,
+      "balance_at_receipt_block": "99999999999999999999999"
+    },
+    {
+      "index": "1",
+      "category": 1,
+      "recipient": "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8",
+      "amount": "100000000000000000",
+      "contribution_id": "0xad42df29ef2efe84d14c85b19b5ac08eef4b7d88fea0951cc1353bcbe5d9f633",
+      "claimed": true,
+      "transaction_hash": "0xe91bfe0b10dbcdf6212d7f5bd7d4c05c3b3e7edab31272597b0bb781bf039c88",
+      "receipt_status": 1,
+      "receipt_sender": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+      "receipt_block": 226,
+      "canonical_block": true,
+      "balance_at_receipt_block": "100000000000000000"
+    }
+  ],
+  "genesis_hash": "0xf79baaec0021985f848c1d1ac7ec3f5a7b5a31ff01d3f44e6b1c450ff6c84774",
+  "evm_anchor": {
+    "block_number": 1,
+    "block_hash": "0x1e26ea4071fa0282c9da58c69b3970bddaec0bd46bb306a3091fa5594b0ef632"
+  },
+  "front_end_sent_transactions": false,
+  "private_keys_loaded": false,
+  "known_test_relayer": "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+  "recipient_sessions_already_claimed_rejected": [
+    "0x98cab1b7370775a14f5234fe39740aff6042aa2a",
+    "0x9fa2113a7dcec9d0881a9dca200fc6ac458d22b8"
+  ],
+  "faucet_balance_observed_now": "99999.999999999999699999",
+  "verification_recipient_balance_now": "0.1",
+  "page_errors": [],
+  "failed_requests": [],
+  "read_only_rpc_methods": [
+    "eth_chainId",
+    "eth_getBlockByNumber",
+    "eth_getCode",
+    "eth_call",
+    "eth_getBalance",
+    "eth_getTransactionReceipt"
+  ],
+  "receipt_sender_basis": "Both integration transactions were relayed by the independently supplied public faucet address. Frontend receipt checks used that known sender while checking each distinct recipient/contribution identity.",
+  "balance_basis": "Exact balances at each receipt block read independently. Current faucet balance also reflects separate integration probes; it is not labelled contribution earnings.",
+  "node_build_evidence": {
+    "binary_sha256": "342b1c2a92359fc81cb8501d955e280fe617629b2d2e60c64fd390f90832a587",
+    "source_manifest_sha256": "94f7d91ce1e626fa94e75fbc982536f9c8527d8365f4e6f547748f125040eae4",
+    "basis": "Local initial-build-evidence.json; wallet RPC does not remotely attest the node binary."
+  },
+  "screenshots": [
+    "wallet-fresh3-faucet-claimed.png",
+    "wallet-fresh3-verifier-claimed.png"
+  ],
+  "independent_operators": false,
+  "mainnet": false
+}

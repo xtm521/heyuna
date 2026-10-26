@@ -100,6 +100,8 @@ jobs:
           cp contracts/pnpm-lock.yaml release/contracts-pnpm-lock.yaml
           cp apps/wallet/pnpm-lock.yaml release/wallet-pnpm-lock.yaml
           cp apps/desktop/src-tauri/Cargo.lock release/Cargo.lock
+          cp chain/go.mod release/chain-go.mod
+          cp chain/go.sum release/chain-go.sum
           python3 scripts/release_inventory.py release
       - uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2
         with:

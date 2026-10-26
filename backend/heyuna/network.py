@@ -19,8 +19,19 @@ import psutil
 from fastapi import APIRouter, HTTPException
 from pydantic import Field
 
+from .deployment import NetworkManifest, load_manifest
 from .federation import digest, validate_artifacts
-from .protocol import ContributionReceipt, Message, TaskBundle
+from .native_protocol import (
+    ContributionReceiptV2,
+    NetworkBinding,
+    RecomputationEvidence,
+    TrainingTaskV2,
+    attestation_bindings,
+    parse_bundle,
+    parse_receipt,
+    parse_task,
+)
+from .protocol import Message, canonical_hash
 from .training import validate_dataset, validate_model_path
 
 
@@ -89,13 +100,19 @@ class NetworkService:
     def snapshot(self):
         with self.lock:
             fresh = self.connected and time.time() - self.last_authenticated_at < 120
+            chain_id = None
+            try:
+                if (self.state_dir / "deployment.json").is_file():
+                    chain_id = load_manifest(self.state_dir / "deployment.json").chain_id
+            except (OSError, ValueError):
+                pass  # Unknown is not a verified network identity.
             return {
                 "contribution": {"enabled": self.enabled, "state": self.state, "detail": self.detail},
                 "network": {"configured": bool(self.config), "connected": fresh,
                             "endpoint": self.config.get("endpoint", ""),
                             "last_authenticated_at": self.last_authenticated_at or None,
                             "state": "authenticated" if fresh else ("configured" if self.config else "unconfigured")},
-                "rewards": {"chain_id": 11155111, "confirmed": "0", "pending": "0",
+                "rewards": {"chain_id": chain_id, "confirmed": "0", "pending": "0",
                             "state": "no_chain_verification", "receipt_count": len(self.receipts)},
                 "supported_limits": {"time_window": True, "memory_rss": True, "daily_upload": True,
                                      "cpu": "sampled_stop_not_scheduler_throttle"},
@@ -182,6 +199,42 @@ class NetworkService:
         return httpx.Client(base_url=self.config["endpoint"], timeout=30.0, follow_redirects=False,
                             trust_env=False, headers={"Authorization": "Bearer " + self.config["device_token"]})
 
+    def _context(self):
+        path = self.state_dir / "deployment.json"
+        if not path.is_file():
+            raise RuntimeError("Install a trusted network manifest before requesting contribution work")
+        manifest = load_manifest(path)
+        return manifest, "/v2" if isinstance(manifest, NetworkManifest) else "/v1"
+
+    @staticmethod
+    def _check_receipt(receipt, manifest):
+        native = isinstance(manifest, NetworkManifest)
+        if native != isinstance(receipt, ContributionReceiptV2):
+            raise ValueError("Receipt protocol does not match the selected network")
+        if native and not receipt.network.matches(manifest):
+            raise ValueError("Receipt belongs to another network")
+
+    @staticmethod
+    def _check_task_receipt(receipt, task):
+        if (receipt.task_id, receipt.round_id, receipt.task_hash, receipt.work_units) != (
+                task.task_id, task.round_id, task.fingerprint, task.work_units):
+            raise ValueError("Receipt task, round or work-unit binding differs")
+        if isinstance(task, TrainingTaskV2):
+            if receipt.wallet.lower() != task.recipient.lower():
+                raise ValueError("Receipt recipient differs from the committed task")
+            expected = attestation_bindings(task)
+            for field, value in expected.items():
+                actual = getattr(receipt, field)
+                if hasattr(value, "model_dump"):
+                    value = value.model_dump(mode="json")
+                    actual = actual.model_dump(mode="json") if actual else None
+                if actual != value:
+                    raise ValueError(f"Receipt {field} binding differs from the task")
+            if task.category == 0 and (receipt.verification is not None or receipt.verification_evidence_hash is not None):
+                raise ValueError("Training receipt contains an unexpected verification binding")
+            if task.category == 1 and receipt.verification_evidence_hash is None:
+                raise ValueError("Recomputation receipt has no evidence binding")
+
     @staticmethod
     def _request(client, method, url, **kwargs):
         # Read incrementally to reject malicious coordinator responses before unbounded allocation.
@@ -235,21 +288,28 @@ class NetworkService:
             self.state, self.detail = "paused_assistant", "Model resources are in use by the coding assistant"
             return
         try:
+            manifest, prefix = self._context()
             backend = self._backend()
             with self._client() as client:
-                status = self._json(self._request(client, "GET", "/v1/status"))
-                if not isinstance(status, dict) or status.get("role") != "device" or status.get("chain_id") != 11155111:
-                    raise RuntimeError("Coordinator is not an authenticated Sepolia device endpoint")
+                status = self._json(self._request(client, "GET", prefix + "/status"))
+                if not isinstance(status, dict) or status.get("role") != "device" or status.get("chain_id") != manifest.chain_id:
+                    raise RuntimeError("Coordinator is not an authenticated endpoint for the selected network")
+                if isinstance(manifest, NetworkManifest) and not NetworkBinding.model_validate(status.get("network")).matches(manifest):
+                    raise RuntimeError("Coordinator network binding differs from the trusted manifest")
                 self.connected = True
                 self.last_authenticated_at = time.time()
-                response = self._request(client, "POST", "/v1/tasks/lease", json={"backend": backend})
+                response = self._request(client, "POST", prefix + "/tasks/lease", json={"backend": backend})
                 if response.status_code == 204:
                     self.state, self.detail = "idle", "Authenticated; no contribution task is available"
                     return
                 raw = self._json(response)
                 lease = raw.pop("lease")
-                bundle = TaskBundle.model_validate(raw)
+                bundle = parse_bundle(raw)
                 task = bundle.task
+                if isinstance(manifest, NetworkManifest) != isinstance(task, TrainingTaskV2):
+                    raise ValueError("Task protocol does not match the selected network")
+                if isinstance(manifest, NetworkManifest) and not task.network.matches(manifest):
+                    raise ValueError("Task belongs to another network")
                 self.current_task = {"task_id": task.task_id, "round_id": task.round_id,
                                      "data_source": task.data_source, "data_license": task.data_license,
                                      "data_hash": task.data_hash, "steps": task.config.steps}
@@ -303,7 +363,7 @@ class NetworkService:
                         if time.monotonic() - started > 3600:
                             raise RuntimeError("Training exceeded the one-hour alpha job limit")
                         if time.monotonic() - heartbeat > 60:
-                            self._json(self._request(client, "POST", f"/v1/tasks/{task.task_id}/heartbeat", json={"lease_id": lease["lease_id"]}))
+                            self._json(self._request(client, "POST", f"{prefix}/tasks/{task.task_id}/heartbeat", json={"lease_id": lease["lease_id"]}))
                             heartbeat = time.monotonic()
                             self.last_authenticated_at = time.time()
                     if self.process.returncode:
@@ -312,6 +372,16 @@ class NetworkService:
                 validate_artifacts(task, a, result, update=True, base_b=b)
                 submission = {"lease_id": lease["lease_id"], "task_hash": task.fingerprint,
                               "adapter_hash": digest(result), "adapter_b": base64.b64encode(result).decode()}
+                if isinstance(task, TrainingTaskV2) and task.category == 1:
+                    if digest(result) != task.verification.adapter_hash:
+                        raise ValueError("Independent recomputation differs from the target artifact")
+                    metrics = json.loads((job / "metrics.json").read_text())
+                    evidence = RecomputationEvidence(task_hash=task.fingerprint,
+                        target_receipt_id=task.verification.receipt_id,
+                        target_chain_receipt_id=task.verification.chain_receipt_id,
+                        artifact_hash=digest(result), metrics_hash=canonical_hash(metrics))
+                    submission["verification_evidence"] = evidence.model_dump()
+                    (job / "recomputation-evidence.json").write_text(evidence.model_dump_json())
                 byte_count = len(json.dumps(submission).encode())
                 self._limits(byte_count)
                 if self.cancel.is_set() or not self.enabled:
@@ -320,8 +390,13 @@ class NetworkService:
                 # Count attempted bytes before request so retries cannot bypass the daily cap.
                 self.usage["upload_bytes"] += byte_count
                 self._save("usage.json", self.usage)
-                receipt = ContributionReceipt.model_validate(self._json(self._request(
-                    client, "POST", f"/v1/tasks/{task.task_id}/submit", json=submission))).model_dump(mode="json")
+                parsed_receipt = parse_receipt(self._json(self._request(
+                    client, "POST", f"{prefix}/tasks/{task.task_id}/submit", json=submission)))
+                self._check_receipt(parsed_receipt, manifest)
+                self._check_task_receipt(parsed_receipt, task)
+                if "verification_evidence" in submission and parsed_receipt.verification_evidence_hash != canonical_hash(submission["verification_evidence"]):
+                    raise ValueError("Receipt recomputation evidence differs from the submitted report")
+                receipt = parsed_receipt.model_dump(mode="json")
                 if receipt["state"] not in {"pending_verification", "verified", "pending_settlement", "rejected"}:
                     raise ValueError("Coordinator returned an unsupported receipt state")
                 if receipt["task_hash"] != task.fingerprint or receipt["adapter_hash"] != digest(result):
@@ -352,11 +427,27 @@ class NetworkService:
         if not self.config:
             return []
         try:
+            manifest, prefix = self._context()
             with self._client() as client:
-                result = self._json(self._request(client, "GET", "/v1/receipts"))
+                result = self._json(self._request(client, "GET", prefix + "/receipts"))
                 if not isinstance(result, list):
                     raise TypeError("invalid receipt response")
-                parsed = [ContributionReceipt.model_validate(item).model_dump(mode="json") for item in result]
+                receipts = [parse_receipt(item) for item in result]
+                for receipt in receipts:
+                    self._check_receipt(receipt, manifest)
+                    task_file = self.directory / "jobs" / receipt.task_id / "task.json"
+                    if task_file.is_file():
+                        self._check_task_receipt(receipt, parse_task(json.loads(task_file.read_text())))
+                        result = task_file.parent / "result.safetensors"
+                        if result.is_file() and (result.stat().st_size > 4 * 1024**2 or digest(result.read_bytes()) != receipt.adapter_hash):
+                            raise ValueError("Remote receipt result differs from the local artifact")
+                        evidence = task_file.parent / "recomputation-evidence.json"
+                        if (isinstance(receipt, ContributionReceiptV2) and receipt.category == 1 and evidence.is_file()
+                                and canonical_hash(json.loads(evidence.read_text())) != receipt.verification_evidence_hash):
+                            raise ValueError("Remote receipt verification report differs from local evidence")
+                    else:
+                        receipt.detail = "Remote receipt; task binding is not locally verified. " + receipt.detail
+                parsed = [item.model_dump(mode="json") for item in receipts]
                 if any(item["state"] in {"claimable", "confirmed"} for item in parsed):
                     raise ValueError("Chain state from a coordinator is not independent chain evidence")
                 self.receipts = parsed

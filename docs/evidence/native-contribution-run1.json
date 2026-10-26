@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "kind": "four-process-local-sdk-contribution-smoke",
+  "chain_id": 297012,
+  "cosmos_chain_id": "heyuna_297012-1",
+  "network_domain": "0x9b220e94a3dcae7ae75bd203f0478723bc5b0080d8cf09fb4586401630d9ddd4",
+  "genesis_hash": "0x198511c7da22ca636b6e2248a298ad14437144e84e1ad65b877173ac9dfbdb57",
+  "reward_vault": "0x532d6EE2Ab7fa94773b0635d944d082ef921361e",
+  "challenge_seconds": 3,
+  "unsafe_test_profile": true,
+  "independent_operators": false,
+  "offchain_task_hash": "ebb61d1efd71a5b92cad1bf497eaeb9d53bfa3db366e8343a7f066329df0c48f",
+  "adapter_hash": "496f8fc4d0c83b0edca48d5488a5447d5d769bd20f4e1b180a533de58472f7eb",
+  "transactions": [
+    {
+      "operation": "fund-verifier0",
+      "hash": "FA5A303667A16B5A21D13969019E8DA9D04CB62B4CD12B4637FC0C6111F3AB58",
+      "height": 222,
+      "code": 0
+    },
+    {
+      "operation": "fund-verifier1",
+      "hash": "080763883585006D8C14EC2084C38FF1967C3F75009A3DC52C07F4DA7B0EC917",
+      "height": 223,
+      "code": 0
+    },
+    {
+      "operation": "fund-verifier2",
+      "hash": "90DCB11B1FF37EFD884DD4274F2F46963D542AB2CC32AA8D3C81CBF513034C91",
+      "height": 224,
+      "code": 0
+    },
+    {
+      "operation": "submit_task",
+      "hash": "6B0AFF8BB985386824420E6475D96A1CCB9233C706601AAF5EE8BCB11107DA0D",
+      "height": 225,
+      "code": 0,
+      "id": "0x9b0bdc2a16f2f8d17070f7b9abe91e95188fde6f3f77ec2f6c7a8f277d9dfc36"
+    },
+    {
+      "operation": "submit_result",
+      "hash": "AE3D64D8CED5D387C2060BDF37D0FE597845B5272F6806C23692C33607FDD740",
+      "height": 226,
+      "code": 0,
+      "id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "FC68044D1610FF034CE2547467D958AE6E467A015AE80F657EE396907FF0C0B6",
+      "height": 229,
+      "code": 0,
+      "id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578"
+    },
+    {
+      "operation": "submit_report",
+      "hash": "AFF13092ED88502B48F744F03179FFC8A134B52AE61CA6BF3A4831CADA59F56F",
+      "height": 230,
+      "code": 0,
+      "id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "00ECEFEDD45559C9675FA45C503A282FEFD08A6752FD84BA8EA40BA6B32933A7",
+      "height": 232,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "9C88072260D2C4D5CC3DD53C5F6AD4175D864A7C566EC0F58B26DF4F31FBCC0D",
+      "height": 233,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "challenge",
+      "hash": "E805A315E53EDBBEB020C7E8FA4C17600BD20A3918820B821BA1C7B39A401045",
+      "height": 234,
+      "code": 0,
+      "id": "0x5f8866448fc0edd8c01e8d926e5e511d7d2e6d572c12df9dac1b9546b399af3c"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "94873452FC7D87272C862B725789C3BE99351FD543914791F80A751E69E8A39E",
+      "height": 236,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "BE332F0A23760C19ADD85966A458E3367DEC00F657A85D542E78FF024AC178A0",
+      "height": 238,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "094DA60EB616340016D0E60EEFE32C25886BA44EAFA51EBACA67140481961CAE",
+      "height": 239,
+      "code": 0,
+      "id": "0"
+    },
+    {
+      "operation": "finalize_epoch",
+      "hash": "16A25835BCC70ABEDCD82AE735A6CC9C8FCE490227D8E3F486FDC63D0880CE4D",
+      "height": 244,
+      "code": 0,
+      "id": "0"
+    }
+  ],
+  "negative_cases": [
+    {
+      "operation": "submit_result",
+      "hash": "A38F7E48E3441F3B4A4A1E3895A7FD7570F37EE144A2ED63B47F640CA67D2B44",
+      "height": 227,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = duplicate task result or reused result hash"
+    },
+    {
+      "operation": "propose_epoch",
+      "hash": "13CFB559815CA871182D6FB774F15A59D26B598EFA402DAB22C148330F5B1CBD",
+      "height": 231,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = proposals must use the current release week; past and future weeks are closed"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "57D1C6BD32D9C097E1C484F244E9AFCCCE0089F23621974EA8B529F5084069F7",
+      "height": 235,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = epoch control requires an invited verifier"
+    },
+    {
+      "operation": "finalize_epoch",
+      "hash": "0154156A3952EEFA297808C1BC1B3934BFA6A3E9D4A6D9A31DBF478213D8AA84",
+      "height": 237,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = epoch is frozen, immutable, or within challenge period"
+    },
+    {
+      "operation": "resume_epoch",
+      "hash": "D41FE4C1AA7975FAD1861FB557D44F837FCEFD27037C5898AB913EEC82466C23",
+      "height": 240,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = stale control nonce or immutable epoch"
+    },
+    {
+      "operation": "freeze_epoch",
+      "hash": "F724CF5561D10DC20F844D1C4F7D7F17465A7A8CD9B87CF630CB3C9F1128A5F7",
+      "height": 245,
+      "code": 1,
+      "reason": "failed to execute message; message index: 0: rpc error: code = InvalidArgument desc = stale control nonce or immutable epoch"
+    }
+  ],
+  "task_id": "0x9b0bdc2a16f2f8d17070f7b9abe91e95188fde6f3f77ec2f6c7a8f277d9dfc36",
+  "receipt_id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578",
+  "epoch": {
+    "approvals": [
+      "0x3d66326d735de311454ead523930470494bac05e",
+      "0xc0fe42fd1314bd754c193f39e9d80b1c75672b0d"
+    ],
+    "control_nonce": 4,
+    "control_votes": null,
+    "entries": [
+      {
+        "amount": "1000000000000000000",
+        "category": 0,
+        "index": 0,
+        "receipt_id": "0x9a3765661d5fdac07fe38111493eed7263f34e4046a8eaa725175a6abd16b578",
+        "recipient": "0xd7425b0a55aefefffa0ba0eaa36865dbe63eafcb"
+      }
+    ],
+    "finalize_after": 1792992295,
+    "id": 0,
+    "proposal_hash": "0x7ef11c39555215b925a6f8affbeb953c0125a292b545fe98e5b4c5546e0f07d1",
+    "proposal_nonce": 0,
+    "proposed_at": 1792992285,
+    "root": "0xaa730f4412a26ef85d53f88e029a022f441ca5272007c62606a0ee8cd7673d6e",
+    "status": "finalized",
+    "training_budget": "1000000000000000000",
+    "verification_budget": "0"
+  },
+  "accounting": {
+    "training_reserved": "1000000000000000000",
+    "verification_reserved": "0"
+  },
+  "trust_notice": "Three verification keys belong to one local operator; signatures are not independent training proofs."
+}

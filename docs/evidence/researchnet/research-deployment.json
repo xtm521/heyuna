@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "profile": "research",
+  "chain_id": 297011,
+  "cosmos_chain_id": "heyuna_297011-1",
+  "network_name": "Heyuna Researchnet",
+  "network_domain": "0xf047862b0f3cb9593559bcbfe65cfe2cb503c0a3cb1e47672c7ab89a52d3d3cf",
+  "genesis_hash": "0x1e3f06ac8530db882134afaf06aa39b23c60785a7276355b7d0850d5a165484a",
+  "genesis_hash_kind": "sha256-canonical-genesis-json",
+  "evm_anchor": {
+    "block_number": 1,
+    "block_hash": "0x43d554920f29ffafd178e35fdbfcbd940ed5fa7f5dc3dba05856318c5e850032"
+  },
+  "rpc_url": "http://127.0.0.1:9545",
+  "cosmos_rpc_url": "http://127.0.0.1:27657",
+  "asset_kind": "native",
+  "symbol": "tHEYUNA",
+  "base_denom": "aheyuna",
+  "decimals": 18,
+  "total_supply": "20000000000000000000000000",
+  "reward_vault_address": "0x2B86c7AfFbe206dF55778cBbA3eBd1e8319b9568",
+  "public_fund_address": "0x3f3e4758f3Ea6dCdfE3E7f243f52b2E3b6B0F788",
+  "factory_address": "0x0000000000000000000000000000000000000F01",
+  "contribution_precompile_address": "0x0000000000000000000000000000000000000900",
+  "genesis": 1792993949,
+  "challenge_seconds": 259200,
+  "confirmations": 1,
+  "code_hashes": {
+    "reward_vault": "0xe6ccba4191a411524817769336321b93369ee5b8670938f68d9f58447a303eb4",
+    "public_fund": "0x35304e64cc4b4f53b27fe60bab63f32d33ee3bfcc72814238ba03f6982971cc4",
+    "factory": "0xaf530c29e59a68b97faabbe0233f837794e9d5abd7dfb469aa86aaa880741e92"
+  }
+}
