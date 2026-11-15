@@ -41,8 +41,8 @@ importers:
         specifier: 0.8.38
         version: 0.8.38(debug@4.4.3)
       z3-solver:
-        specifier: 5.3.1
-        version: 5.3.1
+        specifier: 5.4.1
+        version: 5.4.1
 
 packages:
 
@@ -297,8 +297,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  z3-solver@5.3.1:
-    resolution: {integrity: sha512-xndynBQoXmFMopcdpCchRhT2mJyuIfmwY2lxBje0OCkDAX8WEWSCg0AXHPZwskcFIziVaA7bBQJxPTKkWy5Diw==}
+  z3-solver@5.4.1:
+    resolution: {integrity: sha512-HyRpufMZ1NuaYfnxzc34qw9tLzwoUipv8ySfRewnCwXaKVuT5LHs313+edFfaWs0MLmk1v9yg4V44QqtdFLtDg==}
     engines: {node: '>=16'}
 
 snapshots:
@@ -604,6 +604,6 @@ snapshots:
 
   ws@8.21.0: {}
 
-  z3-solver@5.3.1:
+  z3-solver@5.4.1:
     dependencies:
       async-mutex: 0.3.2
